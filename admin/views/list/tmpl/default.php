@@ -33,8 +33,8 @@ JHTML::_('behavior.modal', 'a.modal');
 
 jimport('joomla.html.pane');
 
-$this->loadTemplate('js');
-$this->loadTemplate('base64images');
+echo $this->loadTemplate('js');
+echo $this->loadTemplate('base64images');
 
 jimport('joomla.filter.output');
 
@@ -61,12 +61,7 @@ else
 	
 }
 
-if(comWeeverHelper::isWebKit())
-	$dashWebKit = "-webkit";
-else 
-	$dashWebKit = "";
-
-$this->loadTemplate('banner');
+echo $this->loadTemplate('banner');
 
 ?>	
 
@@ -115,7 +110,7 @@ foreach( (array) $this->tabs as $k=>$v )
 
 	/* When there are items, but none are published */
 	if( count($v) && $tab_active == 0 )
-		echo '<li class="wx-nav-tabs wx-sort" rel="unpublished" style="float:center;">
+		echo '<li class="wx-nav-tabs wx-sort" id="' . $v[0]->id . '" rel="unpublished" style="float:center;">
 				<a href="#Tab-' . $v[0]->id . '" class="wx-tab-sortable' . $trialClass.'">
 				
 					<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-grayed-out wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
@@ -131,7 +126,7 @@ foreach( (array) $this->tabs as $k=>$v )
 			</li>';	
 	
 		else
-			echo '<li class="wx-nav-tabs wx-sort">
+			echo '<li class="wx-nav-tabs wx-sort" id="' . $v[0]->id . '">
 						<a href="#Tab-' . $v[0]->id . '" class="wx-tab-sortable' . $trialClass.'">
 						
 							<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
@@ -140,7 +135,7 @@ foreach( (array) $this->tabs as $k=>$v )
 							
 							</div>
 							
-							<div id="wx-nav-label-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-nav-label" title="ID #'.$v[0]->id.'">'.$v[0]->title.'</div>
+							<div id="wx-nav-label-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-nav-label" title="ID #'.$v[0]->id.'">'.( $v[0]->tabTitle ? $v[0]->tabTitle : $v[0]->title ).'</div>
 							
 						</a>
 					</li>';	
@@ -151,7 +146,7 @@ foreach( (array) $this->tabs as $k=>$v )
  
 		</ul>
 		 
-		<?php $this->loadTemplate('add_tab'); ?>
+		<?php echo $this->loadTemplate('addtab'); ?>
 		
 		<div id="wx-overlay-drag">
 		

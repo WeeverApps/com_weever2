@@ -77,6 +77,8 @@ class WeeverViewList extends JView
 				continue;
 
 			$tabs[][] 				= $v;
+			
+			end($tabs);
 			$parent_tabs[ $v->id ]	= key($tabs);
 
 		}

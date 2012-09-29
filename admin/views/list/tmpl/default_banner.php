@@ -22,6 +22,11 @@
 
 defined('_JEXEC') or die;
 
+if(comWeeverHelper::isWebKit())
+	$dashWebKit = "-webkit";
+else 
+	$dashWebKit = "";
+
 ?>
 
 <?php if( $newDownload = JRequest::getVar("upgrade") ) : ?>

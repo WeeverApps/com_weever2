@@ -81,6 +81,22 @@ class WeeverController extends JController
 	
 	}
 	
+	public function ajaxSaveTabItemName()
+	{
+	
+		$model = $this->getModel('ajax');
+	
+		$result = $model->saveTabItemName( JRequest::getVar("name"), JRequest::getVar("id") );
+	
+		//$result = comWeeverHelper::pushTabNameToCloud();
+		
+		if( $result->success )
+			echo "Tab Changes Saved";
+		
+		jexit();
+	
+	}
+	
 	
 	public function ajaxSubtabDelete()
 	{
@@ -142,12 +158,13 @@ class WeeverController extends JController
 	public function ajaxSaveTabOrder()
 	{
 	
-		$order = JRequest::getVar("order");
+		$model = $this->getModel('ajax');
+	
+		$result = $model->saveTabOrder( JRequest::getVar("order") );
 		
-		$response = comWeeverHelper::sortTabs($order);
-		
-		echo $response;
-		
+		if( $result->success )
+			echo "Order Updated";
+	
 		jexit();
 	
 	}

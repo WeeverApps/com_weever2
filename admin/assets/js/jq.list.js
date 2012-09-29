@@ -250,7 +250,7 @@ jQuery( document ).ready( function() {
 				
 					type: 		"POST",
 					url: 		"index.php",
-					data: 		"option=com_weever&task=ajaxSaveTabName&name=" + encodeURIComponent(tabName) + "&id=" + tabId + '&site_key=' + siteKey,
+					data: 		"option=com_weever&task=ajaxSaveTabItemName&name=" + encodeURIComponent(tabName) + "&id=" + tabId + '&site_key=' + siteKey,
 					success: 	function(msg) {
 					
 						jQuery('#wx-modal-loading-text').html(msg);

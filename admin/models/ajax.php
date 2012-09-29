@@ -40,6 +40,40 @@ class WeeverModelAjax extends JModel
 	public function saveTabName($name, $tab_id) 
 	{
 	
+		$api_endpoint 		= "tabs/set_tabTitle";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
+			
+			'site_key' 		=> $this->key,
+			'tabTitle'		=> $name,
+			'tab_id'		=> $tab_id
+		
+		);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
+
+		if( isset($json->error) && $json->error == true )
+		{
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
+			 return false;
+			 
+		}
+		
+		return $json;
+	
+	}
+	
+	public function saveTabItemName($name, $tab_id) 
+	{
+	
 		$api_endpoint 		= "tabs/set_title";
 		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
 		$stage_url 			= '';
@@ -48,6 +82,39 @@ class WeeverModelAjax extends JModel
 			'site_key' 		=> $this->key,
 			'title'			=> $name,
 			'tab_id'		=> $tab_id
+		
+		);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
+
+		if( isset($json->error) && $json->error == true )
+		{
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
+			 return false;
+			 
+		}
+		
+		return $json;
+	
+	}
+	
+	public function saveTabOrder($order) 
+	{
+	
+		$api_endpoint 		= "tabs/sort_tabs";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
+			
+			'site_key' 		=> $this->key,
+			'order'			=> $order
 		
 		);
 		

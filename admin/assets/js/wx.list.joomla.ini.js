@@ -2,8 +2,9 @@
 *	Weever Apps Administrator Component for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
-*	Version: 	1.7
+*	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
+*				Aaron Song 				<aaron@weeverapps.com>
+*	Version: 	2.0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -17,6 +18,7 @@
 *   GNU General Public License for more details <http://www.gnu.org/licenses/>.
 *
 */
+
 
 jQuery(function() {
 
@@ -65,10 +67,9 @@ jQuery(function() {
 		cancel:		'.wx-nosort',
 		update: 	function(event, info) {
 							
-			var str 	= String(jQuery(this).sortable('toArray')),
+			var str 	= String(jQuery(this).sortable('toArray')).replace('addTabID,', ''),
 				siteKey = jQuery("input#wx-site-key").val();
-			
-			
+				
 			jQuery.ajax({
 			
 			   type: 		"POST",
@@ -146,7 +147,7 @@ wx.ajaxUrl			= function(a) {
 wx.navLabelDialog	= function(e) {
 
 	var tabId 		= jQuery(this).attr('ref'),
-		siteKey 	= jQuery("input#wx-site-key").val(),
+		siteKey 	= jQuery( 'input#wx-site-key' ).val(),
 		htmlName 	= jQuery( '#wx-nav-label-' + tabId ).html(),
 		clickedElem	= jQuery( '#wx-nav-label-' + tabId ),
 		txt 		= '<h3 class="wx-imp-h3">' + 
