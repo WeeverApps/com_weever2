@@ -380,9 +380,9 @@ jQuery(document).ready( function() {
 				
 				};
 		
-			for( var i = 0; i < wx.tabSyncData.results.tabs.length; i++ ) {
+			for( var i = 0; i < wx.tabSyncData.tabs.length; i++ ) {
 			
-				var tab			= wx.tabSyncData.results.tabs[i],
+				var tab			= wx.tabSyncData.tabs[i],
 					serviceDiv 	= 'div#add-';
 					
 				if( tab.type == "tab" ) {
@@ -446,9 +446,9 @@ jQuery(document).ready( function() {
 		
 			wx.types	= wx.types || {};
 		
-			for( i = 0; i < wx.tabSyncData.results.tabs.length; i++ ) {
+			for( i = 0; i < wx.tabSyncData.tabs.length; i++ ) {
 			
-				var tab		= wx.tabSyncData.results.tabs[i];
+				var tab		= wx.tabSyncData.tabs[i];
 				
 				if( tab.type != 'tab' )
 					continue;

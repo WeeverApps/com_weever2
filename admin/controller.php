@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	1.9
+*	Version: 	2.0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -68,9 +68,15 @@ class WeeverController extends JController
 	public function ajaxSaveTabName()
 	{
 	
-		$result = comWeeverHelper::pushTabNameToCloud();
+		$model = $this->getModel('ajax');
+	
+		$result = $model->saveTabName( JRequest::getVar("name"), JRequest::getVar("id") );
+	
+		//$result = comWeeverHelper::pushTabNameToCloud();
 		
-		echo $result;
+		if( $result->success )
+			echo "Tab Changes Saved";
+		
 		jexit();
 	
 	}

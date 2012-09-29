@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	1.9
+*	Version: 	2.0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -582,7 +582,7 @@ class comWeeverHelper
 	public static function tabSync($stage=null)
 	{
 	
-		$tab_obj 	= comWeeverHelper::getJsonTabSync();
+		$tab_obj 	= self::getJsonTabSync();
 		
 		$query 		= " SELECT `setting` FROM #__weever_config WHERE `option`='site_key' ";
 		$db 		= &JFactory::getDBO();
@@ -735,7 +735,7 @@ class comWeeverHelper
 			
 		$postdata = self::buildWeeverHttpQuery($query, false);
 		
-		$json = self::sendToWeeverServer($postdata);
+		$json = self::sendToWeeverServer($postdata, null);
 
 		if($json == "Site key missing or invalid.")
 		{
@@ -753,9 +753,10 @@ class comWeeverHelper
 	public static function buildWeeverHttpQuery($array, $ajax = false)
 	{
 	
-		$array['version'] 	= comWeeverConst::VERSION;
-		$array['generator'] = comWeeverConst::NAME;
-		$array['cms'] 		= 'joomla';
+		$array['version'] 		= comWeeverConst::VERSION;
+		$array['generator'] 	= comWeeverConst::NAME;
+		$array['cms'] 			= 'joomla';
+		$array['cms_version']	= self::joomlaVersion();
 		
 		if($ajax == true)
 		{
@@ -780,76 +781,82 @@ class comWeeverHelper
 	}
 	
 
-	public static function sendToWeeverServerCurl($context)
+	public static function sendToWeeverServerCurl($context, $url = null)
 	{
+	
+		if( !$url ) 
+		{
 
-		if(self::getStageStatus())
-			$weeverServer = comWeeverConst::LIVE_STAGE;
-		else
-			$weeverServer = comWeeverConst::LIVE_SERVER;
+			if(self::getStageStatus())
+				$weeverServer = comWeeverConst::LIVE_STAGE;
+			else
+				$weeverServer = comWeeverConst::LIVE_SERVER;
+				
+			$url = $weeverServer.comWeeverConst::API_VERSION;
 			
-		$url = $weeverServer.comWeeverConst::API_VERSION;
+		}
 		
 		$ch = curl_init($url);
 		
-		curl_setopt($ch,CURLOPT_POST,true);
-		curl_setopt($ch,CURLOPT_POSTFIELDS,$context);
-		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+		curl_setopt($ch,	CURLOPT_POST,			true);
+		curl_setopt($ch,	CURLOPT_POSTFIELDS,		$context);
+		curl_setopt($ch,	CURLOPT_RETURNTRANSFER,	true);
 
-		$response = curl_exec($ch);
-		$error = curl_error($ch);
+		$response 		= curl_exec($ch);
+		$error 			= curl_error($ch);
 
 		curl_close($ch);
         
         if ($error != "")
-        {
-            $result = $error;
-            return $result;
-        }
+            return $error;
        
-        $result = $response;
-		
-		return $result;
+		return $response;
 
 	}
 	
 	
-	public static function sendToWeeverServer($postdata)
+	public static function sendToWeeverServer($postdata, $url = null)
 	{
 
-		
 		if(in_array('curl', get_loaded_extensions()))
 		{
-			$context = $postdata;
-			$response = comWeeverHelper::sendToWeeverServerCurl($context);
+		
+			$context 	= $postdata;
+			$response 	= comWeeverHelper::sendToWeeverServerCurl($context, $url);
+			
 		}
+		
 		elseif(ini_get('allow_url_fopen') == 1)
 		{
-			$context = comWeeverHelper::buildPostDataContext($postdata);
-			$response = comWeeverHelper::sendToWeeverServerFOpen($context);
+		
+			$context 	= comWeeverHelper::buildPostDataContext($postdata);
+			$response 	= comWeeverHelper::sendToWeeverServerFOpen($context, $url);
+			
 		}
+		
 		else 
-		{
-			$response = JText::_('WEEVER_ERROR_NO_CURL_OR_FOPEN');
-		}
+			$response 	= JText::_('WEEVER_ERROR_NO_CURL_OR_FOPEN');
 
 		return $response;
 	
 	}
 	
-	public static function sendToWeeverServerFOpen($context)
+	public static function sendToWeeverServerFOpen($context, $url = null)
 	{
 		
-		if(self::getStageStatus())
-			$weeverServer = comWeeverConst::LIVE_STAGE;
-		else
-			$weeverServer = comWeeverConst::LIVE_SERVER;
+		if( !$url ) 
+		{
+
+			if(self::getStageStatus())
+				$weeverServer = comWeeverConst::LIVE_STAGE;
+			else
+				$weeverServer = comWeeverConst::LIVE_SERVER;
+				
+			$url = $weeverServer . comWeeverConst::API_VERSION;
 			
-		$url = $weeverServer.comWeeverConst::API_VERSION;
+		}
 		
-		$response = file_get_contents($url, false, $context);
-		
-		return $response;
+		return file_get_contents($url, false, $context);
 	
 	}
 	

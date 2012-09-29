@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	1.9
+*	Version: 	2.0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -29,9 +29,9 @@ jimport('joomla.plugin.helper');
 final class comWeeverConst
 {
 
-	const VERSION			= "1.9";
+	const VERSION			= "2.0";
 	const RELEASE_TYPE		= "development/internal";
-	const RELEASE_NAME		= "<a href='http://www.erca.org/conservation/area.tremblay_beach.cfm' target='_blank'>Tremblay Beach</a>";
+	const RELEASE_NAME		= "Test Version 1";
 	const NAME				= "Weever Apps Administrator Component for Joomla!";
 	const COPYRIGHT_YEAR	= "(c) 2010-2012";
 	const COPYRIGHT			= "Weever Apps Inc.";
@@ -42,7 +42,7 @@ final class comWeeverConst
 	const SUPPORT_WEB		= "http://support.weeverapps.com/";
 	const LIVE_SERVER		= "http://weeverapp.com/";
 	const LIVE_STAGE		= "http://stage.weeverapp.com/";
-	const API_VERSION		= "api/v1/";
+	const API_VERSION		= "api/v2/";
 	const SUPPORTED_TYPES	= "-blog--calendar--component--contact--form--listingcomponent--page--photo--social--video--panel--aboutapp--map--directory--proximity-";
 
 }

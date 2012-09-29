@@ -1,11 +1,11 @@
 <?php
-
 /*	
 *	Weever Apps Administrator Component for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
-*	Version: 	1.5.1
+*	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
+*				Aaron Song 				<aaron@weeverapps.com>
+*	Version: 	2.0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@
 *
 */
 
-
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
@@ -34,33 +33,34 @@ class WeeverModelList extends JModel
 	public $jsonTheme 	= null;
 	public $jsonAccount = null;
 	public $data		= null;
+	protected	$key	= null;
 	
 	public function __construct()
 	{
         
         parent::__construct();
         
-        $this->json 			= comWeeverHelper::getJsonTabSync();
-        $this->jsonAccount 		= comWeeverHelper::getJsonAccountSync();
-         
-        $mainframe 	= JFactory::getApplication();
-        $option 	= JRequest::getCmd('option');
+        $this->key 	= comWeeverHelper::getKey();
         
-        $key = comWeeverHelper::getKey();
-       
-        $filter_order     = $mainframe->getUserStateFromRequest($option.'filter_order', 'filter_order', 'ordering', 'cmd');
-        $filter_order_Dir = $mainframe->getUserStateFromRequest($option.'filter_order_Dir', 'filter_order_Dir', 'asc', 'word');
+        $this->json 			= $this->getNavTabs();
+       // $this->jsonAccount 		= comWeeverHelper::getJsonAccountSync();
+         
+        $application 	= JFactory::getApplication();
+        $option 		= JRequest::getCmd('option');
+
+        $filter_order     = $application->getUserStateFromRequest($option.'filter_order', 'filter_order', 'ordering', 'cmd');
+        $filter_order_Dir = $application->getUserStateFromRequest($option.'filter_order_Dir', 'filter_order_Dir', 'asc', 'word');
  
-        $this->setState('filter_order', $filter_order);
-        $this->setState('filter_order_Dir', $filter_order_Dir);
-        $this->setState('site_key', $key);
+        $this->setState( 'filter_order', 		$filter_order );
+        $this->setState( 'filter_order_Dir', 	$filter_order_Dir );
+        $this->setState( 'site_key', 			$this->key );
         
 	}
 	
 	private function _buildContentOrderBy()
 	{
     	
-    	$mainframe = JFactory::getApplication();
+    	$application = JFactory::getApplication();
     	$option = JRequest::getCmd('option');
 
         $orderby = '';
@@ -74,6 +74,38 @@ class WeeverModelList extends JModel
         return $orderby;
 	}
 	
+	
+	protected function getNavTabs() 
+	{
+	
+		$api_endpoint 		= "tabs/list_tab_data";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
+		
+			'site_key' 		=> $this->key
+		
+		);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
+
+		if( isset($json->error) && $json->error == true )
+		{
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
+			 return false;
+			 
+		}
+		
+		return $json;
+	
+	}
 		
 	public function getCountSubtabs()
 	{

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="1.7" method="upgrade">
+<extension type="component" version="2.5" method="upgrade">
 
 	<name>COM_WEEVER</name>
-	<creationDate>2012-08-02</creationDate>
+	<creationDate>2012-09-28</creationDate>
 	<author>Robert Gerald Porter, Aaron Song</author>
 	<authorEmail>rob@weeverapps.com</authorEmail>
 	<authorUrl>http://www.weeverapps.com/</authorUrl>
 	<copyright>(c) 2010-2012 Weever Apps Inc.</copyright>
 	<license>GPLv3</license>
-	<version>1.9</version>
+	<version>2.0</version>
+	<releaseType>Development</releaseType>
 	<description>COM_WEEVER_DESCRIPTION</description>
 	
 	<scriptfile>install.weever.joomla.2.5.php</scriptfile>
@@ -66,20 +67,6 @@
 		<filename>icon_.png</filename>
 		<filename>titlebar_logo_.png</filename>
 	</media>
-	
-	<plugins>
-	
-		<plugin folder="plugins/system" plugin="mobileesp" name="MobileESP for Joomla" group="system" />
-		<plugin folder="plugins/k2" plugin="weevermapsk2" name="Weever Maps Geotagger for K2" group="k2" />
-		<plugin folder="plugins/content" plugin="weevermaps" name="Weever Maps Geotagger" group="content" />
-		
-	</plugins>
- 
-	<templates>
-	
-		<template folder="templates" template="weever_cartographer" name="Weever Cartographer R3S JSON Feed Template" />
-		
-	</templates>
 
 	<updateservers>
 	

@@ -1947,7 +1947,7 @@ img.wx-jquery-dialog-titlebar-icon {
 }
 
 div#wx-list-workspace {
-	opacity: 0;
+/*	opacity: 0; not sure why this is here, made everything vanish in v2 */
 }
 
 /* JQuery Dialog Buttons
@@ -1956,7 +1956,7 @@ div#wx-list-workspace {
  .ui-button-text-only .ui-button-text {
     padding: inherit;
 }
-
+	
 .ui-button .ui-button-text {
     cursor: pointer;
     display: block;

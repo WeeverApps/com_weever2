@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	1.9
+*	Version: 	2.0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -31,21 +31,22 @@ class WeeverViewList extends JView
 	{
 	
 		comWeeverHelper::phpVersionCheck();
+		
+		$document 		= &JFactory::getDocument();
 
-		JRequest::setVar('layout','default');
+		JRequest::setVar( 'layout', 'default' );
 		
 		$state 			= &$this->get( 'state' );
-		$tabsData 		= $this->get('tabsdata');
-		
-		if( $tabsData == false )
-			return;
-		
-		$appData 		= json_decode($tabsData)->results;
+		$nav_tabs 		= $this->get('tabsdata');
 		$accountData 	= $this->get('AccountData');
-		$tabRows 		= array();
 		
-		// fix for broken URLs
-		$row			=& JTable::getInstance('WeeverConfig', 'Table');
+		if( $nav_tabs == false )
+			return;
+			
+	//	print_r($nav_tabs);
+			
+		// fix for broken URLs *** GET FROM ACCOUNT DATA
+		/*$row			=& JTable::getInstance('WeeverConfig', 'Table');
 		$row->load(4);
 		
 		if( $row->setting != $appData->config->primary_domain ) {
@@ -53,67 +54,65 @@ class WeeverViewList extends JView
 			$row->setting 	= $appData->config->primary_domain;		
 			$row->store();
 			
-		}
-		
-		$document 		= &JFactory::getDocument();
-		
+		}*/
+
 		$document->addCustomTag (
 		
 			'<script type="text/javascript">'.
 			
-				'wx.tabSyncData = ' . $tabsData .
+				'wx.tabSyncData = ' . json_encode( $nav_tabs ) .
 			
 			'</script>'
 			
 		);
-		
-		$this->assignRef('tier', $appData->config->tier);
-		$this->assignRef('theme',$appData->theme_params);
-		$this->assignRef('account', $accountData);
+	
+		$tabs			= array();
+		$parent_tabs	= array();
 
-		foreach((array)$appData->tabs as $k=>$v)
+		/* First pass for tab parents and orphans */
+		foreach( (array) $nav_tabs->tabs as $k=>$v )
 		{
-			
-			$componentRow = $v->type . "Rows";
-			${$componentRow}[] = $v;
 		
+			if( $v->parent_id )
+				continue;
+
+			$tabs[][] 				= $v;
+			$parent_tabs[ $v->id ]	= key($tabs);
+
 		}
 		
-		$this->assignRef('tabRows', $tabRows);
-		$this->assignRef('blogRows', $blogRows);
-		$this->assignRef('directoryRows', $directoryRows);
-		$this->assignRef('pageRows', $pageRows);
-		$this->assignRef('componentRows', $componentRows);
-		$this->assignRef('listingComponentRows', $listingComponentRows);
-		$this->assignRef('contactRows', $contactRows);
-		$this->assignRef('videoRows', $videoRows);
-		$this->assignRef('photoRows', $photoRows);
-		$this->assignRef('socialRows', $socialRows);
-		$this->assignRef('formRows', $formRows);
-		$this->assignRef('aboutappRows', $aboutappRows);
-		$this->assignRef('panelRows', $panelRows);
-		$this->assignRef('calendarRows', $calendarRows);
-		$this->assignRef('mapRows', $mapRows);
-		$this->assignRef('proximityRows', $proximityRows);
-		/*
-		if( comWeeverHelper::componentExists("com_k2") )
-			$k2Categories 	= $this->get('k2Categories');
-		*/	
+		/* Second pass for the rest */
+		foreach( (array) $nav_tabs->tabs as $k=>$v )
+		{
+		
+			if( !$v->parent_id )
+				continue;
+		
+			$tabs[ $parent_tabs[$v->parent_id] ][]	= $v;
+			
+		}
+		
+		$tier = 2;
+		
+		$this->assignRef( 'tabs', 		$tabs/*$appData->config->tier*/ );
+		$this->assignRef( 'tier', 		$tier/*$appData->config->tier*/ );
+	//	$this->assignRef( 'theme',		$appData->theme_params );
+		
 		$contentCategories 	= $this->get('contentCategories');
 		$menuItems 			= $this->get('menuItems');
 		$menuJoomlaBlogs	= $this->get('menuJoomlaBlogs');
 		$menuK2Blogs		= $this->get('menuK2Blogs');
-		$menuEasyBlogBlogs		= $this->get('menuEasyBlogBlogs');
+		$menuEasyBlogBlogs	= $this->get('menuEasyBlogBlogs');
 		$contactItems		= $this->get('contactItems');
+
+		/* Data from Joomla about existing categories and articles */
+		$this->assignRef( 'contentCategories', 	$contentCategories );
+		$this->assignRef( 'menuJoomlaBlogs', 	$menuJoomlaBlogs );
+		$this->assignRef( 'menuK2Blogs', 		$menuK2Blogs );
+		$this->assignRef( 'menuEasyBlogBlogs', 	$menuEasyBlogBlogs );
+		$this->assignRef( 'contactItems', 		$contactItems );
 		
-		//$this->assignRef('k2Categories', $k2Categories);
-		$this->assignRef('contentCategories', $contentCategories);
-		$this->assignRef('menuJoomlaBlogs', $menuJoomlaBlogs);
-		$this->assignRef('menuK2Blogs', $menuK2Blogs);
-		$this->assignRef('menuEasyBlogBlogs', $menuEasyBlogBlogs);
-		$this->assignRef('contactItems', $contactItems);
-		
-		$this->assign('site_key', $state->get('site_key'));
+		$this->assign( 	'site_key', 	$state->get('site_key') );
 
 		$lists['order_Dir'] = $state->get( 'filter_order_Dir' );
 		$lists['order']     = $state->get( 'filter_order' );
@@ -124,16 +123,14 @@ class WeeverViewList extends JView
 		
 		comWeeverHelper::getJsStrings();			
 		
-		if( JRequest::getVar("wxTabSync") )
-		{
-			var_dump($appData);
-		}
+		if( JRequest::getVar("wxTabDump") )
+			var_dump($nav_tabs);
 	
-		JSubMenuHelper::addEntry(JText::_('WEEVER_TAB_ITEMS'), 'index.php?option=com_weever', true);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_THEMING'), 'index.php?option=com_weever&view=theme&task=theme', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_CONFIGURATION'), 'index.php?option=com_weever&view=config&task=config', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_ACCOUNT'), 'index.php?option=com_weever&view=account&task=account', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_SUPPORT_TAB'), 'index.php?option=com_weever&view=support&task=support', false);
+		JSubMenuHelper::addEntry( JText::_('WEEVER_TAB_ITEMS'), 	'index.php?option=com_weever', true);
+		JSubMenuHelper::addEntry( JText::_('WEEVER_THEMING'), 		'index.php?option=com_weever&view=theme&task=theme', false);
+		JSubMenuHelper::addEntry( JText::_('WEEVER_CONFIGURATION'), 'index.php?option=com_weever&view=config&task=config', false);
+		JSubMenuHelper::addEntry( JText::_('WEEVER_ACCOUNT'), 		'index.php?option=com_weever&view=account&task=account', false);
+		JSubMenuHelper::addEntry( JText::_('WEEVER_SUPPORT_TAB'), 	'index.php?option=com_weever&view=support&task=support', false);
 
 		parent::display($tpl);
 	
