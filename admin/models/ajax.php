@@ -137,6 +137,72 @@ class WeeverModelAjax extends JModel
 		return $json;
 	
 	}
+	
+	public function saveTabPublish($id, $publish) 
+	{
+	
+		$api_endpoint 		= "tabs/set_published";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
+			
+			'site_key' 		=> $this->key,
+			'tab_id'		=> $id,
+			'published'		=> $publish
+		
+		);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
 
+		if( isset($json->error) && $json->error == true )
+		{
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
+			 return false;
+			 
+		}
+		
+		return $json;
+	
+	}
+
+	public function deleteTab($id) 
+	{
+	
+		$api_endpoint 		= "tabs/delete";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
+			
+			'site_key' 		=> $this->key,
+			'tab_id'		=> $id
+		
+		);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
+
+		if( isset($json->error) && $json->error == true )
+		{
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
+			 return false;
+			 
+		}
+		
+		return $json;
+	
+	}
 
 }

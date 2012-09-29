@@ -98,45 +98,40 @@ class WeeverController extends JController
 	}
 	
 	
-	public function ajaxSubtabDelete()
+	public function ajaxTabDelete()
 	{
 
-		$id = JRequest::getVar('id');
-		$result = comWeeverHelper::pushDeleteToCloud($id);
+		$model = $this->getModel('ajax');
+	
+		$result = $model->deleteTab( JRequest::getVar("id") );
+	
+		//$result = comWeeverHelper::pushTabNameToCloud();
 		
-		if($result == "Site key missing or invalid.")
-		{
-			JError::raiseError(500, JText::_('WEEVER_SERVER_ERROR').$result);	
-		}
-
-		echo $result;
+		if( $result->success )
+			echo "Item Deleted";
 		
-		jexit();				
-		
+		jexit();
 	
 	}
 	
 	
 	public function ajaxTabPublish()
 	{
-	
 
-		$status = JRequest::getVar('status');
+		$status 	= JRequest::getVar('status');
+		$id 		= JRequest::getVar('id');
 		
 		if($status == 1)		
 			$publish = 0;
 		else
 			$publish = 1;
 			
-		$id = JRequest::getVar('id');
-		$result = comWeeverHelper::pushPublishToCloud($id, $publish);
+		$model 		= $this->getModel('ajax');
+		$result 	= $model->saveTabPublish( $id, $publish );
 		
-		if($result == "Site key missing or invalid.")
-		{
-			JError::raiseError(500, JText::_('WEEVER_SERVER_ERROR').$result);	
-		}
-		
-		echo $result;
+		if( $result->success )
+			echo "Item Status Updated";
+	
 		jexit();		
 	
 	}

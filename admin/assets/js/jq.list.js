@@ -341,7 +341,7 @@ jQuery( document ).ready( function() {
 			
 				jQuery('#wx-modal-loading-text').html(msg);
 				
-				if(msg == "Item Published" || msg == "Item Unpublished") {
+				if(msg == "Item Status Updated") {
 				
 					jQuery('#wx-modal-secondary-text').html(Joomla.JText._('WEEVER_JS_APP_UPDATED'));
 				
@@ -388,7 +388,7 @@ jQuery( document ).ready( function() {
 			
 			type: 		"POST",
 			url: 		"index.php",
-			data: 		"option=com_weever&task=ajaxSubtabDelete&id="+tabId+'&site_key='+siteKey,
+			data: 		"option=com_weever&task=ajaxTabDelete&id="+tabId+'&site_key='+siteKey,
 			success: 	function(msg) {
 			
 				jQuery('#wx-modal-loading-text').html(msg);
