@@ -29,79 +29,9 @@ wx.labelText = function(active, futurePassive) {
 
 wx.tabTypes = {
 
-	'blog':			{
+	'alltabs':		{
 	
-		label:	new wx.labelText('Display as a list of articles', 'This content will be displayed as a list of articles')
-
-	},
-	'page':			{
-	
-		label:	new wx.labelText('Display as part of a list of pages', 'This content will be displayed as part of a list of pages')
-	
-	},
-	'directory':	{
-	
-		label:	new wx.labelText('Display as part of a directory', 'This content will be displayed as a part of a directory')
-	
-	},
-	'video':		{
-
-		label:	new wx.labelText('Display as a list of videos', 'This content will be displayed as a list of videos')
-
-	},
-	'photo':		{
-	
-		label:	new wx.labelText('Display as a list of photo albums', 'This content will be displayed as a list of photo albums')
-	
-	},
-	'panel':		{
-	
-		label:	new wx.labelText('Display this as a single page', 'This content will be displayed as a single page')
-	
-	},
-	'aboutapp':		{
-	
-		label:	new wx.labelText('Display this as a single page about this app','This content will be displayed as a single page about this app')
-	
-	},
-	'map':			{
-	
-		label:	new wx.labelText('Display this as locations on a map', 'This content will be displayed as locations on a map')
-	
-	},
-	'proximity':	{
-	
-		label:	new wx.labelText('Display as a list of nearby locations', 'This content will be displayed as a list of nearby locations')
-	
-	},
-	'social':		{
-	
-		label:	new wx.labelText('Display as a list of status updates', 'This content will be displayed as a list of status updates')
-	
-	},
-	'audio':		{
-	
-		label:	new wx.labelText('Display as a list of audio tracks', 'This content will be displayed as a list of audio tracks')
-		
-	},
-	'product':		{
-	
-		label: 	new wx.labelText('Display as a list of products', 'This content will be displayed as a list of products')
-	
-	},
-	'calendar':		{
-	
-		label:	new wx.labelText('Display as a list of events on a calendar', 'This content will be displayed as a list of events on a calendar')
-	
-	},
-	'form':			{
-	
-		label: 	new wx.labelText('Display as a list of forms', 'This content will be displayed as a list of forms')
-	
-	},
-	'contact':		{
-	
-		label:	new wx.labelText('Display as a contact card', 'This content will be displayed as a contact card')
+		label:	new wx.labelText('Display as a tab', 'This content will be displayed as a new tab')
 	
 	}
 

@@ -43,7 +43,7 @@ final class comWeeverConst
 	const LIVE_SERVER		= "http://weeverapp.com/";
 	const LIVE_STAGE		= "http://stage.weeverapp.com/";
 	const API_VERSION		= "api/v2/";
-	const SUPPORTED_TYPES	= "-blog--calendar--component--contact--form--listingcomponent--page--photo--social--video--panel--aboutapp--map--directory--proximity-";
+	const SUPPORTED_TYPES	= "-alltabs-";
 
 }
 

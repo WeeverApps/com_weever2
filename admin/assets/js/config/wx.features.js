@@ -36,7 +36,7 @@ wx.features = [
 				component:		'blog',
 				name:			'Blog',
 				title:			true,
-				types:			['blog', 'map', 'proximity',  'directory'],
+				types:			['alltabs'],
 				fields:			{
 				
 					'cms_feed':	'#wx-add-joomla-blog-select',
@@ -58,7 +58,7 @@ wx.features = [
 				component:		'blog',
 				name:			'Category',
 				title:			true,
-				types:			['blog', 'directory', 'map', 'proximity'],
+				types:			['alltabs'],
 				component:		{
 				
 					'blog':			'blog',
@@ -81,7 +81,7 @@ wx.features = [
 				component:		'page',
 				title:			true,
 				titleUse:		'Change only if you think a shorter title is more appropriate for a mobile app.',
-				types:			['page', 'panel', 'map', 'aboutapp'],
+				types:			['alltabs'],
 				fields:			{
 				
 					cms_feed:	'#wx-add-joomla-article-url',
@@ -120,7 +120,7 @@ wx.features = [
 			'showimages':	'Add the image from my Joomla contact'
 		
 		},
-		types:			'contact'
+		types:			['alltabs']
 		
 	},
 	{
@@ -138,7 +138,7 @@ wx.features = [
 				name:			'K2 Blog',
 				extension:		'com_k2',
 				title:			true,
-				types:			['blog', 'directory', 'map', 'proximity'],
+				types:			['alltabs'],
 				component:		{
 				
 					'blog':			'blog',
@@ -160,7 +160,7 @@ wx.features = [
 				name:			'K2 Category',
 				extension:		'com_k2',
 				title:			true,
-				types:			['blog', 'directory', 'map', 'proximity'],
+				types:			['alltabs'],
 				component:		{
 				
 					'blog':			'blog',
@@ -183,7 +183,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				titleUse:		'Change only if you think a shorter title is more appropriate for a mobile app.',
-				types:			['page', 'panel', 'map', 'aboutapp'],
+				types:			['alltabs'],
 				component:		{
 				
 					'map':			'map',
@@ -205,7 +205,7 @@ wx.features = [
 				name:			'K2 Tag',
 				extension:		'com_k2',
 				title:			true,
-				types:			['blog', 'directory', 'map', 'proximity'],
+				types:			['alltabs'],
 				component:		{
 				
 					'blog':			'blog',
@@ -252,7 +252,7 @@ wx.features = [
 				extension:		'com_easyblog',
 				title:			true,
 				//unavailable:	'Coming soon!',
-				types:			['blog', 'directory', 'map', 'proximity'],
+				types:			['alltabs'],
 				component:		{
 				
 					'blog':			'blog',
@@ -275,7 +275,7 @@ wx.features = [
 				extension:		'com_easyblog',
 				title:			true,
 				//unavailable:	'Coming soon!',
-				types:			['blog', 'directory', 'map', 'proximity'],
+				types:			['alltabs'],
 				component:		{
 				
 					'blog':			'blog',
@@ -299,7 +299,7 @@ wx.features = [
 				title:				true,
 				titleUse:		'Change only if you think a shorter title is more appropriate for a mobile app.',
 				//unavailable:	'Coming soon!',
-				types:			['page', 'panel', 'map', 'aboutapp'],
+				types:			['alltabs'],
 				component:		{
 				
 					'map':			'map',
@@ -322,7 +322,7 @@ wx.features = [
 				extension:		'com_easyblog',
 				title:			true,
 				//unavailable:	'Coming soon!',
-				types:			['blog', 'directory', 'map', 'proximity'],
+				types:			['alltabs'],
 				component:		{
 				
 					'blog':			'blog',
@@ -365,7 +365,7 @@ wx.features = [
 				name:			'Twitter User',
 				defaultTitle:	'component_behaviour',
 				component:		'twitteruser',
-				types:			'social',
+				types:			['alltabs'],
 				fields:			{
 				
 					component_behaviour: 	'#wx-twitter-user-value'
@@ -384,7 +384,7 @@ wx.features = [
 				name:			'Hash Tag',
 				component:		'twitter',
 				defaultTitle:	'component_behaviour',
-				types:			'social',
+				types:			['alltabs'],
 				fields:			{
 				
 					component_behaviour: 	'#wx-twitter-hashtag-value'
@@ -402,7 +402,7 @@ wx.features = [
 				id:				'search',
 				name:			'Search Term',
 				component:		'twitter',
-				types:			'social',
+				types:			['alltabs'],
 				defaultTitle:	'Twitter',
 				fields:			{
 				
@@ -442,7 +442,7 @@ wx.features = [
 				' <p><em>It is recommended you add Pages, rather than personal profiles. Due to privacy settings, personal profiles may not work in the app.</em></p>	',
 				
 		url:			'http://facebook.com/',
-		types:			['social', 'photo', 'calendar'],
+		types:			['alltabs'],
 		labels:			{
 		
 			'social':		new wx.labelText('Display my status updates as a stream', null),
@@ -467,7 +467,7 @@ wx.features = [
 		id:				'tumblr',
 		vertical:		'all',
 		name:			'Tumblr',
-		types:			'blog',
+		types:			['alltabs'],
 		unavailable:	'Tumblr Support is coming soon!'
 	
 	},
@@ -476,7 +476,7 @@ wx.features = [
 		vertical:		'all',
 		id:				'google_plus',
 		name:			'Google +',
-		types:			'social',
+		types:			['alltabs'],
 		unavailable:	'Google Plus Support is coming soon!'
 	
 	},
@@ -503,7 +503,7 @@ wx.features = [
 			
 				id:				'channel',
 				name:			'User / Channel',
-				types:			'video',
+				types:			['alltabs'],
 				title:			true,
 				defaultTitle:	'Videos',
 				component:		'youtube',
@@ -523,7 +523,7 @@ wx.features = [
 			
 				id:				'playlist',
 				name:			'Playlist',
-				types:			'video',
+				types:			['alltabs'],
 				component:		'youtube.playlists',
 				title:			true,
 				defaultTitle:	'Videos',
@@ -563,7 +563,7 @@ wx.features = [
 			    
 			'</ul>',
 			
-		types:			'video',
+		types:			['alltabs'],
 		title:			true,
 		defaultTitle:	'Videos',
 		fields:			{
@@ -606,7 +606,7 @@ wx.features = [
 			
 			'<p>For more information check out: <a href="http://wufoo.com/integrations" target="_blank">http://wufoo.com/integrations</a></p>',
 			
-		types:			'form',
+		types:			['alltabs'],
 		defaultTitle:	'Forms',
 		tier:			2,
 		fields:			{
@@ -648,7 +648,7 @@ wx.features = [
 				title:			true,
 				defaultTitle:	'Latest Photos',
 				component:		'flickr',
-				types:			'photo',
+				types:			['alltabs'],
 				fields:			{
 				
 					component_behaviour:	'#wx-flickr-photostream-photo-url'
@@ -667,7 +667,7 @@ wx.features = [
 				name:			'All Photosets',
 				defaultTitle:	'Photos',
 				component:		'flickr.photosets',
-				types:			'photo',
+				types:			['alltabs'],
 				defaultValue:	{
 				
 					component_behaviour:	'http://flickr.com/photos/'
@@ -705,7 +705,7 @@ wx.features = [
 			'</ul>', 
 			
 		
-		types:			'photo',
+		types:			['alltabs'],
 		fields:			{
 		
 			component_behaviour:	'#wx-picasa-photo-url'
@@ -734,7 +734,7 @@ wx.features = [
 			
 			'</ul>',
 			
-		types:			'photo',
+		types:			['alltabs'],
 		labels:			{
 		
 			'photo':	new wx.labelText(null, 'This content will be displayed as a slideshow of photos')
@@ -764,14 +764,14 @@ wx.features = [
 				
 				id:		'user',
 				name:	'User',
-				types:	'audio'				
+				types:	['alltabs']				
 			
 			},
 			{
 			
 				id:		'set',
 				name:	'Set',
-				types:	'audio'
+				types:	['alltabs']
 			
 			}
 		
@@ -790,14 +790,14 @@ wx.features = [
 			
 				id:		'band',
 				name:	'Band',
-				types:	'audio'
+				types:	['alltabs']
 			
 			},
 			{
 			
 				id:		'album',
 				name:	'Album',
-				types:	'audio'			
+				types:	['alltabs']		
 			
 			}
 		
@@ -808,7 +808,7 @@ wx.features = [
 	
 		id:				'google_calendar',
 		name:			'Google Calendar',
-		types:			'calendar',
+		types:			['alltabs'],
 		defaultTitle:	'Calendar',
 		component:		'google.calendar',
 		title:			true,
@@ -826,7 +826,7 @@ wx.features = [
 		component:		'blogger',
 		title:			true,
 		defaultTitle:	'Our Blog',
-		types:			'blog',
+		types:			['alltabs'],
 		fields:			{
 		
 			cms_feed: 	'#wx-add-blog-blogger-url-input'
@@ -842,7 +842,7 @@ wx.features = [
 		description:	'<p>Identi.ca is a social microblogging service similar to Twitter, but built on open source tools and open standards.' +
 					
 					'<p>In Weever, you can display a search term or hashtag stream.</p>',
-		types:			'social',
+		types:			['alltabs'],
 		defaultTitle:	'Identi.ca Status',
 		fields:			{
 		
@@ -857,11 +857,11 @@ wx.features = [
 		name:			'R3S Object',
 		component:		'r3s',
 		title:			true,
-		types:			['blog', 'page', 'map', 'panel', 'directory', 'aboutapp', 'proximity'],
+		types:			['alltabs'],
 		component:		{
 		
 			'blog':			'blog',
-			'directory':	'dir	ectory',
+			'directory':	'directory',
 			'map':			'map',
 			'proximity':	'proximity',
 			'aboutapp':		'aboutapp',

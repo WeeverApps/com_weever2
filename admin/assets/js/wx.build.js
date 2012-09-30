@@ -199,7 +199,7 @@ jQuery(document).ready( function() {
 					
 					if( item.types instanceof Array && undefined != wx.types[ item.types[0] ] ) {
 					
-						if( wx.tabSyncData.results.config.tier == 2.1 && ( wx.types[ item.types[0] ].tier > 1 ) )
+					/*	if( wx.tabSyncData.results.config.tier == 2.1 && ( wx.types[ item.types[0] ].tier > 1 ) )
 							appendDiv = appendNoticeDiv( 'div#add-' + item.id, 'trial' );
 						
 						if( wx.types[ item.types[0] ].tier > wx.tabSyncData.results.config.tier ) {
@@ -207,7 +207,7 @@ jQuery(document).ready( function() {
 							appendDiv 	= appendNoticeDiv( 'div#add-' + item.id, 'upgrade' );
 							extraClass	+= ' wx-upgrade-prompt';
 							
-						}
+						}*/
 							
 					}
 				
@@ -445,22 +445,31 @@ jQuery(document).ready( function() {
 		var buildTabTypes		= function() {
 		
 			wx.types	= wx.types || {};
+			
+			console.log( wx.tabSyncData );
+			
+			wx.types[ 'alltabs' ] = {
+			
+				name:	'anytab',
+				tier:	0
+			
+			};
 		
-			for( i = 0; i < wx.tabSyncData.tabs.length; i++ ) {
+			/*for( i = 0; i < wx.tabSyncData.tabs.length; i++ ) {
 			
 				var tab		= wx.tabSyncData.tabs[i];
 				
-				if( tab.type != 'tab' )
+				if( tab.parent_id != null )
 					continue;
 					
-				wx.types[ tab.component ] = {
+				wx.types[ tab.id ] = {
 				
-					name:	tab.name,
+					name:	tab.title,
 					tier:	tab.tier
 				
 				};
 				
-			}
+			}*/
 		
 		}
 		

@@ -399,6 +399,8 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			
 		}
 		
+		console.log( serviceTypes );
+		
 		if( serviceTypes.length == 1 ) {
 		
 			if( undefined == featureData.labels )
@@ -430,6 +432,8 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		
 			var checked, label, disabled,
 				extraClass		= '';
+			
+			console.log( serviceTypes );
 
 			for( var i=0; i < serviceTypes.length; i++ ) {
 			
@@ -446,7 +450,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 				else
 					label	= featureData.labels[ serviceTypes[i] ];
 					
-				if( wx.types[ serviceTypes[i] ].tier > wx.tabSyncData.results.config.tier ) {
+				if( wx.types[ serviceTypes[i] ].tier > wx.tabSyncData.results.config.tier ) {
 				
 					extraClass	= ' wx-add-upgrade';
 					disabled	= ' disabled="disabled"';
