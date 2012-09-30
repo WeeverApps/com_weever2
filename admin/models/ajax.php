@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0
+*	Version: 	2.0-alpha-1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -37,12 +37,35 @@ class WeeverModelAjax extends JModel
 
 	}
 	
+	protected function makeAPICall($api_endpoint, $remote_query)
+	{
+	
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
+
+		if( isset($json->error) && $json->error == true )
+		{
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
+			 return false;
+			 
+		}
+		
+		return $json;
+
+	}
+	
 	public function saveTabName($name, $tab_id) 
 	{
 	
-		$api_endpoint 		= "tabs/set_tabTitle";
-		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
-		$stage_url 			= '';
 		$remote_query 		= array( 	
 			
 			'site_key' 		=> $this->key,
@@ -50,33 +73,14 @@ class WeeverModelAjax extends JModel
 			'tab_id'		=> $tab_id
 		
 		);
-		
-		if( comWeeverHelper::getStageStatus() )
-			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
 	
-		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
-		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
-		
-		$json		= json_decode( $response );
-
-		if( isset($json->error) && $json->error == true )
-		{
-		
-			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
-			 return false;
-			 
-		}
-		
-		return $json;
+		return $this->makeAPICall( "tabs/set_tabTitle", $remote_query );
 	
 	}
 	
 	public function saveTabItemName($name, $tab_id) 
 	{
 	
-		$api_endpoint 		= "tabs/set_title";
-		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
-		$stage_url 			= '';
 		$remote_query 		= array( 	
 			
 			'site_key' 		=> $this->key,
@@ -84,66 +88,31 @@ class WeeverModelAjax extends JModel
 			'tab_id'		=> $tab_id
 		
 		);
-		
-		if( comWeeverHelper::getStageStatus() )
-			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
 	
-		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
-		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
-		
-		$json		= json_decode( $response );
-
-		if( isset($json->error) && $json->error == true )
-		{
-		
-			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
-			 return false;
-			 
-		}
-		
-		return $json;
+		return $this->makeAPICall( "tabs/set_title", $remote_query );
 	
 	}
 	
 	public function saveTabOrder($order) 
 	{
 	
-		$api_endpoint 		= "tabs/sort_tabs";
-		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
-		$stage_url 			= '';
 		$remote_query 		= array( 	
 			
 			'site_key' 		=> $this->key,
 			'order'			=> $order
 		
 		);
-		
-		if( comWeeverHelper::getStageStatus() )
-			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
 	
-		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
-		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
-		
-		$json		= json_decode( $response );
-
-		if( isset($json->error) && $json->error == true )
-		{
-		
-			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
-			 return false;
-			 
-		}
-		
-		return $json;
+		return $this->makeAPICall( "tabs/sort_tabs", $remote_query );
 	
 	}
 	
 	public function saveTabPublish($id, $publish) 
 	{
 	
-		$api_endpoint 		= "tabs/set_published";
-		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
-		$stage_url 			= '';
+		if( is_array($id) )
+			$id = implode( ",", $id );
+	
 		$remote_query 		= array( 	
 			
 			'site_key' 		=> $this->key,
@@ -152,32 +121,16 @@ class WeeverModelAjax extends JModel
 		
 		);
 		
-		if( comWeeverHelper::getStageStatus() )
-			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
-	
-		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
-		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
-		
-		$json		= json_decode( $response );
-
-		if( isset($json->error) && $json->error == true )
-		{
-		
-			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
-			 return false;
-			 
-		}
-		
-		return $json;
+		return $this->makeAPICall( "tabs/set_published", $remote_query );
 	
 	}
 
 	public function deleteTab($id) 
 	{
 	
-		$api_endpoint 		= "tabs/delete";
-		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
-		$stage_url 			= '';
+		if( is_array($id) )
+			$id = implode( ",", $id );
+
 		$remote_query 		= array( 	
 			
 			'site_key' 		=> $this->key,
@@ -185,23 +138,26 @@ class WeeverModelAjax extends JModel
 		
 		);
 		
-		if( comWeeverHelper::getStageStatus() )
-			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+		return $this->makeAPICall( "tabs/delete", $remote_query );
 	
-		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
-		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
-		
-		$json		= json_decode( $response );
+	}
+	
+	public function saveNewTab($config, $title, $content, $layout, $icon_id, $published) 
+	{
 
-		if( isset($json->error) && $json->error == true )
-		{
+		$remote_query 		= array( 	
+			
+			'site_key' 		=> $this->key,
+			'config'		=> $config,
+			'title'			=> $title,
+			'content'		=> $content,
+			'layout'		=> $layout,
+			'icon_id'		=> $icon_id,
+			'published'		=> $published
 		
-			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
-			 return false;
-			 
-		}
+		);
 		
-		return $json;
+		return $this->makeAPICall( "tabs/add_tab", $remote_query );
 	
 	}
 

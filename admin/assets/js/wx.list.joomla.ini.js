@@ -109,34 +109,49 @@ wx.baseExtensionUrl 	= "index.php?option=com_weever";
 
 wx.ajaxUrl			= function(a) {
 
-	this.title					= "&name=" + encodeURIComponent( jQuery('#wx-add-title-tab-item').val() );
-	this.type 					= "&type=" + a.type;
-	this.component				= "&component=" + a.component;
+	this.title					= "&title=" + encodeURIComponent( jQuery('#wx-add-title-tab-item').val() );
+	this.content				= "&content=" +  encodeURIComponent( a.content );
 	this.appKey					= "&site_key=" + jQuery("input#wx-site-key").val();
-	this.var					= "";
-	this.component_behaviour	= "";
+	this.config					= a.config;
+	this.icon_id				= "&icon_id=" + a.icon_id;
 	this.published				= "&published=" + a.published;
-	this.component_id			= "";
-	this.extra					= "";
+	this.layout					= "&layout=" + a.layout;
 	this.cms_feed				= "";
 		
 	this.getParams		= function() {
 	
-		if(this.component_behaviour)
-			this.component_behaviour 	= "&component_behaviour=" + encodeURIComponent(this.component_behaviour);
+		if( this.cms_feed && this.cms_feed.search("http") == -1 ) {
+		
+			this.cms_feed = "http://" + document.domain + "/" + this.cms_feed;
+		
+		}
+
+		for( var key in this.config ) {
+
+			if( this.config[key][0] == ":" ) {
 			
-		if(this.var) 
-			this.var					= "&var=" + encodeURIComponent(this.var);
+				var value = this.config[key].replace(":","");
 			
-		if(this.component_id)
-			this.component_id			= "&component_id=" + this.component_id;
+				this.config[key] = this[ value ]; // if ":cms_feed", will grab this.cms_feed
+				
+				continue;
 			
-		if(this.cms_feed)
-			this.cms_feed				= "&cms_feed=" + encodeURIComponent(this.cms_feed);
+			}
+
+		}
+
+		if(this.config) 
+			this.config					= "&config=" + encodeURIComponent( JSON.stringify(this.config) );
+		else 
+			this.config					= "";
 	
-		return "option=com_weever&task=ajaxSaveNewTab" + this.title + this.type +
-						this.component + this.component_behaviour + this.var + "&weever_action=add" +
-					 	this.appKey + this.published + this.component_id + this.cms_feed + this.extra;			
+		var url = "option=com_weever&task=ajaxSaveNewTab" + this.title + 
+						this.content + this.config + "&weever_action=add" +
+					 	this.appKey + this.published + this.layout + this.icon_id;			
+		
+		console.log(url);			
+		 	
+		return url;
 
 	}
 	

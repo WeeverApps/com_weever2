@@ -36,23 +36,21 @@ if (typeof console == "undefined") {
 
 wx.ajaxAddTabItem	= function(a) {
 
-	//console.log(a);
+console.log(a);	
 	
 	var ajaxUrls	= [],
 		returned	= 0,
 		addAjaxUrl	= function(type, data) {
 		
-			var component;
+			console.log(data);
 		
-			if( typeof data.component === "object" ) 			
-				component = data.component[ type ];
-			else
-				component = data.component;
-
 			var newType = new wx.ajaxUrl({ 
 			
 				type:		type,
-				component:	component,
+				content:	data.content,
+				config:		data.config,
+				layout:		data.layout,
+				icon_id:	data.icon_id,
 				published:	1
 				
 			});
@@ -105,7 +103,7 @@ wx.ajaxAddTabItem	= function(a) {
 		}
 	
 	} else {
-
+	
 		addAjaxUrl(a.featureData.types, a.featureData);	
 	
 	}

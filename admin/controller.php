@@ -164,17 +164,6 @@ class WeeverController extends JController
 	
 	}
 	
-	public function ajaxSaveSubtabOrder()
-	{
-		
-		$response = comWeeverHelper::pushSubtabReorderToCloud();
-
-		echo $response;
-		
-		jexit();
-	
-	}
-	
 	public function ajaxToggleAppStatus()
 	{
 	
@@ -199,51 +188,24 @@ class WeeverController extends JController
 	
 	public function ajaxSaveNewTab()
 	{
-
-		$rss = null;
-		$tab_id = null;
-		
-		$type = JRequest::getWord('type', 'tab');
 	
-		if(  $type == "contact" || 
-				$type == "blog" || $type == "directory" ||
-				$type == "page" || 
-				( $type == "map" && JRequest::getVar("tag") )  
-			)
-		{
-		
-			$type_method = "_build".$type."FeedURL";
+		$model = $this->getModel('ajax');
 	
-			// ### check later
-			if(JRequest::getVar('view' == "contact"))
-			{
-				comWeeverHelper::getContactInfo();		
-			}		
+		$result = $model->saveNewTab( 
+		
+			JRequest::getVar("config"), 
+			JRequest::getVar("title"), 
+			JRequest::getVar("content"), 
+			JRequest::getVar("layout"), 
+			JRequest::getVar("icon_id"), 
+			JRequest::getVar("published")
 			
-			$rss = comWeeverHelper::$type_method();
-			
-			if($rss === false)
-			{
-				echo "Feed build failed!";
-				jexit();
-			}
-						
-		}
-		
+		);
 
-		JRequest::setVar('rss', $rss, 'post');
-		JRequest::setVar('weever_server_response', comWeeverHelper::pushSettingsToCloud(), 'post');
-		
-		if(JRequest::getVar('weever_server_response') == "Site key missing or invalid.")
-		{
-			echo JRequest::getVar('weever_server_response');
-			jexit();
-		}
-
-		
-		echo JRequest::getVar('weever_server_response');
-		
-		jexit();		
+		if( $result->success )
+			echo "Item Added";
+	
+		jexit();
 	
 	}
 		
@@ -251,24 +213,17 @@ class WeeverController extends JController
 	public function remove()
 	{
 		
-		
 		JRequest::checkToken() or jexit('Invalid Token');
-		$option = JRequest::getCmd('option');
 		
-		$cid = JRequest::getVar('cid', array(0));
+		$model 		= $this->getModel('ajax');
+		$option 	= JRequest::getCmd('option');
 		
-		$result = comWeeverHelper::pushDeleteToCloud($cid);
-	
-		if($result == "Site key missing or invalid.")
-		{
-			JError::raiseError(500, JText::_('WEEVER_SERVER_ERROR').$result);	
-		}		
-		
-		if($result)
-			$this->setRedirect('index.php?option='.$option.'&view=list', JText::_('WEEVER_SERVER_RESPONSE').$result);	
+		$result 	= $model->deleteTab( JRequest::getVar('cid', array(0)) );
+
+		if($result->success)
+			$this->setRedirect('index.php?option='.$option.'&view=list', JText::_('WEEVER_SERVER_RESPONSE').$result->message);	
 		else
 			$this->setRedirect('index.php?option='.$option.'&view=list',JText::_('WEEVER_ERROR_COULD_NOT_CONNECT_TO_SERVER'), 'error');
-		
 	
 	}
 	
@@ -418,38 +373,27 @@ class WeeverController extends JController
 	
 	public function publish()
 	{
-	
-		$option = JRequest::getCmd('option');
 
-		$cid = JRequest::getVar('cid', array());
-		if(!$cid)
-		{
-			$cid[] = JRequest::getVar('id', array());
-		}
+		JRequest::checkToken() or jexit('Invalid Token');
 		
-		$publish = 1;
+		$model 		= $this->getModel( 'ajax' );
+		$option 	= JRequest::getCmd( 'option' );
+		$cid 		= JRequest::getVar( 'cid', array() );
+		$publish 	= 1;
 		
-		if($this->getTask() == 'unpublish')
+		if( $this->getTask() == 'unpublish' )
 			$publish = 0;
 		
-		$result = comWeeverHelper::pushPublishToCloud($cid, $publish);
-		
-		if($result == "Site key missing or invalid.")
-		{
-			JError::raiseError(500, JText::_('WEEVER_SERVER_ERROR').$result);	
-		}
-		
-	
-		if($result)
-		{
-			$this->setRedirect('index.php?option='.$option, JText::_('WEEVER_SERVER_RESPONSE').$result);	
-			return;
-		}
+		if(!$cid)
+			$cid[] = JRequest::getVar( 'id', array() );
+
+		$result 	= $model->saveTabPublish( $cid, $publish );
+
+		if($result->success)
+			$this->setRedirect('index.php?option='.$option, JText::_('WEEVER_SERVER_RESPONSE').$result->message);
 		else
-		{
 			$this->setRedirect('index.php?option='.$option, JText::_('WEEVER_ERROR_COULD_NOT_CONNECT_TO_SERVER'), 'error');
-			return;
-		}
+
 	
 	}
 
