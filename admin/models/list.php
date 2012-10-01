@@ -79,7 +79,7 @@ class WeeverModelList extends JModel
 	{
 	
 		$api_endpoint 		= "tabs/list_tab_data";
-		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverAPIVersion::$version . $api_endpoint;
 		$stage_url 			= '';
 		$remote_query 		= array( 	
 		
@@ -88,7 +88,7 @@ class WeeverModelList extends JModel
 		);
 		
 		if( comWeeverHelper::getStageStatus() )
-			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverAPIVersion::$version . $api_endpoint;
 	
 		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
 		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);

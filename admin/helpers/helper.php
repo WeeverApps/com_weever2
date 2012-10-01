@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0
+*	Version: 	2.0-alpha 0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -26,6 +26,19 @@ jimport('joomla.application.component.helper');
 jimport('joomla.plugin.helper');
 
 require_once (JPATH_COMPONENT.DS.'helpers'.DS.'theme'.'.php');
+
+if( !class_exists('comWeeverAPIVersion') && JRequest::getVar("legacyAPI") == 1 ) {
+
+	include_once('apiversion.php');
+	
+}
+
+else if( !class_exists('comWeeverAPIVersion') && ( JRequest::getVar("legacyAPI") == 2 || strstr( JRequest::getVar("task"), "ajax" ) ) ) {
+
+	include_once('apiversion2.php');
+	
+}
+
 
 class comWeeverHelper
 {
@@ -132,7 +145,7 @@ class comWeeverHelper
 	public static function getDeviceSettings() 	{ return self::getSetting(5); }
 	public static function getAppStatus() 		{ return self::getSetting(6); }
 	public static function getStageStatus()		{ return self::getSetting(7); }
-	public static function getPlatformVersion()	{ return self::getSetting(15); }
+	public static function getPlatformVersion()	{ return 2; }
 	
 	
 	public static function isWebKit()
@@ -792,7 +805,7 @@ class comWeeverHelper
 			else
 				$weeverServer = comWeeverConst::LIVE_SERVER;
 				
-			$url = $weeverServer.comWeeverConst::API_VERSION;
+			$url = $weeverServer.comWeeverAPIVersion::$version;
 			
 		}
 		
@@ -852,7 +865,7 @@ class comWeeverHelper
 			else
 				$weeverServer = comWeeverConst::LIVE_SERVER;
 				
-			$url = $weeverServer . comWeeverConst::API_VERSION;
+			$url = $weeverServer . comWeeverAPIVersion::$version;
 			
 		}
 		

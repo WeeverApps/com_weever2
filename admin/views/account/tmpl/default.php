@@ -202,11 +202,12 @@ else
 	</div>
 	
 	<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>
-	<?php echo comWeeverHelper::endJHtmlPane(); ?>
+	<?php echo comWeeverHelper::endJHtmlPane( $pane ); ?>
 
 	<input type="hidden" name="option" value="<?php echo $option; ?>" />
 	<input type="hidden" id="wx-site-key" value="<?php echo $this->site_key; ?>" />
 	<input type="hidden" name="view" value="account" />
+	<input type="hidden" name="legacyAPI" value="1" />
 	<input type="hidden" name="task" value="" />
 	<?php echo JHTML::_('form.token'); ?>
 	 

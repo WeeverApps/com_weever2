@@ -1,10 +1,10 @@
 /*	
 *	Weever Apps Administrator Component for Joomla
-*	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
-*				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0
+*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
+				Aaron Song	<aaron@weeverapps.com>
+*	Version: 	2.0 alpha 0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -18,7 +18,6 @@
 *   GNU General Public License for more details <http://www.gnu.org/licenses/>.
 *
 */
-
 
 jQuery(function() {
 
@@ -117,12 +116,22 @@ wx.ajaxUrl			= function(a) {
 	this.published				= "&published=" + a.published;
 	this.layout					= "&layout=" + a.layout;
 	this.cms_feed				= "";
+	this.type 					= a.type;
+	this.parent_id				= "";
+	this.component_behaviour	= "";
 		
 	this.getParams		= function() {
 	
 		if( this.cms_feed && this.cms_feed.search("http") == -1 ) {
 		
 			this.cms_feed = "http://" + document.domain + "/" + this.cms_feed;
+		
+		}
+			
+		/* if we're adding this under an existing tab */
+		if( this.type == "oldtabs" ) {
+		
+			this.parent_id = "&parent_id=" + jQuery('#wxSelectOldTab').val();
 		
 		}
 
@@ -147,10 +156,8 @@ wx.ajaxUrl			= function(a) {
 	
 		var url = "option=com_weever&task=ajaxSaveNewTab" + this.title + 
 						this.content + this.config + "&weever_action=add" +
-					 	this.appKey + this.published + this.layout + this.icon_id;			
+					 	this.appKey + this.published + this.layout + this.icon_id + this.parent_id;			
 		
-		console.log(url);			
-		 	
 		return url;
 
 	}

@@ -1,10 +1,10 @@
 /*	
 *	Weever Apps Administrator Component for Joomla
-*	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
-*				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	1.8
+*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
+				Aaron Song	<aaron@weeverapps.com>
+*	Version: 	2.0 alpha 0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ wx.swipePages = [
 	
 		/* name:		'1. Add Website Content to Your Mobile App', */
 		
-		helpHtml:	'<div id="wxnavtip-content" class="wx_box info wxblk"><h2 class="wxnavtip-title">Welcome to Weever Apps! <span style="font-size:14px; float:right;"> <span onclick="wx.swipe.next()" class="wxnavtip-slide-info">next &rarr;</span></span></h2><p class="wxnavtip-description">You\'re currently on the &rdquo;Add Site Content&ldquo; slide. Each slide has different things that you can add to your app.</p></div>',
+		helpHtml:	'<div id="wxnavtip-content" class="wx_box info wxblk"><h2 class="wxnavtip-title">Welcome to Weever Apps! <span style="font-size:14px; float:right;"> <span onclick="wx.swipe.next()" class="wxnavtip-slide-info">next &rarr;</span></span></h2><p class="wxnavtip-description">You\'re currently using an alpha release version of our version 2.x platform. There\'s only a few items available to add right now.</p></div>',
 		
 		
 		items:		[
@@ -48,9 +48,6 @@ wx.swipePages = [
 	
 	},
 	{
-	
-		/* name:		'2. Add Your Social Feeds', */
-		
 		
 		helpHtml:	'<div id="wxnavtip-social" class="wx_box info wxblk"><h2 class="wxnavtip-title">2. Add Your Social Media Streams <span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> <span class="wxnavtip-minisep">|</span> <span onclick="wx.swipe.next()" class="wxnavtip-slide-info">next &rarr;</span></span></h2><p class="wxnavtip-description">Be Social! &nbsp;The Weever Apps &ldquo;share tab&rdquo; and social-forwarding options make it easy for visitors to share your app!</p></div>',
 		
@@ -70,8 +67,6 @@ wx.swipePages = [
 	},
 	{
 	
-		/* name:		'3. Add Your Multimeda Content', */
-		
 		helpHtml:	'<div id="wxnavtip-audiovideo" class="wx_box info wxblk"><h2 class="navtip-title">3. Add Audio, Video and Photos <span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> <span class="wxnavtip-minisep">|</span> <span onclick="wx.swipe.next()" class="wxnavtip-slide-info">next &rarr;</span></span></h2><p class="wxnavtip-description">Share your products, services, tutorials, creative works or favorite content!</p></div>',
 		
 			items:		[
@@ -90,8 +85,6 @@ wx.swipePages = [
 	},
 	{
 	
-		/* name:		'4. Add Forms, Calendars, and More', */
-		
 		helpHtml:	'<div id="wxnavtip-eventsandforms" class="wx_box info wxblk"><h2 class="navtip-title">4. Add Event Calendars, Signup Forms &amp; More! <span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> <span class="wxnavtip-minisep">|</span> <span onclick="wx.swipe.next()" class="wxnavtip-slide-info">next &rarr;</span></span></h2><p class="wxnavtip-description">Connect your visitors to everything they need to know, when they need to know it.</p></div>',
 		
 		items:		[
@@ -107,8 +100,6 @@ wx.swipePages = [
 	},
 	{
 	
-		/* name:		'... or, Add Content by Navigation Tab Type', */
-		
 		helpHtml:	'<div id="wxnavtip-alltabs" class="wx_box info wxblk"><h2 class="navtip-title">...and Done!<span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> </span></h2><p class="wxnavtip-description">Easy, eh?  Well, we certainly hope so!  &#x263A; &nbsp; Here are all the <strong>&ldquo;tab-types&rdquo;</strong> we support (tabs are those little icon-buttons at the bottom of the app). Pick from the icons below to add a new feature to that tab &ndash; or just use the slides again if you like that better.<br/><br/>All set with features? Great! &nbsp;<a style="color:#2B6181;" class="wxreverse-decor" href="index.php?option=com_weever&view=theme&task=theme">Now let\'s make this app look fantastic</a>!</p></div>',		
 		
 		

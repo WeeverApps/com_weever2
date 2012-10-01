@@ -115,7 +115,7 @@ foreach( (array) $this->tabs as $k=>$v )
 				
 					<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-grayed-out wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
 					
-						<img class="wx-nav-icon-img" src="data:image/png;base64,' . file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id) . '" />
+						<img class="wx-nav-icon-img" src="data:image/png;base64,' . file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverAPIVersion::$version . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id) . '" />
 						
 					</div>
 					
@@ -131,7 +131,7 @@ foreach( (array) $this->tabs as $k=>$v )
 						
 							<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
 							
-								<img class="wx-nav-icon-img" src="data:image/png;base64,'.file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id).'" />
+								<img class="wx-nav-icon-img" src="data:image/png;base64,'.file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverAPIVersion::$version . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id).'" />
 							
 							</div>
 							
@@ -198,9 +198,9 @@ foreach( (array) $this->tabs as $k=>$v )
 		
 			<div class="wx-tab-top-buttons-container">
 			
-				<button class="wxui-btn white medium radius3 wx-add-source-icon" style="margin-right:1.5em;" ref="add-<?php echo $row->component; ?>-type">+ &nbsp;Add More Content</button>
+				<button class="wxui-btn white medium radius3 wx-add-source-icon" style="margin-right:1.5em;" ref="add-<?php echo $row->component; ?>-type">+ &nbsp;Add More Content (nonfunc)</button>
 				<button class="wxui-btn white medium radius3 wx-nav-label" style="margin-right:1.5em;" ref="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Name</button>
-				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon</button>
+				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon (nonfunc)</button>
 				
 				<?php if( $row->component == "panel" || $row->component == "aboutapp" || $row->component == "map" ) : ?>
 				
@@ -226,6 +226,12 @@ foreach( (array) $this->tabs as $k=>$v )
 						<th class='title'>
 						
 							<?php echo JHTML::_('grid.sort', JText::_('WEEVER_NAME'), 'name', $this->lists['order_Dir'], $this->lists['order']); ?> &nbsp; (<a target="_blank" href="http://weeverapps.com/mobile-app-layout" style="color:#1C94C4;">?</a>)
+							
+						</th>
+						
+						<th width='9%' nowrap='nowrap'>
+						
+							<?php echo JText::_('Move to Tab'); ?>
 							
 						</th>
 						
@@ -315,6 +321,16 @@ foreach( (array) $this->tabs as $k=>$v )
 						
 						<td align='center'>
 						
+							<?php if( $sub > 1 || count($v) == 1 ) : ?>
+							
+							 <a href="#" title="ID #<?php echo $vv->id; ?>" class="wx-subtab-movetab"><?php echo '<img src="components/com_weever/assets/icons/move.png" border="0" style="width:24px;" alt="Move to Tab">'; ?></a>
+							 
+							<?php endif; ?>
+							 
+						</td>
+						
+						<td align='center'>
+						
 							 <a href="#" title="ID #<?php echo $vv->id; ?>" class="wx-subtab-publish"<?php echo ($vv->published ? 'rel="1"><img src="components/com_weever/assets/icons/tick.png" border="0" alt="Published">' : 'rel="0"><img src="components/com_weever/assets/icons/publish_x.png" border="0" alt="Unpublished">'); ?></a>
 							 
 						</td>
@@ -350,6 +366,7 @@ foreach( (array) $this->tabs as $k=>$v )
 		<input type="hidden" name="site_key" id="wx-site-key" value="<?php echo $this->site_key; ?>" />
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="legacyAPI" value="2" />
 		<input type="hidden" name="view" value="list" />
 		<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
 		<input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists['order_Dir']; ?>" />

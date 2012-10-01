@@ -365,12 +365,13 @@ else
 		</table>
 	
 	<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>
-	<?php echo comWeeverHelper::endJHtmlPane(); ?>
+	<?php echo comWeeverHelper::endJHtmlPane( $pane ); ?>
 
 	<input type="hidden" name="option" value="<?php echo $option; ?>" />
 	<input type="hidden" name="app_enabled" value="<?php echo $this->app_enabled; ?>" />
 	<input type="hidden" name="site_key" id="wx-site-key" value="<?php echo $this->site_key; ?>" />
 	<input type="hidden" name="view" value="config" />
+	<input type="hidden" name="legacyAPI" value="1" />
 	<input type="hidden" name="task" value="" />
 	<?php echo JHTML::_('form.token'); ?>
 	 

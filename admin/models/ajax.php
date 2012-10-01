@@ -40,11 +40,11 @@ class WeeverModelAjax extends JModel
 	protected function makeAPICall($api_endpoint, $remote_query)
 	{
 	
-		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverAPIVersion::$version . $api_endpoint;
 		$stage_url 			= '';
 		
 		if( comWeeverHelper::getStageStatus() )
-			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverAPIVersion::$version . $api_endpoint;
 	
 		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
 		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
@@ -142,7 +142,22 @@ class WeeverModelAjax extends JModel
 	
 	}
 	
-	public function saveNewTab($config, $title, $content, $layout, $icon_id, $published) 
+	public function moveTab($tab_id, $parent_id) 
+	{
+	
+		$remote_query 		= array( 	
+			
+			'site_key' 		=> $this->key,
+			'tab_id'		=> $tab_id,
+			'parent_id'		=> $parent_id
+		
+		);
+		
+		return $this->makeAPICall( "tabs/set_parent_id", $remote_query );
+	
+	}
+	
+	public function saveNewTab($config, $title, $content, $layout, $icon_id, $published, $parent_id) 
 	{
 
 		$remote_query 		= array( 	
@@ -153,7 +168,8 @@ class WeeverModelAjax extends JModel
 			'content'		=> $content,
 			'layout'		=> $layout,
 			'icon_id'		=> $icon_id,
-			'published'		=> $published
+			'published'		=> $published,
+			'parent_id'		=> $parent_id
 		
 		);
 		

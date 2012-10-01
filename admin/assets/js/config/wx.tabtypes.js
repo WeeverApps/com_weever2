@@ -1,9 +1,10 @@
 /*	
 *	Weever Apps Administrator Component for Joomla
-*	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter <rob@weeverapps.com>
-*	Version: 	1.7
+				Aaron Song	<aaron@weeverapps.com>
+*	Version: 	2.0 alpha 0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -29,9 +30,14 @@ wx.labelText = function(active, futurePassive) {
 
 wx.tabTypes = {
 
-	'alltabs':		{
+	'oldtabs':		{
 	
-		label:	new wx.labelText('Display as a tab', 'This content will be displayed as a new tab')
+		label:	new wx.labelText('Display under existing tab: ', 'This content will be displayed under the tab: ')
+	
+	},
+	'newtab':		{
+	
+		label:	new wx.labelText('Display as a new tab', 'This content will be displayed as a new tab: ')
 	
 	}
 

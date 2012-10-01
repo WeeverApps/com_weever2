@@ -1,9 +1,10 @@
 /*	
 *	Weever Apps Administrator Component for Joomla
-*	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter <rob@weeverapps.com>
-*	Version: 	1.7
+				Aaron Song	<aaron@weeverapps.com>
+*	Version: 	2.0 alpha 0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -319,6 +320,113 @@ jQuery( document ).ready( function() {
 			
 		});
 		
+	});
+	
+	jQuery("a.wx-subtab-movetab").click(function() {
+	
+		var tabId 			= jQuery(this).attr('title').substring(4),			
+			siteKey 		= jQuery("input#wx-site-key").val(),
+			clickedElem 	= jQuery(this),	
+			htmlName 		= jQuery(this).html();
+			
+		tabDropdown = "<select id='wxSelectTab'><option value='null'>Promote to New Tab</option>";
+		
+		for( var i=0; i < wx.tabSyncData.tabs.length; i++ ) {
+		
+			if( wx.tabSyncData.tabs[i].parent_id != null )
+				continue;
+				
+			var name = wx.tabSyncData.tabs[i].tabTitle || wx.tabSyncData.tabs[i].title;
+				
+			tabDropdown += "<option value='" + wx.tabSyncData.tabs[i].id + "'>" + name + "</option>";
+		
+		}
+		
+		tabDropdown += "</select>";
+		
+		var txt 	= '<h3 class="wx-imp-h3">Move Tabs or Create New Tab</h3><input type="hidden" id="parentId" name="parentId" value="" /> ' + tabDropdown;
+		
+		myCallbackForm = function(v,m,f) {
+		
+			if(v != undefined && v == true) { 
+			
+				parentId = f['parentId'];
+				
+				console.log ( "option=com_weever&task=ajaxTabMove&parent_id="+ parentId +"&tab_id=" + tabId+ '&site_key=' + siteKey );
+				
+				jQuery.ajax({
+				
+					type: 		"POST",
+					url: 		"index.php",
+					data: 		"option=com_weever&task=ajaxTabMove&parent_id="+ parentId +"&tab_id=" + tabId+ '&site_key=' + siteKey,
+					success: 	function(msg) {
+					
+						jQuery('#wx-modal-loading-text').html(msg);
+						
+						if(msg == "Item Moved") {
+						
+							jQuery('#wx-modal-secondary-text').html(Joomla.JText._('WEEVER_JS_APP_UPDATED'));
+							setTimeout("document.location.reload(true);",20);
+							
+						} else {
+						
+							jQuery('#wx-modal-secondary-text').html('');
+							jQuery('#wx-modal-error-text').html(Joomla.JText._('WEEVER_JS_SERVER_ERROR'));
+							
+						}
+					
+					}
+					
+				});
+			
+			}
+			
+		}	
+		
+		submitCheck = function(v,m,f) {
+		
+			console.log(f);
+			
+			return true;
+		
+		}		
+		
+		var tabName 	= jQuery.prompt(txt, {
+		
+			callback: 		myCallbackForm, 
+			loaded:			function() {
+		
+				jQuery('select#wxSelectTab').change( function() {
+				
+					jQuery('#parentId').val( jQuery(this).val() );
+			
+				});
+			
+			},
+			submit: 		submitCheck,
+			overlayspeed: 	"fast",
+			buttons: 		{  Cancel: false, Submit: true },
+			focus: 			1
+			
+		});
+		
+		jQuery('#wxSelectTab').select();
+		// hit 'enter/return' to save
+		jQuery("#wxSelectTab").bind("keypress", function (e) {
+		
+			if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+				
+				jQuery('button#jqi_state0_buttonSubmit').click();
+				return false;
+				
+			} else {
+			
+			return true;
+			
+			}
+			
+		});
+	
 	});
 			
 	jQuery("a.wx-subtab-publish").click(function() {

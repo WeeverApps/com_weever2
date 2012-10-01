@@ -1,9 +1,10 @@
 /*	
 *	Weever Apps Administrator Component for Joomla
-*	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter <rob@weeverapps.com>
-*	Version: 	1.7
+				Aaron Song	<aaron@weeverapps.com>
+*	Version: 	2.0 alpha 0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -17,7 +18,6 @@
 *   GNU General Public License for more details <http://www.gnu.org/licenses/>.
 *
 */
-
 /* builds the jQuery UI + SwipeJS Pages system using settings from /config */
 
 jQuery(document).ready( function() { 
@@ -249,7 +249,6 @@ jQuery(document).ready( function() {
 				
 					if( wx.types[ type ] == undefined ) {
 						
-						console.log( "Missing tab detected: " + type);
 						return "";
 						
 					}
@@ -448,9 +447,16 @@ jQuery(document).ready( function() {
 			
 			console.log( wx.tabSyncData );
 			
-			wx.types[ 'alltabs' ] = {
+			wx.types[ 'oldtabs' ] = {
 			
 				name:	'anytab',
+				tier:	0
+			
+			};
+			
+			wx.types[ 'newtab' ] = {
+			
+				name:	'newtab',
 				tier:	0
 			
 			};

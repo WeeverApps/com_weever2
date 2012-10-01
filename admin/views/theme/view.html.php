@@ -24,6 +24,12 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
+class comWeeverAPIVersion {
+
+	public static $version = "api/v1/";
+
+}
+
 class WeeverViewTheme extends JView
 {
 
@@ -32,7 +38,7 @@ class WeeverViewTheme extends JView
 
 		if ( $this->get('appdata') == false )
 			return;
-
+			
 		$this->assign('appEnabled', comWeeverHelper::getAppStatus() );
 		$this->assign('devices', comWeeverHelper::getDeviceSettings() );
 		$this->assign('site_key', comWeeverHelper::getKey() );

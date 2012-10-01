@@ -198,7 +198,8 @@ class WeeverController extends JController
 			JRequest::getVar("content"), 
 			JRequest::getVar("layout"), 
 			JRequest::getVar("icon_id"), 
-			JRequest::getVar("published")
+			JRequest::getVar("published"),
+			JRequest::getVar("parent_id")
 			
 		);
 
@@ -208,7 +209,26 @@ class WeeverController extends JController
 		jexit();
 	
 	}
+
+
+	public function ajaxTabMove()
+	{
+	
+		$model = $this->getModel('ajax');
+	
+		$result = $model->moveTab( 
 		
+			JRequest::getVar("tab_id"), 
+			JRequest::getVar("parent_id")
+			
+		);
+
+		if( $result->success )
+			echo "Item Moved";
+	
+		jexit();
+	
+	}	
 
 	public function remove()
 	{

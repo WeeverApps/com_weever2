@@ -2,8 +2,9 @@
 *	Weever Apps Administrator Component for Joomla
 *	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter (rob.porter@weever.ca)
-*	Version: 	1.7
+*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
+				Aaron Song	<aaron@weeverapps.com>
+*	Version: 	2.0 alpha 0
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -428,49 +429,53 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		else
 		{
 		
-			var checked, label, disabled,
+			var checked, label, disabled, tabList = [], tabDropdown,
 				extraClass		= '';
+				
+			tabDropdown = "<select id='wxSelectOldTab'>";
 			
-			console.log( serviceTypes );
+			for( var i=0; i < wx.tabSyncData.tabs.length; i++ ) {
+			
+				if( wx.tabSyncData.tabs[i].parent_id != null )
+					continue;
+					
+				var name = wx.tabSyncData.tabs[i].tabTitle || wx.tabSyncData.tabs[i].title;
+					
+				tabDropdown += "<option value='" + wx.tabSyncData.tabs[i].id + "'>" + name + "</option>";
+			
+			}
+			
+			tabDropdown += "</select>";
 
 			for( var i=0; i < serviceTypes.length; i++ ) {
 			
-				if( i == 0 && wx.activeTypeDialog == null)	
+				if( i == 0 && wx.activeTypeDialog == null)
 					checked = " checked='checked'";
-				else
-					checked = 0;
 					
-				if( wx.activeTypeDialog == serviceTypes[i] )
-					checked = " checked='checked'";
+				else {
+				
+					checked 		= 0;
+					tabDropdown 	= "";
+					
+				}
 
 				if( undefined == featureData.labels )
 					label	= wx.tabTypes[ serviceTypes[i] ].label;
 				else
 					label	= featureData.labels[ serviceTypes[i] ];
-					
-				if( wx.types[ serviceTypes[i] ].tier > wx.tabSyncData.results.config.tier ) {
-				
-					extraClass	= ' wx-add-upgrade';
-					disabled	= ' disabled="disabled"';
-					
-				}
-				else 
-				{
-				
-					extraClass	= '';	
-					disabled 	= '';
-				
-				}
+			
+				extraClass	= '';	
+				disabled 	= '';
 					
 				checkboxOptions += "<div class='wx-add-source-check-container" + extraClass + "'>" +
 				
-						"<input type='checkbox' class='wx-add-source-check' id='wx-add-source-check-" +
+						"<input type='radio' class='wx-add-source-check' id='wx-add-source-check-" +
 						 	serviceTypes[i] + "' value='" + serviceTypes[i] + 
-						 		"' " + checked + disabled + " />" +
+						 		"' " + checked + disabled + " name='wxRadioType' />" +
 						
 						"<label for='wx-add-source-check-" +  serviceTypes[i] + "'>" + label.active + "</label>" +
 						
-					 	" in the tab \"" + wx.types[ serviceTypes[i] ].name + "\"."+
+					 	tabDropdown +
 					 	
 				 	"</div>";
 			

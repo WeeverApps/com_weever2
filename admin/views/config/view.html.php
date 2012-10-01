@@ -24,6 +24,12 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
+class comWeeverAPIVersion {
+
+	public static $version = "api/v1/";
+
+}
+
 class WeeverViewConfig extends JView
 {
 
