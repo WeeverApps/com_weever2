@@ -152,10 +152,11 @@ else
 	
 	</fieldset>
 	</div>
+	
 	<?php if($this->site_key) : ?>
 	
-		<?php echo $pane->endPanel(); ?>
-		<?php echo $pane->startPanel(JText::_("WEEVER_STAGING_MODE_P_ADVANCED_P"), 'advanced-settings'); ?>
+		<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>
+		<?php echo comWeeverHelper::startJHtmlTabPanel( JText::_("WEEVER_STAGING_MODE_P_ADVANCED_P"), 'advanced-settings', $pane ); ?>
 		
 		<div>
 		

@@ -35,7 +35,7 @@
 	
 		<menu link="com_weever" img="components/com_weever/assets/icons/icon-16-weever_menu_logo.png">COM_WEEVER_MENU</menu>
 			 
-		 <files folder="components/com_weever">
+		 <files folder="admin">
 		 
 			<filename>weever.php</filename>
 			<filename>controller.php</filename>
@@ -50,7 +50,7 @@
 			
 		  </files>
 		  
-		  <languages folder="components/com_weever">
+		  <languages folder="admin">
 		  
 		  	<language tag="en-GB">languages/en-GB/en-GB.com_weever.ini</language>
 		  	<language tag="en-GB">languages/en-GB/en-GB.com_weever.sys.ini</language>

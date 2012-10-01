@@ -22,8 +22,9 @@
 
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.helper');
-jimport('joomla.plugin.helper');
+jimport( 'joomla.application.component.helper' );
+jimport( 'joomla.plugin.helper' );
+jimport( 'joomla.html.html.tabs' );
 
 require_once (JPATH_COMPONENT.DS.'helpers'.DS.'theme'.'.php');
 
@@ -87,13 +88,32 @@ class comWeeverHelper
 	}
 	
 	
+	public static function jHtmlOptions() 
+	{
+	
+		return array(
+		    'onActive' => 'function(title, description){
+		        description.setStyle("display", "block");
+		        title.addClass("open").removeClass("closed");
+		    }',
+		    'onBackground' => 'function(title, description){
+		        description.setStyle("display", "none");
+		        title.addClass("closed").removeClass("open");
+		    }',
+		    'startOffset' => 0,  // 0 starts on the first tab, 1 starts the second, etc...
+		    'useCookie' => true, // this must not be a string. Don't use quotes.
+		);
+	
+	}
+	
+	
 	public static function endJHtmlPane( $paneObj = null )
 	{
 	
 		if( self::isLegacyJoomla() )
 			return $paneObj->endPane();
 			
-		return JHtmlTabs::end();
+		return JHtml::_('tabs.end');
 	
 	}
 	
@@ -113,7 +133,7 @@ class comWeeverHelper
 		if( self::isLegacyJoomla() )
 			return  $paneObj->startPane( $id );
 			
-		return JHtmlTabs::start( $id );
+		return JHtml::_( 'tabs.start', $id, self::jHtmlOptions() );
 	
 	}
 	
@@ -125,8 +145,8 @@ class comWeeverHelper
 			return $paneObj->startPanel( $text, $id );
 		
 		else 
-			return JHtmlTabs::panel( $text, $id );
-	
+			return JHtml::_( 'tabs.panel', $text, $id );
+				
 	}
 	
 	
