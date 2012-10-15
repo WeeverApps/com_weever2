@@ -30,7 +30,7 @@ final class comWeeverConst
 {
 
 	const VERSION			= "2.0";
-	const RELEASE_TYPE		= "Alpha Release 0";
+	const RELEASE_TYPE		= "Alpha Release 1";
 	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/nt/aulavik/index.aspx' target='_blank'>Aulavik</a>";
 	const NAME				= "Weever Apps Administrator Component for Joomla!";
 	const COPYRIGHT_YEAR	= "(c) 2010-2012";

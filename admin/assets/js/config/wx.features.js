@@ -36,7 +36,7 @@ wx.features = [
 				name:			'Blog',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layout:			'list',
+				layouts:		['list','grid','carousel'],
 				fields:			{
 				
 					'cms_feed':	'#wx-add-joomla-blog-select',
@@ -57,7 +57,7 @@ wx.features = [
 				content:		'html',
 				name:			'Category',
 				title:			true,
-				layout:			'list',
+				layouts:		['list','grid','carousel'],
 				types:			['oldtabs', 'newtab'],
 				fields:			{
 				
@@ -79,7 +79,7 @@ wx.features = [
 				name:			'Article',
 				content:		'htmlPage',
 				title:			true,
-				layout:			'panel',
+				layouts:		'panel',
 				titleUse:		'Change only if you think a shorter title is more appropriate for a mobile app.',
 				types:			['oldtabs', 'newtab'],
 				fields:			{
@@ -117,7 +117,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layout:			'list',
+				layouts:		['list','grid','carousel'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -140,7 +140,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layout:			'list',
+				layouts:		['list','grid','carousel'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -165,7 +165,7 @@ wx.features = [
 				titleUse:		'Change only if you think a shorter title is more appropriate for a mobile app.',
 				types:			['oldtabs', 'newtab'],
 				content:		'htmlPage',
-				layout:			'panel',
+				layouts:		'panel',
 				config:			{
 				
 					url:		':cms_feed',
@@ -202,7 +202,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layout:			'list',
+				layouts:		['list','grid','carousel'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -226,7 +226,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layout:			'list',
+				layouts:		['list','grid','carousel'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -250,7 +250,7 @@ wx.features = [
 				titleUse:		'Change only if you think a shorter title is more appropriate for a mobile app.',
 				types:			['oldtabs', 'newtab'],
 				content:		'htmlPage',
-				layout:			'panel',
+				layouts:		'panel',
 				config:			{
 				
 					url:		':cms_feed',
@@ -275,7 +275,7 @@ wx.features = [
 		types:			['oldtabs', 'newtab'],
 		defaultTitle:	'Calendar',
 		content:		'googleCalendar',
-		layout:			'list',
+		layouts:		'list',
 		title:			true,
 		fields:			{
 		
@@ -315,7 +315,7 @@ wx.features = [
 				content:		'twitter',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layout:			'list',
+				layouts:		'list',
 				icon_id:		22,
 				config:			{
 				
@@ -342,7 +342,7 @@ wx.features = [
 				content:		'twitter',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layout:			'list',
+				layouts:		'list',
 				icon_id:		22,
 				config:			{
 				
@@ -369,7 +369,7 @@ wx.features = [
 				content:		'twitter',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layout:			'list',
+				layouts:		'list',
 				icon_id:		22,
 				config:			{
 				

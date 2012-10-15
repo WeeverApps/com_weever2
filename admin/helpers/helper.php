@@ -165,7 +165,7 @@ class comWeeverHelper
 	public static function getDeviceSettings() 	{ return self::getSetting(5); }
 	public static function getAppStatus() 		{ return self::getSetting(6); }
 	public static function getStageStatus()		{ return self::getSetting(7); }
-	public static function getPlatformVersion()	{ return 2; }
+	public static function getPlatformVersion()	{ return 1; }
 	
 	
 	public static function isWebKit()

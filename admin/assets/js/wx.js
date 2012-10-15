@@ -50,7 +50,7 @@ console.log(a);
 				type:		type,
 				content:	data.content,
 				config:		data.config,
-				layout:		data.layout,
+				layout:		jQuery('#wxLayoutType option:selected').val(),
 				icon_id:	data.icon_id,
 				published:	1
 				
@@ -484,6 +484,34 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		}
 		
 		jQuery(dialogId).append( checkboxOptions );
+		
+		var layoutOptions = "";
+		
+		if( featureData.layouts instanceof Array ) {
+		
+			for( var i = 0; i < featureData.layouts.length; i ++ ) {
+			
+				layoutOptions += "<option value='" + featureData.layouts[i] + "'>" + featureData.layouts[i] + "</option>";
+			
+			}
+			
+		}
+		
+		else {
+		
+			layoutOptions = "<option value='" + featureData.layouts + "'>" + featureData.layouts + "</option>";
+		
+		}
+		
+		jQuery(dialogId).append( "<div class='wx-add-layout-dropdown-container'>" +
+		
+			"<select id='wxLayoutType'>" + 
+		
+				layoutOptions +
+		
+			"</select></div>"	
+			
+		);
 		
 	}
 	
