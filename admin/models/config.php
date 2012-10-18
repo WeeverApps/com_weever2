@@ -5,7 +5,7 @@
 *	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter (rob.porter@weever.ca)
-*	Version: 	1.5
+*	Version: 	2.0 alpha 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -35,7 +35,7 @@ class WeeverModelConfig extends JModel
         
         parent::__construct();
 
-		$this->getJsonConfigSync();
+		$this->json = $this->getConfig();
         
 	}
 	
@@ -45,42 +45,37 @@ class WeeverModelConfig extends JModel
 		return $this->json;
 	
 	}
-
-	public function getJsonConfigSync()
+	
+	protected function getConfig() 
 	{
 	
-		if( comWeeverHelper::getStageStatus() )
-		{
-			$weeverServer = comWeeverConst::LIVE_STAGE;
-			$stageUrl = comWeeverHelper::getSiteDomain();
-		}
-		else
-		{
-			$weeverServer = comWeeverConst::LIVE_SERVER;
-			$stageUrl = '';
-		}
+		$api_endpoint 		= "config/get_config";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
 		
-		$postdata = comWeeverHelper::buildWeeverHttpQuery(
-			array( 	
-				'stage' => $stageUrl,
-				'app' => 'json',
-				'site_key' => comWeeverHelper::getKey(),
-				'm' => "config_sync"				
-				)
+			'site_key' 		=> $this->key
+		
 		);
-			
-		$json = comWeeverHelper::sendToWeeverServer($postdata);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
 
-		if($json == "Site key missing or invalid.")
+		if( isset($json->error) && $json->error == true )
 		{
-			 JError::raiseNotice(100, JText::_('WEEVER_NOTICE_NO_SITEKEY'));
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
 			 return false;
+			 
 		}
 		
-		$this->json = json_decode($json);
-
+		return $json;
 	
 	}
-
 
 }

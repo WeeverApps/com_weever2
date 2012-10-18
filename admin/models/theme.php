@@ -34,66 +34,49 @@ class WeeverModelTheme extends JModel
 	public function __construct()
 	{
        
-       parent::__construct();
-       
-       $this->getJsonThemeSync();
+    	parent::__construct();
+    	
+    	$this->json = $this->getDesign();
        
 	}
 	
-	public function getAppData()
+	public function getDesignData()
 	{
 		
 		return $this->json;
 	
 	}
 	
-	
-	public function getAccountData()
-	{
-		
-		return $this->account;
-	
-	}
-	
-	
-	public function getJsonThemeSync()
+	protected function getDesign()
 	{
 	
-		if( comWeeverHelper::getStageStatus() )
-		{
-			$weeverServer = comWeeverConst::LIVE_STAGE;
-			$stageUrl = comWeeverHelper::getSiteDomain();
-		}
-		else
-		{
-			$weeverServer = comWeeverConst::LIVE_SERVER;
-			$stageUrl = '';
-		}
+		$api_endpoint 		= "design/get_design";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
 		
-		$postdata = comWeeverHelper::buildWeeverHttpQuery(
-			array( 	
-				'stage' => $stageUrl,
-				'app' => 'json',
-				'site_key' => comWeeverHelper::getKey(),
-				'm' => "theme_sync"				
-				)
+			'site_key' 		=> $this->key
+		
 		);
-			
-		$json = comWeeverHelper::sendToWeeverServer($postdata);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
 
-		if($json == "Site key missing or invalid.")
+		if( isset($json->error) && $json->error == true )
 		{
-			 JError::raiseNotice(100, JText::_('WEEVER_NOTICE_NO_SITEKEY'));
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
 			 return false;
+			 
 		}
 		
-		$result = json_decode($json);
-		
-		$this->account = $result->account;
-		$this->json = $result->results;
+		return $json;
 
-	
 	}
-
 	
 }

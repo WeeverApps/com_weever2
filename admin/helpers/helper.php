@@ -28,19 +28,6 @@ jimport( 'joomla.html.html.tabs' );
 
 require_once (JPATH_COMPONENT.DS.'helpers'.DS.'theme'.'.php');
 
-if( !class_exists('comWeeverAPIVersion') && JRequest::getVar("legacyAPI") == 1 ) {
-
-	include_once('apiversion.php');
-	
-}
-
-else if( !class_exists('comWeeverAPIVersion') && ( JRequest::getVar("legacyAPI") == 2 || strstr( JRequest::getVar("task"), "ajax" ) ) ) {
-
-	include_once('apiversion2.php');
-	
-}
-
-
 class comWeeverHelper
 {
 
@@ -165,7 +152,6 @@ class comWeeverHelper
 	public static function getDeviceSettings() 	{ return self::getSetting(5); }
 	public static function getAppStatus() 		{ return self::getSetting(6); }
 	public static function getStageStatus()		{ return self::getSetting(7); }
-	public static function getPlatformVersion()	{ return 1; }
 	
 	
 	public static function isWebKit()
@@ -825,7 +811,7 @@ class comWeeverHelper
 			else
 				$weeverServer = comWeeverConst::LIVE_SERVER;
 				
-			$url = $weeverServer.comWeeverAPIVersion::$version;
+			$url = $weeverServer.comWeeverConst::API_VERSION;
 			
 		}
 		
@@ -885,7 +871,7 @@ class comWeeverHelper
 			else
 				$weeverServer = comWeeverConst::LIVE_SERVER;
 				
-			$url = $weeverServer . comWeeverAPIVersion::$version;
+			$url = $weeverServer . comWeeverConst::API_VERSION;
 			
 		}
 		
@@ -911,219 +897,6 @@ class comWeeverHelper
 					);
 	
 		return stream_context_create($opts);
-	
-	}
-	
-	
-	public static function pushSubtabReorderToCloud()
-	{
-
-		$query = array( 	
-					'id' 				=> JRequest::getVar('id'),
-					'reordering' 		=> 'subtab',
-					'type' 				=> JRequest::getVar('type'),
-					'dir' 				=> JRequest::getVar('dir'),
-					'm' 				=> "update_order",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-				);
-		
-		return self::buildAjaxQuery($query);
-
-	}
-	
-
-	public static function pushReorderToCloud()
-	{
-
-		$query = array( 	
-					'reordering' 		=> JRequest::getVar('reordering'),
-					'm' 				=> "update_order",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-				);
-		
-		return self::buildAjaxQuery($query);
-
-	}
-	
-
-	public static function pushTabSettingsToCloud($var)
-	{
-	
-		$query = array( 	
-					'var' 				=> $var,
-					'id' 				=> JRequest::getVar('id'),
-					'type' 				=> JRequest::getVar('type'),
-					'm' 				=> "update_tab_settings",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-				);
-		
-		return self::buildAjaxQuery($query);
-
-	}
-	
-	
-	public static function pushImageToCloud($url)
-	{
-	
-		$query = array( 	
-					'url' 				=> $url,
-					'type' 				=> JRequest::getVar('type'),
-					'm' 				=> "edit_image",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-				);
-			
-		return self::buildAjaxQuery($query);
-
-	}
-	
-
-	public static function pushTabNameToCloud()
-	{
-	
-		$query = array( 	
-					'name' 				=> JRequest::getVar('name'),
-					'id' 				=> JRequest::getVar('id'),
-					'm' 				=> "edit_tab_name",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-				);
-		
-		return self::buildAjaxQuery($query);
-
-	}
-	
-	
-	public static function pushTabIconToCloud()
-	{
-
-		$query = array( 
-			
-					'icon' 			=> JRequest::getVar('icon'),
-					'type' 			=> JRequest::getVar('type'),
-					'm' 			=> "edit_tab_icon",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-					
-				);
-			
-		return self::buildAjaxQuery($query);
-		
-	}
-	
-	
-	public static function pushThemeToCloud($jsonTheme, $jsonLaunch)
-	{
-	
-		$query = array( 
-			
-					'theme' 			=> $jsonTheme,
-					'launch' 			=> $jsonLaunch,
-					'titlebar_title' 	=> JRequest::getVar('titlebar_title'),
-					'title' 			=> JRequest::getVar('title'),
-					'm' 				=> "edit_theme",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-					
-				);
-		
-		return self::buildAjaxQuery($query);
-
-	}
-						
-
-	public static function pushConfigToCloud()
-	{
-	
-		$query = array( 	
-		
-					'title' 			=> JRequest::getVar('title'),
-					'devices' 			=> JRequest::getVar('devices'),
-					'ecosystem' 		=> JRequest::getVar('ecosystem'),
-					'app_enabled' 		=> JRequest::getVar('app_enabled'),
-					'domain' 			=> JRequest::getVar('domain'),
-					'loadspinner' 		=> JRequest::getVar('loadspinner',"", "post","string",JREQUEST_ALLOWHTML),
-					'google_analytics' 	=> JRequest::getVar('google_analytics'),
-					'local' 			=> JRequest::getVar('local'),
-					'm' 				=> "edit_config",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-					
-				);
-		
-		return self::buildAjaxQuery($query);
-	
-	}
-	
-	
-	public static function pushAppStatusToCloud($status)
-	{
-	
-		$query = array( 	
-		
-					'app_enabled' 		=> $status,
-					'm' 				=> "app_status",
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-					
-				);
-		
-		return self::buildAjaxQuery($query);
-	
-	}
-	
-
-	public static function pushSettingsToCloud()
-	{
-		
-		$query = array( 	
-		
-					'name' 					=> JRequest::getVar('name'),
-					'hash' 					=> JRequest::getVar('hash'),
-					'component' 			=> JRequest::getVar('component'),
-					'published' 			=> JRequest::getVar('published'),
-					'component_id' 			=> JRequest::getVar('component_id'),
-					'ordering' 				=> JRequest::getVar('ordering'),
-					'id' 					=> JRequest::getVar('id'),
-					'rss_update' 			=> JRequest::getVar('rss_update'),
-					'icon' 					=> JRequest::getVar('icon'),
-					'rss' 					=> JRequest::getVar('rss'),
-					'type' 					=> JRequest::getVar('type'),
-					'component_behaviour' 	=> JRequest::getVar('component_behaviour'),
-					'var' 					=> JRequest::getVar('var',"", "post","string",JREQUEST_ALLOWRAW),
-					'cms_feed' 				=> JRequest::getVar('cms_feed'),
-					'm' 					=> JRequest::getVar('weever_action') . "_tab",
-					'build_version'			=> comWeeverHelper::getPlatformVersion()
-					
-				);
-
-		return self::buildAjaxQuery($query);
-		
-	}
-	
-	
-	public static function pushPublishToCloud($cid, $publish)
-	{
-	
-		$query = array(
-		
-					'published' 		=> $publish,
-					'm' 				=> 'publish_tab',
-					'cloud_tab_id' 		=> $cid,
-					'build_version'		=> comWeeverHelper::getPlatformVersion()
-					
-				);
-				
-		return self::buildAjaxQuery($query);
-
-	}
-	
-		
-	public static function pushDeleteToCloud($id)
-	{
-	
-		$query = array(
-		
-					'cloud_tab_id' 		=> $id,
-					'm' 				=> 'delete_tab'
-					
-				);
-	
-		return self::buildAjaxQuery($query);
 	
 	}
 	

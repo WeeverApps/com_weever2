@@ -67,26 +67,23 @@ if( !strstr($this->devices, 'DetectTierWeeverTablets') && !strstr($this->devices
 else 
 	$noTablet = null;
 	
-if(!$this->theme->images->phone_load)
-	$this->theme->images->phone_load = "../images/com_weever/phone_load_live.png";
+if(!$this->theme->launchscreens->phone)
+	$this->theme->launchscreens->phone = "../images/com_weever/phone_load_live.png";
 
-if(!$this->theme->images->tablet_load)
-	$this->theme->images->tablet_load = "../images/com_weever/tablet_load_live.png";
-	
-if(!$this->theme->images->icon)
-	$this->theme->images->icon = "../images/com_weever/icon_live.png";
+if(!$this->theme->launchscreens->tablet)
+	$this->theme->launchscreens->tablet = "../images/com_weever/tablet_load_live.png";
 
-if(!$this->theme->images->tablet_landscape_load)
-	$this->theme->images->tablet_landscape_load = "../images/com_weever/tablet_landscape_load_live.png";
+if(!$this->theme->launchscreens->tablet_landscape)
+	$this->theme->launchscreens->tablet_landscape = "../images/com_weever/tablet_landscape_load_live.png";
 	
-if(!$this->theme->images->titlebar_logo)
-	$this->theme->images->titlebar_logo = "../images/com_weever/titlebar_logo_live.png";
+if(!$this->theme->install->icon)
+	$this->theme->install->icon = "../images/com_weever/icon_live.png";
 	
-if(!$this->theme->template)
-	$this->theme->template = "sencha";
+if(!$this->theme->titlebar->image)
+	$this->theme->titlebar->image = "../images/com_weever/titlebar_logo_live.png";
 	
-if(!$this->theme->title)
-	$this->theme->title = "Untitled";
+//if(!$this->theme->title)
+//	$this->theme->title = "Untitled";
 
 if(comWeeverHelper::isWebKit())
 	$dashWebKit = "-webkit";
@@ -95,17 +92,6 @@ else
 
 
 ?>
-
-<?php if($this->account->tier_number == 1) : ?>
-	<div class="wx-promotion-basic<?php echo $dashWebKit; ?>">
-	<span class="wx-promotion-basic-title"><?php echo JText::_('WEEVER_PREMIUM_PROMOTION'); ?></span>
-	<span class="wx-promotion-basic-link"><?php echo JText::_('WEEVER_PREMIUM_PROMOTION_LEARN_MORE'); ?></span></div>
-
-<?php elseif($this->account->tier_number == 2.1) : ?>
-	<span class="wx-promotion-trial<?php echo $dashWebKit; ?>"><a href="http://weeverapps.com/pricing" class="wxui-btn green small radius3" id="headerbutton"><?php echo JText::_('WEEVER_PREMIUM_UPGRADE_BUTTON'); ?></a><?php echo JText::_('WEEVER_PREMIUM_UPGRADE_CALL'); ?><br><span class="wx-promotion-trial-byline"><?php echo JText::_('WEEVER_PREMIUM_UPGRADE_BYLINE'); ?></span></span>
-	
-<?php endif; ?>
-
 
 <span id="wx-admin-topbar-left" class="wx-admin-topbar">
 			<a href="http://weeverapps.com/pricing"><?php echo JText::_('WEEVER_PLANS_AND_PRICING'); ?></a> &nbsp; | &nbsp; <a href="http://twitter.com/weeverapps"><?php echo JText::_('WEEVER_FOLLOW_TWITTER'); ?></a> &nbsp; <!--| &nbsp; <a href="http://www.weeverapps.com/"><?php echo JText::_('WEEVER_NEWSLETTER'); ?></a-->
@@ -167,7 +153,7 @@ else
 					}
 				}
 				
-				tabletImg.src = src || "<?php echo $this->theme->images->tablet_load; ?>";
+				tabletImg.src = src || "<?php echo $this->theme->launchscreens->tablet; ?>";
 
 			}
 			
@@ -181,7 +167,7 @@ else
 					}
 				}
 				
-				tabletLandscapeImg.src = src || "<?php echo $this->theme->images->tablet_landscape_load; ?>";
+				tabletLandscapeImg.src = src || "<?php echo $this->theme->launchscreens->tablet_landscape; ?>";
 			
 			}
 			
@@ -195,7 +181,7 @@ else
 					}
 				}
 				
-				phoneImg.src = src || "<?php echo $this->theme->images->phone_load; ?>";
+				phoneImg.src = src || "<?php echo $this->theme->launchscreens->phone; ?>";
 
 			}		
 			
@@ -210,7 +196,7 @@ else
 					}
 				}
 				
-				iconImg.src = src || "<?php echo $this->theme->images->icon; ?>";
+				iconImg.src = src || "<?php echo $this->theme->install->icon; ?>";
 			
 			}	
 			
@@ -224,7 +210,7 @@ else
 					}
 				}
 				
-				titlebarImg.src = src || "<?php echo $this->theme->images->titlebar_logo; ?>";
+				titlebarImg.src = src || "<?php echo $this->theme->titlebar_logo; ?>";
 								
 			
 			}
@@ -253,14 +239,14 @@ else
     					
     					<div class="wx-image-size-warning" id="wx-image-size-titlebar"><?php echo JText::_('WEEVER_IMAGE_SIZE_WARNING'); ?></div>
     					
-    					<?php if($this->theme->titlebarSource == "html") : ?>
+    					<?php if($this->theme->titlebar->source == "html") : ?>
     					
     					<div class="wx-notice" id="wx-titlebar-html-notice"><?php echo JText::_('WEEVER_TITLEBAR_HTML_NOTICE'); ?></div>
     					
     					<?php endif; ?>
     					
-    					<div class="wx-theme-image-container wx-theme-image-container-titlebar"><a href='<?php echo $this->theme->images->titlebar_logo; ?>' id="wx-theme-titlebar-logo-link" class='popup' rel='{handler: "iframe", size:  { x: 600, y: 64}}'>
-    					<img class="wx-theme-titlebar-image " id="wx-theme-titlebar-logo" src="<?php echo $this->theme->images->titlebar_logo; ?>" />
+    					<div class="wx-theme-image-container wx-theme-image-container-titlebar"><a href='<?php echo $this->theme->titlebar->image; ?>' id="wx-theme-titlebar-logo-link" class='popup' rel='{handler: "iframe", size:  { x: 600, y: 64}}'>
+    					<img class="wx-theme-titlebar-image " id="wx-theme-titlebar-logo" src="<?php echo $this->theme->titlebar->image; ?>" />
     					</a></div>
     					
     					<div id="wx-titlebar-upload"></div>
@@ -273,18 +259,18 @@ else
     					</div>
     					
     					
-    					<div class="wx-theme-caption" id="wx-theme-caption-titlebar-text" style="margin-top:1em;"><input id="wx-enable-titlebar-text" type="checkbox" value="1" name="titlebar_title_enabled" <?php echo ($this->theme->titlebarSource == 'text' ? "checked='checked'":""); ?> /> <?php echo JText::_('WEEVER_TITLEBAR_LOGO_TEXT'); ?></div>
+    					<div class="wx-theme-caption" id="wx-theme-caption-titlebar-text" style="margin-top:1em;"><input id="wx-enable-titlebar-text" type="checkbox" value="1" name="titlebar_title_enabled" <?php echo ($this->theme->titlebar->source == 'text' ? "checked='checked'":""); ?> /> <?php echo JText::_('WEEVER_TITLEBAR_LOGO_TEXT'); ?></div>
     					
     					<div class="wx-theme-note wx-theme-note-titlebar" id="wx-theme-note-titlebar-text"><?php echo JText::_('WEEVER_TITLEBAR_TEXT_DESCRIPTION'); ?></div>
     					
-    					<div class="wx-titlebar-text-container"><input type="text" id="wx-titlebar-text" name="titlebar_title" value="<?php echo htmlentities($this->theme->titlebar_title, ENT_QUOTES, "UTF-8"); ?>" /></div>
+    					<div class="wx-titlebar-text-container"><input type="text" id="wx-titlebar-text" name="titlebar_title" value="<?php echo htmlentities($this->theme->titlebar->text, ENT_QUOTES, "UTF-8"); ?>" /></div>
     					
     					<div id="wx-titlebar-text-save-reminder"><?php echo JText::_('WEEVER_TITLEBAR_TEXT_SAVE_REMINDER'); ?></div>
     					
     				</div>
     				
     				
-    				<?php if($this->theme->titlebarSource == 'text') : ?>
+    				<?php if($this->theme->titlebar->source == 'text') : ?>
     				
     					<script>
 							
@@ -304,34 +290,7 @@ else
     		
     				<?php endif; ?>
     		
-    		<table class="admintable" id="wx-app-theme-container">
-    	
-    			
-    			<tr>
-    			<td>
-    			
-    			<div id="wx-theme-titlebar-logo-preview-container"><img id="wx-theme-titlebar-logo-preview" src="<?php echo $this->theme->images->titlebar_logo; ?>" /><div id="wx-theme-titlebar-text-preview"><?php echo $this->theme->titlebar_title; ?></div></div>
-    			
-    			<a id="wx-theme-screenshot-link" class="popup" href="<?php echo $themeDir.$this->theme->template.'.png'; ?>" rel='{handler: "iframe", size:  { x: 340, y: 500}}'><img src="<?php echo $themeDir.$this->theme->template.'.png'; ?>" style="height: 215px;margin-top:-15px !important;" id="wx-theme-screenshot" /></a>
-    			
-    			</td>
-    			<td>
-    			<select name="template" id="wx-theme-select" size="12">
-    			<option disabled="disabled"><?php echo JText::_('WEEVER_AVAILABLE_THEMES'); ?></option>
-    			
-    			<?php foreach($this->theme->themes as $k=>$v) :?>
-	    		
-	    			<option value="<?php echo $v->identifier; ?>" <?php echo ($this->theme->template == $v->identifier ? "selected='selected'":""); ?> rel="<?php echo $themeDir.$v->identifier.'.png'; ?>"><?php echo $v->name; ?></option>
-	    			
-	    		<?php endforeach; ?>
-	    		
-    			</select>
-    			</td>
-    			</tr>
-    			<tr><td colspan="2" id="wx-theme-help"><?php echo JText::_('WEEVER_THEME_HELP'); ?></td></tr>
-    		
-    		</table>
-    	</fieldset>
+     	</fieldset>
     </div>
     
 
@@ -350,14 +309,13 @@ else
 				
 				<div class="wx-image-size-warning" id="wx-image-size-icon"><?php echo JText::_('WEEVER_IMAGE_SIZE_WARNING'); ?></div> 
 				
-				        <div id="wx-icon-upload"></div>
-				        
-				       
-				        
+		        <div id="wx-icon-upload"></div>
+ 
 				<div class="wx-theme-image-container wx-theme-image-container-icon">
-					<img class="wx-theme-icon-image" id="wx-theme-icon" src="<?php echo $this->theme->images->icon; ?>" />
+					<img class="wx-theme-icon-image" id="wx-theme-icon" src="<?php echo $this->theme->install->icon; ?>" />
 				</div>
-				<div id="wx-install-text-container"><input type="text" name="title" maxlength="10" id="wx-install-text" value="<?php echo htmlentities($this->theme->title, ENT_QUOTES, "UTF-8"); ?>" /></div>
+				
+				<div id="wx-install-text-container"><input type="text" name="title" maxlength="10" id="wx-install-text" value="<?php echo htmlentities($this->theme->install->name, ENT_QUOTES, "UTF-8"); ?>" /></div>
 				
 				<div id="wx-install-text-save-reminder"><?php echo JText::_('WEEVER_INSTALL_TEXT_SAVE_REMINDER'); ?></div>
 
@@ -376,8 +334,8 @@ else
 				<div class="wx-image-size-warning" id="wx-image-size-phone"><?php echo JText::_('WEEVER_IMAGE_SIZE_WARNING'); ?></div>
 				
 				        <div id="wx-phone-upload"></div>
-				<div class="wx-theme-image-container wx-theme-image-container-phone"><a href='<?php echo $this->theme->images->phone_load; ?>' class='popup' id="wx-theme-phone-load-link" rel='{handler: "iframe", size:  { y: 460, x: 320}}'>
-				<img class="wx-theme-image" id="wx-theme-phone-load" src="<?php echo $this->theme->images->phone_load; ?>" />
+				<div class="wx-theme-image-container wx-theme-image-container-phone"><a href='<?php echo $this->theme->launchscreens->phone; ?>' class='popup' id="wx-theme-phone-load-link" rel='{handler: "iframe", size:  { y: 460, x: 320}}'>
+				<img class="wx-theme-image" id="wx-theme-phone-load" src="<?php echo $this->theme->launchscreens->phone; ?>" />
 				</a></div>
 
 			</div>
@@ -394,8 +352,8 @@ else
 				
 		                <div id="wx-tablet-upload"></div>
 		                
-				<div class="wx-theme-image-container wx-theme-image-container-tablet"><a href='<?php echo $this->theme->images->tablet_load; ?>' class='popup' id="wx-theme-tablet-load-link" rel='{handler: "iframe", size:  { y: 512, x: 374}}'>
-				<img class="wx-theme-image" id="wx-theme-tablet-load" src="<?php echo $this->theme->images->tablet_load; ?>" />
+				<div class="wx-theme-image-container wx-theme-image-container-tablet"><a href='<?php echo $this->theme->launchscreens->tablet; ?>' class='popup' id="wx-theme-tablet-load-link" rel='{handler: "iframe", size:  { y: 512, x: 374}}'>
+				<img class="wx-theme-image" id="wx-theme-tablet-load" src="<?php echo $this->theme->launchscreens->tablet; ?>" />
 				</a></div>
 
 			
@@ -413,8 +371,8 @@ else
 				
 		                <div id="wx-tablet-landscape-upload"></div>
 		                
-				<div class="wx-theme-image-container wx-theme-image-container-tablet-landscape"><a href='<?php echo $this->theme->images->tablet_landscape_load; ?>' class='popup' id="wx-theme-tablet-landscape-load-link" rel='{handler: "iframe", size: { y: 512, x: 374}}'>
-				<img class="wx-theme-image" id="wx-theme-tablet-landscape-load" src="<?php echo $this->theme->images->tablet_landscape_load; ?>" />
+				<div class="wx-theme-image-container wx-theme-image-container-tablet-landscape"><a href='<?php echo $this->theme->launchscreens->tablet_landscape; ?>' class='popup' id="wx-theme-tablet-landscape-load-link" rel='{handler: "iframe", size: { y: 512, x: 374}}'>
+				<img class="wx-theme-image" id="wx-theme-tablet-landscape-load" src="<?php echo $this->theme->launchscreens->tablet_landscape; ?>" />
 				</a></div>
 
 			
@@ -572,13 +530,13 @@ else
 		<td class="key hasTip" title="<?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TOOLTIP'); ?>"><?php echo JText::_('WEEVER_LAUNCH_ANIMATION'); ?></td>
 		<td>
 		<select name="animation" class="wx-220-select">
-		<option value="fade" <?php echo ($this->theme->animation->type == 'fade' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_FADE'); ?></option>
-		<option value="pop" <?php echo ($this->theme->animation->type == 'pop' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_POP'); ?></option>
-		<option value="slide-left" <?php echo ($this->theme->animation->type == 'slide-left' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_RIGHT'); ?></option>
-		<option value="slide-right" <?php echo ($this->theme->animation->type == 'slide-right' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_LEFT'); ?></option>
-		<option value="slide-up" <?php echo ($this->theme->animation->type == 'slide-up' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_DOWN'); ?></option>
-		<option value="slide-down" <?php echo ($this->theme->animation->type == 'slide-down' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_UP'); ?></option>
-		<option value="none" <?php echo ($this->theme->animation->type == 'none' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_NONE'); ?></option>
+		<option value="fade" <?php echo ($this->theme->animations->launch->type == 'fade' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_FADE'); ?></option>
+		<option value="pop" <?php echo ($this->theme->animations->launch->type == 'pop' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_POP'); ?></option>
+		<option value="slide-left" <?php echo ($this->theme->animations->launch->type == 'slide-left' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_RIGHT'); ?></option>
+		<option value="slide-right" <?php echo ($this->theme->animations->launch->type == 'slide-right' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_LEFT'); ?></option>
+		<option value="slide-up" <?php echo ($this->theme->animations->launch->type == 'slide-up' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_DOWN'); ?></option>
+		<option value="slide-down" <?php echo ($this->theme->animations->launch->type == 'slide-down' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_SLIDE_UP'); ?></option>
+		<option value="none" <?php echo ($this->theme->animations->launch->type == 'none' ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_NONE'); ?></option>
 		</select>
 		</td>
 		</tr>
@@ -588,9 +546,9 @@ else
 		<td>
 		<select name="timeout" class="wx-220-select">
 		<option value="1"><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TIMEOUT_NONE'); ?></option>
-		<option value="325" <?php echo ($this->theme->animation->timeout == 325 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TIMEOUT_SHORTER'); ?></option>
-		<option value="650" <?php echo ($this->theme->animation->timeout == 650 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TIMEOUT_NORMAL'); ?></option>
-		<option value="995" <?php echo ($this->theme->animation->timeout == 995 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TIMEOUT_LONGER'); ?></option>
+		<option value="325" <?php echo ($this->theme->animations->launch->timeout == 325 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TIMEOUT_SHORTER'); ?></option>
+		<option value="650" <?php echo ($this->theme->animations->launch->timeout == 650 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TIMEOUT_NORMAL'); ?></option>
+		<option value="995" <?php echo ($this->theme->animations->launch->timeout == 995 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_TIMEOUT_LONGER'); ?></option>
 		</select>
 		</td>
 		</tr>
@@ -601,9 +559,9 @@ else
 		<td>
 		<select name="duration" class="wx-220-select">
 		<option value="350"><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_DURATION_VERY_SHORT'); ?></option>
-		<option value="850" <?php echo ($this->theme->animation->duration == 850 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_DURATION_SHORTER'); ?></option>
-		<option value="1350" <?php echo ($this->theme->animation->duration == 1350 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_DURATION_NORMAL'); ?></option>
-		<option value="1650" <?php echo ($this->theme->animation->duration == 1650 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_DURATION_LONGER'); ?></option>
+		<option value="850" <?php echo ($this->theme->animations->launch->duration == 850 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_DURATION_SHORTER'); ?></option>
+		<option value="1350" <?php echo ($this->theme->animations->launch->duration == 1350 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_DURATION_NORMAL'); ?></option>
+		<option value="1650" <?php echo ($this->theme->animations->launch->duration == 1650 ? "selected='selected'":""); ?>><?php echo JText::_('WEEVER_LAUNCH_ANIMATION_DURATION_LONGER'); ?></option>
 		</select>
 		</td>
 		</tr>		
@@ -612,7 +570,7 @@ else
 		<td>
 		<select name="install_prompt">
 		<option value="0"><?php echo JText::_('NO'); ?></option>
-		<option value="1" <?php echo ($this->theme->animation->install_prompt ? "selected='selected'":""); ?>><?php echo JText::_('YES'); ?></option>
+		<option value="1" <?php echo ($this->theme->install->prompt ? "selected='selected'":""); ?>><?php echo JText::_('YES'); ?></option>
 		</select>
 		</td>
 		</tr>
@@ -647,14 +605,14 @@ else
 		
 		<tr><td class="key hasTip" title="<?php echo JText::_('WEEVER_CSS_OVERRIDES_TOOLTIP'); ?>"><?php echo JText::_('WEEVER_CSS_OVERRIDES'); ?></td>
 		<td>
-		<textarea name="css" id="wx-css-overrides"><?php echo $this->theme->css->css; ?></textarea>
+		<textarea name="css" id="wx-css-overrides"><?php echo $this->theme->css->styles; ?></textarea>
 		</td>
 		</tr>
 		
 		
 		<tr><td class="key hasTip" title="<?php echo JText::_('WEEVER_CSS_URL_TOOLTIP'); ?>"><?php echo JText::_('WEEVER_CSS_URL'); ?></td>
 		<td>
-		<input type="text" placeholder="http://" name="css_url" id="wx-css-url" value="<?php echo $this->theme->css->css_url; ?>" />
+		<input type="text" placeholder="http://" name="css_url" id="wx-css-url" value="<?php echo $this->theme->css->url; ?>" />
 		</td>
 		</tr>	
 	
@@ -672,7 +630,7 @@ else
 	
 	<tr>
 	<td class="key"><?php echo JText::_('WEEVER_TITLEBAR_CUSTOM_HTML_TEXTAREA_DESCRIPTION'); ?></td>
-	<td><textarea name="titlebarHtml" rows="7" cols="50"><?php echo htmlspecialchars($this->theme->titlebarHtml); ?></textarea></td>	
+	<td><textarea name="titlebarHtml" rows="7" cols="50"><?php echo htmlspecialchars($this->theme->titlebar->html); ?></textarea></td>	
 	</tr>
 	
 	</table>
@@ -680,7 +638,6 @@ else
 	
 	</fieldset>
 	
-
 	</div>
 	
 	<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>

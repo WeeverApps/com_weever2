@@ -115,7 +115,7 @@ foreach( (array) $this->tabs as $k=>$v )
 				
 					<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-grayed-out wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
 					
-						<img class="wx-nav-icon-img" src="data:image/png;base64,' . file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverAPIVersion::$version . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id) . '" />
+						<img class="wx-nav-icon-img" src="data:image/png;base64,' . file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id) . '" />
 						
 					</div>
 					
@@ -131,7 +131,7 @@ foreach( (array) $this->tabs as $k=>$v )
 						
 							<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
 							
-								<img class="wx-nav-icon-img" src="data:image/png;base64,'.file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverAPIVersion::$version . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id).'" />
+								<img class="wx-nav-icon-img" src="data:image/png;base64,'.file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id).'" />
 							
 							</div>
 							
