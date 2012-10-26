@@ -50,20 +50,15 @@ class WeeverController extends JController
 		$sizeLimit 			= 1536000;
 		
 		$uploader 			= new qqFileUploader( $allowedExtensions, $sizeLimit );
-		$result 			= $uploader->handleUpload(JPATH_ROOT . DS . 'images' . DS .'com_weever'. DS);
+		$result 			= $uploader->handleUpload( JPATH_ROOT . DS . 'images' . DS .'com_weever'. DS );
 		
 		if( isset($result['success']) )
 		{
-		
+
 			$result['url'] 	= 'http://' . comWeeverHelper::getSiteDomain() . '/images/com_weever/' . $result['filename'];
 			$model 			= $this->getModel( 'ajax' );
-			
-			$result 		= $model->saveImageUrl( $result['url'] );
-		
-			if( $result->success )
-				echo "Tab Changes Saved";
-			
-			jexit();
+
+			$response 		= $model->saveImageUrl( $result['url'] );
 			
 		}	
 

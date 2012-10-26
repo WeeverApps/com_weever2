@@ -260,7 +260,17 @@ class comWeeverHelper
 			jsJText::script('WEEVER_JS_MAP_START_ZOOM');
 			jsJText::script('WEEVER_JS_MAP_DEFAULT_MARKER_TOOLTIP');
 			jsJText::script('WEEVER_JS_MAP_DEFAULT_MARKER');
+			jsJText::script('WEEVER_UPLOAD_NEW');
+			jsJText::script('WEEVER_UPLOAD_ICON');
+			jsJText::script('WEEVER_DROP_TABLET_LANDSCAPE');
+			jsJText::script('WEEVER_DROP_TABLET');
+			jsJText::script('WEEVER_DROP_PHONE');
+			jsJText::script('WEEVER_DROP_ICON');
+			jsJText::script('WEEVER_DROP_TITLEBAR');		
+			jsJText::script('WEEVER_UPLOAD_CANCEL');
+			jsJText::script('WEEVER_UPLOAD_FAILED');
 			
+				
 			jsJText::load();
 		
 		}
@@ -319,6 +329,15 @@ class comWeeverHelper
 			JText::script('WEEVER_JS_MAP_START_ZOOM');
 			JText::script('WEEVER_JS_MAP_DEFAULT_MARKER_TOOLTIP');
 			JText::script('WEEVER_JS_MAP_DEFAULT_MARKER');
+			JText::script('WEEVER_UPLOAD_NEW');
+			JText::script('WEEVER_UPLOAD_ICON');
+			JText::script('WEEVER_DROP_TABLET_LANDSCAPE');
+			JText::script('WEEVER_DROP_TABLET');
+			JText::script('WEEVER_DROP_PHONE');
+			JText::script('WEEVER_DROP_ICON');
+			JText::script('WEEVER_DROP_TITLEBAR');
+			JText::script('WEEVER_UPLOAD_CANCEL');
+			JText::script('WEEVER_UPLOAD_FAILED');
 		
 		}
 

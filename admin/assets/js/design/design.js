@@ -4,7 +4,7 @@
 *
 *	Author: 	Robert Gerald Porter <rob@weeverapps.com>
 				Aaron Song	<aaron@weeverapps.com>
-*	Version: 	2.0 alpha 1
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -20,8 +20,6 @@
 */
 
 	var weever = weever || {};
-	
-	var siteKey 	= siteKey || jQuery("input#wx-site-key").val();
 	
 	weever.checkTabletImg = function(src) {
 	
@@ -130,7 +128,7 @@
 	function createUploader() {            
 	var tabletUploader = new qq.FileUploader({
 	    element: document.getElementById('wx-tablet-upload'),
-	    action: 'index.php?option=com_weever&task=upload&type=tablet_load&site_key=' + siteKey,
+	    action: 'index.php?option=com_weever&task=upload&type=tablet_load&site_key=' + jQuery("input#wx-site-key").val(),
 	    template: themeUploadTemplate({
 	    	uploadButton: Joomla.JText._('WEEVER_UPLOAD_NEW'),
 	    	dropUpload: Joomla.JText._('WEEVER_DROP_TABLET'),
@@ -148,7 +146,7 @@
 	});   
 	var tabletLandscapeUploader = new qq.FileUploader({
 	    element: document.getElementById('wx-tablet-landscape-upload'),
-	    action: 'index.php?option=com_weever&task=upload&type=tablet_landscape_load&site_key=' + siteKey,
+	    action: 'index.php?option=com_weever&task=upload&type=tablet_landscape_load&site_key=' + jQuery("input#wx-site-key").val(),
 	    template: themeUploadTemplate({
 	    	uploadButton: Joomla.JText._('WEEVER_UPLOAD_NEW'),
 	    	dropUpload: Joomla.JText._('WEEVER_DROP_TABLET_LANDSCAPE'),
@@ -166,7 +164,7 @@
 	}); 
 	var phoneUploader = new qq.FileUploader({
 	    element: document.getElementById('wx-phone-upload'),
-	    action: 'index.php?option=com_weever&task=upload&type=phone_load&site_key=' + siteKey,
+	    action: 'index.php?option=com_weever&task=upload&type=phone_load&site_key=' + jQuery("input#wx-site-key").val(),
 	    template: themeUploadTemplate({
 	    	uploadButton: Joomla.JText._('WEEVER_UPLOAD_NEW'),
 	    	dropUpload: Joomla.JText._('WEEVER_DROP_PHONE'),
@@ -184,7 +182,7 @@
 	});         
 	var iconUploader = new qq.FileUploader({
 	    element: document.getElementById('wx-icon-upload'),
-	    action: 'index.php?option=com_weever&task=upload&type=icon&site_key=' + siteKey,
+	    action: 'index.php?option=com_weever&task=upload&type=icon&site_key=' + jQuery("input#wx-site-key").val(),
 	    template: themeUploadIconTemplate({
 	    	uploadButton: Joomla.JText._('WEEVER_UPLOAD_ICON'),
 	    	dropUpload: Joomla.JText._('WEEVER_DROP_ICON'),
@@ -202,7 +200,7 @@
 	}); 
 	var titlebarUploader = new qq.FileUploader({
 	    element: document.getElementById('wx-titlebar-upload'),
-	    action: 'index.php?option=com_weever&task=upload&type=titlebar_logo&site_key=' + siteKey,
+	    action: 'index.php?option=com_weever&task=upload&type=titlebar_logo&site_key=' + jQuery("input#wx-site-key").val(),
 	    template: themeUploadTemplate({
 	    	uploadButton: Joomla.JText._('WEEVER_UPLOAD_NEW'),
 	    	dropUpload: Joomla.JText._('WEEVER_DROP_TITLEBAR'),

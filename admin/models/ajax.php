@@ -40,7 +40,7 @@ class WeeverModelAjax extends JModel
 	
 	protected function makeAPICall($api_endpoint, $remote_query)
 	{
-	
+
 		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
 		$stage_url 			= '';
 		
@@ -49,10 +49,10 @@ class WeeverModelAjax extends JModel
 	
 		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
 		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
-		
+
 		$json		= json_decode( $response );
 
-		if( isset($json->error) && $json->error == true )
+		if( isset($json->error) && $json->error == true  )
 		{
 		
 			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
@@ -168,7 +168,12 @@ class WeeverModelAjax extends JModel
 	public function saveImageUrl( $url )
 	{
 	
-		$remote_query = array();
+		$remote_query = array( 
+		
+			"type" 			=> JRequest::getVar("type"),
+			'site_key' 		=> $this->key,
+			
+		);
 		
 		switch( $remote_query["type"] )
 		{
