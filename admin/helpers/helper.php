@@ -26,8 +26,6 @@ jimport( 'joomla.application.component.helper' );
 jimport( 'joomla.plugin.helper' );
 jimport( 'joomla.html.html.tabs' );
 
-require_once (JPATH_COMPONENT.DS.'helpers'.DS.'theme'.'.php');
-
 class comWeeverHelper
 {
 
@@ -327,47 +325,6 @@ class comWeeverHelper
 	}
 		
 	
-	public static function saveTheme()
-	{
-			
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
-		
-		$row->load(2);
-		$row->setting = JRequest::getVar($row->option);		
-		$row->store();
-		
-		$row->load(1);
-		$row->setting = JRequest::getVar($row->option);		
-		$row->store();
-		
-		$themeObj = new comWeeverThemeStylesObj;
-		
-		$themeObj->titlebarHtml 		= JRequest::getVar("titlebarHtml", "", "post","string",JREQUEST_ALLOWHTML);
-		$themeObj->css 					= JRequest::getVar("css");
-		$themeObj->css_url 				= JRequest::getVar("css_url");
-		$titlebarTextEnabled 			= JRequest::getVar("titlebar_title_enabled");
-		$themeObj->template 			= JRequest::getVar("template");
-		
-		if(trim($themeObj->titlebarHtml))
-			$themeObj->titlebarSource = "html";
-		else if($titlebarTextEnabled == 1)
-			$themeObj->titlebarSource = "text";
-		else
-			$themeObj->titlebarSource = "image";
-			
-		$launch 					= new StdClass();
-		$launch->animation 			= JRequest::getVar("animation");
-		$launch->duration 			= JRequest::getVar("duration");
-		$launch->timeout 			= JRequest::getVar("timeout");
-		$launch->install_prompt 	= JRequest::getVar("install_prompt");
-		
-		$jsonLaunch 	= json_encode($launch);
-		$jsonTheme 		= json_encode($themeObj);
-		$response 		= comWeeverHelper::pushThemeToCloud($jsonTheme, $jsonLaunch);		
-		
-	}
-	
-	
 	public static function parseVersion($str)
 	{
 		
@@ -505,74 +462,7 @@ class comWeeverHelper
 		comWeeverHelper::tabSync();
 
 	}
-	
-
-	public static function saveConfig()
-	{
 		
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
-
-		if(JRequest::getVar('granular_devices',0))
-		{
-			if(JRequest::getVar('DetectIphoneOrIpod',0))
-				$devices .= "DetectIphoneOrIpod,";
-			if(JRequest::getVar('DetectAndroid',0))
-				$devices .= "DetectAndroid,";
-			if(JRequest::getVar('DetectBlackBerryTouch',0))
-				$devices .= "DetectBlackBerryTouch,";
-			if(JRequest::getVar('DetectWebOSTablet',0))
-				$devices .= "DetectWebOSTablet,";
-			if(JRequest::getVar('DetectIpad',0))
-				$devices .= "DetectIpad,";
-			if(JRequest::getVar('DetectBlackBerryTablet',0))
-				$devices .= "DetectBlackBerryTablet,";
-			if(JRequest::getVar('DetectAndroidTablet',0))
-				$devices .= "DetectAndroidTablet,";
-			if(JRequest::getVar('DetectGoogleTV',0))
-				$devices .= "DetectGoogleTV,";
-			if(JRequest::getVar('DetectAppleTVTwo',0))
-				$devices .= "DetectAppleTVTwo,";
-				
-			$devices = rtrim($devices,",");
-
-			JRequest::setVar('devices',$devices);	
-		}
-		else
-		{
-			if(JRequest::getVar('DetectTierWeeverSmartphones',0))
-				$devices .= "DetectTierWeeverSmartphones";
-			if(JRequest::getVar('DetectTierWeeverTablets',0))
-				$devices .= ",DetectTierWeeverTablets";		
-				
-			$devices = ltrim($devices,",");
-				
-			JRequest::setVar('devices',$devices);		
-		}
-		
-			 
-		for($i = 1; $i <= 15; $i++)
-		{
-		
-			if($i == 2 || $i == 1 || $i == 6 || $i == 13 || $i == 14)
-				continue;
-		
-			$row->load($i); 
-			
-			if($i == 11)
-				$row->setting = JRequest::getVar($row->option,"", "post","string",JREQUEST_ALLOWHTML);
-			else 
-				$row->setting = JRequest::getVar($row->option);
-			
-			$row->store();
-		
-		}
-		
-		$response = comWeeverHelper::pushConfigToCloud();
-		
-		return $msg;
-	
-	}
-	
 	
 	public static function toggleAppStatus()
 	{
@@ -771,11 +661,11 @@ class comWeeverHelper
 
 	public static function buildWeeverHttpQuery($array, $ajax = false)
 	{
-	
-		$array['version'] 		= comWeeverConst::VERSION;
-		$array['generator'] 	= comWeeverConst::NAME;
-		$array['cms'] 			= 'joomla';
-		$array['cms_version']	= self::joomlaVersion();
+
+	//	$array['version'] 		= comWeeverConst::VERSION;
+		$array['user_agent'] 	= comWeeverConst::NAME . " v" . comWeeverConst::VERSION;
+	//	$array['cms'] 			= 'joomla';
+	//	$array['cms_version']	= self::joomlaVersion();
 		
 		if($ajax == true)
 		{
@@ -855,6 +745,12 @@ class comWeeverHelper
 		
 		else 
 			$response 	= JText::_('WEEVER_ERROR_NO_CURL_OR_FOPEN');
+			
+		if( JRequest::getVar("wxAPI") )
+			die($response);
+			
+		if( JRequest::getVar("wxAPIInline") )
+			echo "<textarea>" . $response . "</textarea>";
 
 		return $response;
 	

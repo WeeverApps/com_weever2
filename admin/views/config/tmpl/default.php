@@ -266,18 +266,6 @@ else
 		<td><?php echo JText::_('WEEVER_CONFIG_BLACKBERRY_SIX_TOUCH_GRADE'); ?></td>
 		</tr>
 		
-		<tr><td class="key"><?php echo JText::_('WEEVER_CONFIG_HP_TOUCHPAD'); ?></td>
-		<td>
-		<select name="DetectWebOSTablet">
-		<option value="0"><?php echo JText::_('WEEVER_CONFIG_DISABLED'); ?></option>
-		<option value="1" <?php echo $this->DetectTouchPad; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
-		</select>
-		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_DISABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_HP_TOUCHPAD_GRADE'); ?></td>
-		</tr>
-		
-		
 		<tr><td class="key"><?php echo JText::_('WEEVER_CONFIG_BLACKBERRY_PLAYBOOK'); ?></td>
 		<td>
 		<select name="DetectBlackBerryTablet">
@@ -312,46 +300,12 @@ else
 		<td><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></td>
 		<td><?php echo JText::_('WEEVER_CONFIG_GOOGLE_ANDROID_TABLETS_GRADE'); ?></td>
 		</tr>
-		
 
-		
-		<tr><td class="key"><?php echo JText::_('WEEVER_CONFIG_GOOGLE_TV'); ?></td>
-		<td>
-		<select name="DetectGoogleTV">
-		<option value="0"><?php echo JText::_('WEEVER_CONFIG_DISABLED'); ?></option>
-		<option value="1" <?php echo $this->DetectGoogleTV; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
-		</select>
-		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_DISABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_GOOGLE_TV_GRADE'); ?></td>
-		</tr>
-		
-		<tr><td class="key"><?php echo JText::_('WEEVER_CONFIG_APPLETV_TWO_JAILBROKEN'); ?></td>
-		<td>
-		<select name="DetectAppleTVTwo">
-		<option value="0"><?php echo JText::_('WEEVER_CONFIG_DISABLED'); ?></option>
-		<option value="1" <?php echo $this->DetectAppleTVTwo; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
-		</select>
-		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_DISABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_APPLETV_TWO_JAILBROKEN_GRADE'); ?></td>
-		</tr>
-		
 		</table>
 		
 		</fieldset>
 		</div>
 		
-	<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>
-	<?php echo comWeeverHelper::startJHtmlTabPanel( JText::_("WEEVER_PLATFORM_VERSION"), 'platform-version', $pane ); ?>
-	
-		<table>
-		<tr>
-		<td class="key hasTip" title="<?php echo JText::_("WEEVER_VERSION_TWO_BETA_TOOLTIP"); ?>"><?php echo JText::_('WEEVER_VERSION_TWO_BETA'); ?></td>
-		<td><input type="checkbox" name="platform_version" id="wx-platform-version-check" value="2" <?php echo ($this->platform_version == 2 ? "checked='checked'":""); ?> /> <label for="wx-platform-version-check"><?php echo JText::_('WEEVER_VERSION_TWO_BETA_OPTION'); ?></label></td>	
-		</tr>
-		</table>
-	
 	<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>
 	<?php echo comWeeverHelper::endJHtmlPane( $pane ); ?>
 

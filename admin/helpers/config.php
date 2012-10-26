@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0
+*	Version: 	2.0 Beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ final class comWeeverConst
 {
 
 	const VERSION			= "2.0";
-	const RELEASE_TYPE		= "Alpha Release 1";
+	const RELEASE_TYPE		= "Beta Release 1";
 	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/nt/aulavik/index.aspx' target='_blank'>Aulavik</a>";
 	const NAME				= "Weever Apps Administrator Component for Joomla!";
 	const COPYRIGHT_YEAR	= "(c) 2010-2012";
@@ -44,6 +44,7 @@ final class comWeeverConst
 	const LIVE_STAGE		= "http://stage.weeverapp.com/";
 	const API_VERSION		= "api/v2/";
 	const SUPPORTED_TYPES	= "-oldtabs--newtab-";
+	const API_DEBUG			= true;
 
 }
 

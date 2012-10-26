@@ -35,6 +35,7 @@ class WeeverModelAccount extends JModel
        
        parent::__construct();
        
+       $this->key 	= comWeeverHelper::getKey();
        $this->json = comWeeverHelper::getJsonAccountSync();
        
        $query = " SELECT `setting` FROM #__weever_config WHERE `option`='site_key' ";

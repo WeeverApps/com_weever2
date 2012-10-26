@@ -23,7 +23,9 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controller');
-JTable::addIncludePath(JPATH_COMPONENT.DS.'tables');
+
+JTable::addIncludePath( JPATH_COMPONENT.DS.'tables' );
+
 require_once (JPATH_COMPONENT.DS.'helpers'.DS.'helper'.'.php');
 
 class WeeverController extends JController
@@ -34,32 +36,39 @@ class WeeverController extends JController
 	
 		phpinfo();
 		jexit();
+		
 	}
 
 	
 	public function upload()
 	{
 		
-		require_once (JPATH_COMPONENT.DS.'classes'.DS.'fileuploader'.'.php');
+		require_once ( JPATH_COMPONENT . DS . 'classes' . DS . 'fileuploader.php' );
 	
-		$allowedExtensions = array("png","jpg","jpeg","gif","svg");
-
-		$sizeLimit = 1536000;
+		# Images must be png, jpg, jpeg, gif, or svg and less than 1.5 MB 
+		$allowedExtensions 	= array("png", "jpg", "jpeg", "gif", "svg");
+		$sizeLimit 			= 1536000;
 		
-		$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		$uploader 			= new qqFileUploader( $allowedExtensions, $sizeLimit );
+		$result 			= $uploader->handleUpload(JPATH_ROOT . DS . 'images' . DS .'com_weever'. DS);
 		
-		$result = $uploader->handleUpload(JPATH_ROOT . DS . 'images' . DS .'com_weever'. DS);
-		
-		if(isset($result['success']))
+		if( isset($result['success']) )
 		{
 		
-			$result['url'] = 'http://'.comWeeverHelper::getSiteDomain().'/images/com_weever/'.$result['filename'];
+			$result['url'] 	= 'http://' . comWeeverHelper::getSiteDomain() . '/images/com_weever/' . $result['filename'];
+			$model 			= $this->getModel( 'ajax' );
+			
+			$result 		= $model->saveImageUrl( $result['url'] );
 		
-			$result['weever_response'] = comWeeverHelper::pushImageToCloud($result['url']);
+			if( $result->success )
+				echo "Tab Changes Saved";
+			
+			jexit();
 			
 		}	
 
-		echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		echo htmlspecialchars( json_encode($result), ENT_NOQUOTES );
+		
 		jexit();
 	
 	}
@@ -273,16 +282,44 @@ class WeeverController extends JController
 	
 		if(JRequest::getVar('view') == "config")
 		{
-			comWeeverHelper::saveConfig();
-			$this->setRedirect('index.php?option=com_weever&view=config&task=config',JText::_('WEEVER_CONFIG_SAVED'));
+		
+			$model 		= $this->getModel( 'config' );
+			$json 		= $model->saveConfig();
+			$response	= json_decode( $json );
+			$message	= JText::_('WEEVER_CONFIG_SAVED');
+			
+			if( $response->error == true )
+				$message	= JText::_('WEEVER_SERVER_ERROR') . $response->message;
+			
+			if( comWeeverConst::API_DEBUG == true )
+				$message 	.= "[API_DEBUG] - Executed in " . $response->call->execution_time . 
+								"; JSON RESPONSE: <input type='text' value='" . $json ."' />";
+			
+			$this->setRedirect( 'index.php?option=com_weever&view=config&task=config', $message );
+			
 			return;
+			
 		}
 		
-		if(JRequest::getVar('view') == "theme")
+		if(JRequest::getVar('view') == "design")
 		{
-			$msg = comWeeverHelper::saveTheme();			
-			$this->setRedirect('index.php?option=com_weever&view=theme&task=theme',JText::_('WEEVER_THEME_SAVED').$msg);
+		
+			$model 		= $this->getModel( 'design' );
+			$json 		= $model->saveDesign();
+			$response	= json_decode( $json );
+			$message	= JText::_('WEEVER_THEME_SAVED');
+		
+			if( $response->error == true )
+				$message	= JText::_('WEEVER_SERVER_ERROR') . $response->message;
+			
+			if( comWeeverConst::API_DEBUG == true )
+				$message 	.= "[API_DEBUG] - Executed in " . $response->call->execution_time . 
+								"; JSON RESPONSE: <input type='text' value='" . $json ."' />";
+						
+			$this->setRedirect('index.php?option=com_weever&view=design&task=design', $message);
+			
 			return;
+			
 		}
 		
 		if(JRequest::getVar('view') == "account")

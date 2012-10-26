@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0-alpha-1
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -37,6 +37,7 @@ class WeeverModelAjax extends JModel
 
 	}
 	
+	
 	protected function makeAPICall($api_endpoint, $remote_query)
 	{
 	
@@ -63,6 +64,7 @@ class WeeverModelAjax extends JModel
 
 	}
 	
+	
 	public function saveTabName($name, $tab_id) 
 	{
 	
@@ -77,6 +79,7 @@ class WeeverModelAjax extends JModel
 		return $this->makeAPICall( "tabs/set_tabTitle", $remote_query );
 	
 	}
+	
 	
 	public function saveTabItemName($name, $tab_id) 
 	{
@@ -93,6 +96,7 @@ class WeeverModelAjax extends JModel
 	
 	}
 	
+	
 	public function saveTabOrder($order) 
 	{
 	
@@ -106,6 +110,7 @@ class WeeverModelAjax extends JModel
 		return $this->makeAPICall( "tabs/sort_tabs", $remote_query );
 	
 	}
+	
 	
 	public function saveTabPublish($id, $publish) 
 	{
@@ -125,6 +130,7 @@ class WeeverModelAjax extends JModel
 	
 	}
 
+
 	public function deleteTab($id) 
 	{
 	
@@ -142,6 +148,7 @@ class WeeverModelAjax extends JModel
 	
 	}
 	
+	
 	public function moveTab($tab_id, $parent_id) 
 	{
 	
@@ -156,6 +163,67 @@ class WeeverModelAjax extends JModel
 		return $this->makeAPICall( "tabs/set_parent_id", $remote_query );
 	
 	}
+	
+	
+	public function saveImageUrl( $url )
+	{
+	
+		$remote_query = array();
+		
+		switch( $remote_query["type"] )
+		{
+		
+			case "phone_load":
+			
+				$remote_query["launchscreen_type"]	= "phone";
+				$remote_query["launchscreen"]		= $url;
+			
+				return $this->makeAPICall( "design/set_launchscreen", $remote_query );
+				
+				break;
+				
+			
+			case "icon":
+			
+				$remote_query["app_icon"]		= $url;
+				
+				return $this->makeAPICall( "design/set_app_icon", $remote_query );
+				
+				break;
+				
+			
+			case "tablet_load":
+			
+				$remote_query["launchscreen_type"]	= "tablet";
+				$remote_query["launchscreen"]		= $url;
+			
+				return $this->makeAPICall( "design/set_launchscreen", $remote_query );
+				
+				break;
+				
+			
+			case "tablet_landscape_load":
+			
+				$remote_query["launchscreen_type"]	= "tablet_landscape";
+				$remote_query["launchscreen"]		= $url;
+			
+				return $this->makeAPICall( "design/set_launchscreen", $remote_query );
+				
+				break;
+				
+				
+			case "titlebar_logo":
+			
+				$remote_query["titlebar_logo"]		= $url;
+				
+				return $this->makeAPICall( "design/set_titlebar_logo", $remote_query );
+				
+				break;
+		
+		}
+	
+	}
+	
 	
 	public function saveNewTab($config, $title, $content, $layout, $icon_id, $published, $parent_id) 
 	{

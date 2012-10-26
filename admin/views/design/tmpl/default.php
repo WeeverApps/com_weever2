@@ -138,7 +138,7 @@ echo $this->loadTemplate('banner');
 
 	<input type="hidden" name="option" value="<?php echo $option; ?>" />
 	<input type="hidden" name="site_key" id="wx-site-key" value="<?php echo $this->site_key; ?>" />
-	<input type="hidden" name="view" value="theme" />
+	<input type="hidden" name="view" value="design" />
 	<input type="hidden" name="task" value="" />
 	<?php echo JHTML::_('form.token'); ?>
 	 

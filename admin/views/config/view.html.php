@@ -84,7 +84,7 @@ class WeeverViewConfig extends JView
 		comWeeverHelper::getJsStrings();
 		
 		JSubMenuHelper::addEntry(JText::_('WEEVER_TAB_ITEMS'), 		'index.php?option=com_weever', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_THEMING'), 		'index.php?option=com_weever&view=theme&task=theme', false);
+		JSubMenuHelper::addEntry(JText::_('WEEVER_THEMING'), 		'index.php?option=com_weever&view=design&task=design', false);
 		JSubMenuHelper::addEntry(JText::_('WEEVER_CONFIGURATION'), 	'index.php?option=com_weever&view=config&task=config', true);
 		JSubMenuHelper::addEntry(JText::_('WEEVER_ACCOUNT'), 		'index.php?option=com_weever&view=account&task=account', false);
 		JSubMenuHelper::addEntry(JText::_('WEEVER_SUPPORT_TAB'), 	'index.php?option=com_weever&view=support&task=support', false);
