@@ -38,7 +38,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	protected function makeAPICall($api_endpoint, $remote_query)
+	protected function makeAPICall( $api_endpoint, $remote_query )
 	{
 
 		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
@@ -65,7 +65,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	public function saveTabName($name, $tab_id) 
+	public function saveTabName( $name, $tab_id ) 
 	{
 	
 		$remote_query 		= array( 	
@@ -81,7 +81,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	public function saveTabItemName($name, $tab_id) 
+	public function saveTabItemName( $name, $tab_id ) 
 	{
 	
 		$remote_query 		= array( 	
@@ -97,7 +97,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	public function saveTabOrder($order) 
+	public function saveTabOrder( $order ) 
 	{
 	
 		$remote_query 		= array( 	
@@ -112,7 +112,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	public function saveTabPublish($id, $publish) 
+	public function saveTabPublish( $id, $publish ) 
 	{
 	
 		if( is_array($id) )
@@ -131,7 +131,7 @@ class WeeverModelAjax extends JModel
 	}
 
 
-	public function deleteTab($id) 
+	public function deleteTab( $id ) 
 	{
 	
 		if( is_array($id) )
@@ -149,7 +149,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	public function moveTab($tab_id, $parent_id) 
+	public function moveTab( $tab_id, $parent_id ) 
 	{
 	
 		$remote_query 		= array( 	
@@ -230,7 +230,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	public function saveNewTab($config, $title, $content, $layout, $icon_id, $published, $parent_id) 
+	public function saveNewTab( $config, $title, $content, $layout, $icon_id, $published, $parent_id ) 
 	{
 
 		$remote_query 		= array( 	
@@ -247,6 +247,29 @@ class WeeverModelAjax extends JModel
 		);
 		
 		return $this->makeAPICall( "tabs/add_tab", $remote_query );
+	
+	}
+	
+	
+	public function saveAppStatus()
+	{
+
+		$row =& JTable::getInstance('WeeverConfig', 'Table');
+		
+		$row->load(6);
+		
+		if($row->setting)
+			$row->setting = 0;
+		else 
+			$row->setting = 1;
+			
+		$remote_query		= array(
+		
+			'online'	=> $row->setting
+		
+		);
+		
+		return $this->makeAPICall( "config/set_online", $remote_query );
 	
 	}
 

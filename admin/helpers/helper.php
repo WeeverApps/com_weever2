@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0-alpha 0
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -416,32 +416,15 @@ class comWeeverHelper
 	}
 	
 	
-	public static function saveThemeJson($json)
-	{
-				
-		$db = &JFactory::getDBO();		
-		
-		$query = "		UPDATE	#__weever_config".
-				"		SET		setting = ".$db->Quote($json)." ".
-				"		WHERE	`option` = ".$db->Quote("theme_params")." ";
-		
-		$db->setQuery($query);
-		$result = @$db->loadObject();
-	
-	}
-	
-	
 	public static function enableStagingMode()
 	{
 	
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
+		$row 			=& JTable::getInstance('WeeverConfig', 'Table');
 		$row->load(7);
-		$row->setting = 1;
+		$row->setting 	= 1;
 		$row->store();
-		
-		comWeeverHelper::tabSync(1);
-		
-		$msg = JText::_('WEEVER_STAGING_MODE_ACTIVE');
+
+		$msg 			= JText::_('WEEVER_STAGING_MODE_ACTIVE');
 
 		return $msg;
 		
@@ -451,16 +434,15 @@ class comWeeverHelper
 	public static function disableStagingMode()
 	{
 	
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
+		$row 			=& JTable::getInstance('WeeverConfig', 'Table');
 		$row->load(7);
-		$row->setting = 0;
+		$row->setting 	= 0;
 		$row->store();
-		
-		comWeeverHelper::tabSync();
-		
-		$msg = JText::_('WEEVER_LIVE_MODE_ACTIVE');
+
+		$msg 			= JText::_('WEEVER_LIVE_MODE_ACTIVE');
 
 		return $msg;	
+		
 	}
 	
 	
@@ -477,164 +459,8 @@ class comWeeverHelper
 		
 		$db->setQuery($query);
 		$db->loadObject();
-		
-		comWeeverHelper::tabSync();
 
-	}
-		
-	
-	public static function toggleAppStatus()
-	{
-
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
-		
-		$row->load(6);
-		
-		if($row->setting)
-			$row->setting = 0;
-		else 
-			$row->setting = 1;
-			
-		$response = comWeeverHelper::pushAppStatusToCloud($row->setting);
-		
-		if($response == "App Offline" || $response == "App Online")
-			$row->store();
-		else 
-			$response = "Server Error: ".$response;
-			
-		return $response;
-	
-	}
-	
-	
-	public static function tabSync($stage=null)
-	{
-	
-		$tab_obj 	= self::getJsonTabSync();
-		
-		$query 		= " SELECT `setting` FROM #__weever_config WHERE `option`='site_key' ";
-		$db 		= &JFactory::getDBO();
-		
-		$db->setQuery($query);
-		$key 		= $db->loadObject();
-		
-		$row 		=& JTable::getInstance('WeeverConfig', 'Table');
-		
-		for($i = 1; $i <= 8; $i++)
-		{
-		
-			$row->load($i);
-		
-			switch($row->option)
-			{
-				
-				
-				case "site_key":
-				case "staging_mode":
-				
-					break;
-				
-				default:
-				
-					$row->setting = $tab_obj->config->{$row->option};
-					$row->store();
-					
-					break;
-			}
-
-		}
-		
-		$query = "		UPDATE	#__weever_config".
-				"		SET		setting = ".$db->Quote($tab_obj->config->theme_params)." ".
-				"		WHERE	`option` = ".$db->Quote("theme_params")." ";
-		
-		$db->setQuery($query);
-		$result = $db->loadObject();
-	
-	}
-	
-
-	public static function sortTabs($order)
-	{
-
-		$orderArray 	= explode(",",$order);
-		$reorderType 	= array();
-		
-		foreach( (array) $orderArray as $k=>$v )
-		{
-		
-			$v = str_replace("TabID","",$v);	
-			$reorder[] = $v;
-			
-		}
-	
-		$reordering = json_encode($reorder);
-		
-		JRequest::setVar('reordering', $reordering);	
-		
-		$response = comWeeverHelper::pushReorderToCloud();
-		
-		return $response;	
-	
-	}
-
-
-	public static function getJsonTabSync()
-	{
-		
-		if(self::getStageStatus())
-		{
-			$weeverServer 	= comWeeverConst::LIVE_STAGE;
-			$stageUrl 		= comWeeverHelper::getSiteDomain();
-		}
-		else
-		{
-			$weeverServer 	= comWeeverConst::LIVE_SERVER;
-			$stageUrl 		= '';
-		}
-			
-		$url = $weeverServer;
-		$key = self::getKey();
-		
-		$query = array( 	
-		
-			'stage' 		=> $stageUrl,
-			'app'			=> 'json',
-			'site_key' 		=> $key,
-			'all_tabs'		=> true,
-			'm' 			=> "tab_sync"
-					
-		);
-			
-		$postdata 	= self::buildWeeverHttpQuery($query, false);
-		
-		$json = self::sendToWeeverServer($postdata);
-
-		if($json == "Site key missing or invalid.")
-		{
-			 JError::raiseNotice(100, JText::_('WEEVER_NOTICE_NO_SITEKEY'));
-			 return false;
-		}
-		
-		$j_array = json_decode($json);
-		
-		$latestVersion 		= comWeeverHelper::parseVersion($j_array->joomla_latest);
-		$currentVersion 	= comWeeverHelper::parseVersion(comWeeverConst::VERSION);
-		
-		if( $latestVersion[0] > $currentVersion[0] ||
-			($latestVersion[0] == $currentVersion[0] && $latestVersion[1] > $currentVersion[1]) ||
-			($latestVersion[0] == $currentVersion[0] && $latestVersion[1] == $currentVersion[1] && $latestVersion[2] > $currentVersion[2]) ||
-			($latestVersion[0] == $currentVersion[0] && $latestVersion[1] == $currentVersion[1] && $latestVersion[2] == $currentVersion[2] && $latestVersion[3] > $currentVersion[3]) )
-		{
-		
-			JRequest::setVar("upgrade",$j_array->joomla_download);
-			JRequest::setVar("upgradeVersion",$j_array->joomla_latest);
-		
-		}
-		
-		return $json;	
-	
-	}
+	}	
 	
 
 	public static function getJsonAccountSync()
@@ -775,6 +601,7 @@ class comWeeverHelper
 	
 	}
 	
+	
 	public static function sendToWeeverServerFOpen($context, $url = null)
 	{
 		
@@ -783,10 +610,11 @@ class comWeeverHelper
 
 			if(self::getStageStatus())
 				$weeverServer = comWeeverConst::LIVE_STAGE;
+				
 			else
 				$weeverServer = comWeeverConst::LIVE_SERVER;
 				
-			$url = $weeverServer . comWeeverConst::API_VERSION;
+			$url 	= $weeverServer . comWeeverConst::API_VERSION;
 			
 		}
 		
@@ -799,17 +627,19 @@ class comWeeverHelper
 	{
 	
 		$opts = array(
-					'http'	=> array(
-					
-							'method'	=>"POST",
-							'header'	=>"User-Agent: ".comWeeverConst::NAME." version: ". 
-										comWeeverConst::VERSION."\r\n"."Content-length: " .
-										strlen($postdata)."\r\n".
-							         	"Content-type: application/x-www-form-urlencoded\r\n",
-							'content' 	=> $postdata
-						
-							)
-					);
+
+			'http'	=> array(
+			
+				'method'	=>"POST",
+				'header'	=>"User-Agent: ".comWeeverConst::NAME." version: ". 
+							comWeeverConst::VERSION."\r\n"."Content-length: " .
+							strlen($postdata)."\r\n".
+				         	"Content-type: application/x-www-form-urlencoded\r\n",
+				'content' 	=> $postdata
+			
+			)
+			
+		);
 	
 		return stream_context_create($opts);
 	
@@ -832,7 +662,6 @@ class comWeeverHelper
 
 		if($start && $limit)
 			$query_lim = " LIMIT ".$start.", ".$limit." ";
-
 			
 		$query .= $query_lim;
 

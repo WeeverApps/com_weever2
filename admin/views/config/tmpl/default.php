@@ -195,13 +195,7 @@ else
 			<tr>
 			<td class="key hasTip" title="<?php echo JText::_("WEEVER_DOMAIN_MAPPING_TOOLTIP"); ?>"><?php echo JText::_('WEEVER_DOMAIN_MAPPING'); ?></td>
 			<td><input type="textbox" name="domain"  value="<?php echo $this->domain; ?>" id="wx-domain-map-input" placeholder="app.yourdomain.com" /> </td>	
-			</tr>
-			
-			<tr>
-			<td class="key hasTip" title="<?php echo JText::_("WEEVER_LOADING_SPINNER_TOOLTIP"); ?>"><?php echo JText::_('WEEVER_LOADING_SPINNER_TEXT'); ?></td>
-			<td><textarea type="textbox" name="loadspinner" id="wx-load-spinner" placeholder="<?php echo JText::_("WEEVER_LOADING_SPINNER_PLACEHOLDER"); ?>"><?php echo htmlspecialchars($this->loadspinner); ?></textarea> </td>	
-			</tr>	
-		
+			</tr>		
 			
 			</table>
 		

@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	1.8
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -34,7 +34,7 @@ class WeeverViewDesign extends JView
 		$this->assign('devices', 		comWeeverHelper::getDeviceSettings() );
 		$this->assign('site_key', 		comWeeverHelper::getKey() );
 
-		$this->assignRef('theme', 		$this->get('designdata')->design );
+		$this->assignRef('design', 		$this->get('designdata')->design );
 		
 		if( JRequest::getVar("wxDesignDump") )
 			var_dump( $this->get('designdata') );

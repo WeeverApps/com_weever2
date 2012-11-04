@@ -30,7 +30,7 @@ defined('_JEXEC') or die;
 	
 		<fieldset class='adminForm'><legend><?php echo JText::_('WEEVER_CSS_TEMPLATE_OVERRIDES'); ?></legend>
 		
-		<!--div style="margin-left:1em;"><input type="checkbox" class="wx-check" value="1" id="wx-template-overrides" name="useCssOverride" <?php echo ($this->theme->css->useCssOverride == '1' ? "checked='checked'":""); ?> /><label for="wx-template-overrides" class="wx-check-label"><?php echo JText::_('WEEVER_USE_CSS_TEMPLATE_OVERRIDES'); ?></label></div>
+		<!--div style="margin-left:1em;"><input type="checkbox" class="wx-check" value="1" id="wx-template-overrides" name="useCssOverride" <?php echo ($this->design->css->useCssOverride == '1' ? "checked='checked'":""); ?> /><label for="wx-template-overrides" class="wx-check-label"><?php echo JText::_('WEEVER_USE_CSS_TEMPLATE_OVERRIDES'); ?></label></div>
 		<p><?php echo JText::_('WEEVER_USE_CSS_TEMPLATE_OVERRIDES_DESCRIPTION'); ?></p-->
 		<table class="admintable">
 			
@@ -38,14 +38,14 @@ defined('_JEXEC') or die;
 		
 		<tr><td class="key hasTip" title="<?php echo JText::_('WEEVER_CSS_OVERRIDES_TOOLTIP'); ?>"><?php echo JText::_('WEEVER_CSS_OVERRIDES'); ?></td>
 		<td>
-		<textarea name="css" id="wx-css-overrides"><?php echo $this->theme->css->styles; ?></textarea>
+		<textarea name="css" id="wx-css-overrides"><?php echo $this->design->css->styles; ?></textarea>
 		</td>
 		</tr>
 		
 		
 		<tr><td class="key hasTip" title="<?php echo JText::_('WEEVER_CSS_URL_TOOLTIP'); ?>"><?php echo JText::_('WEEVER_CSS_URL'); ?></td>
 		<td>
-		<input type="text" placeholder="http://" name="css_url" id="wx-css-url" value="<?php echo $this->theme->css->url; ?>" />
+		<input type="text" placeholder="http://" name="css_url" id="wx-css-url" value="<?php echo $this->design->css->url; ?>" />
 		</td>
 		</tr>	
 	
@@ -63,7 +63,7 @@ defined('_JEXEC') or die;
 	
 	<tr>
 	<td class="key"><?php echo JText::_('WEEVER_TITLEBAR_CUSTOM_HTML_TEXTAREA_DESCRIPTION'); ?></td>
-	<td><textarea name="titlebarHtml" rows="7" cols="50"><?php echo htmlspecialchars($this->theme->titlebar->html); ?></textarea></td>	
+	<td><textarea name="titlebarHtml" rows="7" cols="50"><?php echo htmlspecialchars($this->design->titlebar->html); ?></textarea></td>	
 	</tr>
 	
 	</table>

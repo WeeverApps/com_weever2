@@ -40,10 +40,9 @@ class WeeverViewConfig extends JView
 		$this->assignRef('local', 			$configData->localization);
 		$this->assignRef('locales', 		$configData->available_locales);
 		$this->assign('appEnabled', 		$configData->online );
-		$this->assign('ecosystem', 			$configData->ecosystem );
-		$this->assign('google_analytics', 	$configData->analytics[0]->code ? $configData->analytics[0]->code : null );
-		$this->assign('loadspinner', 		$configData->loadspinner_text);
-		$this->assign('domain', 			$configData->custom_domains[0]);
+		$this->assign('ecosystem', 			$configData->syndication->ecosystem );
+		$this->assign('google_analytics', 	isset($configData->analytics[0]) ? $configData->analytics[0]->code : null );
+		$this->assign('domain', 			$configData->domain[0]);
 		$this->assign('site_key', 			comWeeverHelper::getKey() );
 		
 		$this->assign('granular',				'');
@@ -59,7 +58,7 @@ class WeeverViewConfig extends JView
 		$this->assign('DetectTierWeeverTablets','');
 		$this->assign('DetectTierWeeverSmartphones','');
 	
-		$devices = explode("," , $configData->devices);
+		$devices = explode("," , $configData->device);
 		
 		foreach((array)$devices as $v)
 		{

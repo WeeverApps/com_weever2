@@ -68,23 +68,23 @@ if( !strstr($this->devices, 'DetectTierWeeverTablets') && !strstr($this->devices
 else 
 	$noTablet = null;
 	
-if(!$this->theme->launchscreens->phone)
-	$this->theme->launchscreens->phone = "../images/com_weever/phone_load_live.png";
+if(!$this->design->launchscreen->phone)
+	$this->design->launchscreen->phone = "../images/com_weever/phone_load_live.png";
 
-if(!$this->theme->launchscreens->tablet)
-	$this->theme->launchscreens->tablet = "../images/com_weever/tablet_load_live.png";
+if(!$this->design->launchscreen->tablet)
+	$this->design->launchscreen->tablet = "../images/com_weever/tablet_load_live.png";
 
-if(!$this->theme->launchscreens->tablet_landscape)
-	$this->theme->launchscreens->tablet_landscape = "../images/com_weever/tablet_landscape_load_live.png";
+if(!$this->design->launchscreen->tablet_landscape)
+	$this->design->launchscreen->tablet_landscape = "../images/com_weever/tablet_landscape_load_live.png";
 	
-if(!$this->theme->install->icon)
-	$this->theme->install->icon = "../images/com_weever/icon_live.png";
+if(!$this->design->install->icon)
+	$this->design->install->icon = "../images/com_weever/icon_live.png";
 	
-if(!$this->theme->titlebar->image)
-	$this->theme->titlebar->image = "../images/com_weever/titlebar_logo_live.png";
+if(!$this->design->titlebar->image)
+	$this->design->titlebar->image = "../images/com_weever/titlebar_logo_live.png";
 	
-//if(!$this->theme->title)
-//	$this->theme->title = "Untitled";
+//if(!$this->design->title)
+//	$this->design->title = "Untitled";
 
 echo $this->loadTemplate('banner');
 

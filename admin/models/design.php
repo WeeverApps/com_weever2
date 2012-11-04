@@ -88,21 +88,21 @@ class WeeverModelDesign extends JModel
 	public function saveDesign()
 	{
 			
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
+		$row 			=& JTable::getInstance( 'WeeverConfig', 'Table');
 		
 		$row->load(2);
-		$row->setting = JRequest::getVar($row->option);		
+		$row->setting 	= JRequest::getVar($row->option);		
 		$row->store();
 		
 		$row->load(1);
-		$row->setting = JRequest::getVar($row->option);		
+		$row->setting 	= JRequest::getVar($row->option);		
 		$row->store();
 		
 		$design 				= new StdClass();
 		$design->titlebar		= new StdClass();
 		
 		$design->titlebar
-					->html		= JRequest::getVar("titlebarHtml", "", "post","string",JREQUEST_ALLOWHTML);
+					->html		= JRequest::getVar("titlebarHtml", "", "post", "string", JREQUEST_ALLOWHTML);
 		$design->titlebar
 					->text		= JRequest::getVar("titlebar_title");
 		
@@ -120,10 +120,10 @@ class WeeverModelDesign extends JModel
 		$design->css->url 		= JRequest::getVar("css_url");
 		
 		$design->animations						= new StdClass();
-		$design->animations->launch				= new StdClass();
-		$design->animations->launch->type		= JRequest::getVar("animation");
-		$design->animations->launch->duration	= JRequest::getVar("duration");
-		$design->animations->launch->timeout	= JRequest::getVar("timeout");
+		$design->animation->launch				= new StdClass();
+		$design->animation->launch->type		= JRequest::getVar("animation");
+		$design->animation->launch->duration	= JRequest::getVar("duration");
+		$design->animation->launch->timeout		= JRequest::getVar("timeout");
 		
 		$design->install			= new StdClass();
 		$design->install->prompt	= JRequest::getVar("install_prompt");

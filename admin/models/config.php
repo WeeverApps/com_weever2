@@ -5,7 +5,7 @@
 *	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter (rob.porter@weever.ca)
-*	Version: 	2.0 alpha 1
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -85,86 +85,75 @@ class WeeverModelConfig extends JModel
 	public function saveConfig()
 	{
 		
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
+		$row 	=& JTable::getInstance( 'WeeverConfig', 'Table' );
 
-		if(JRequest::getVar('granular_devices',0))
+		if( JRequest::getVar('granular_devices', 0) )
 		{
-		
-			if(JRequest::getVar('DetectIphoneOrIpod',0))
-				$devices .= "DetectIphoneOrIpod,";
-			if(JRequest::getVar('DetectAndroid',0))
-				$devices .= "DetectAndroid,";
-			if(JRequest::getVar('DetectBlackBerryTouch',0))
-				$devices .= "DetectBlackBerryTouch,";
-			if(JRequest::getVar('DetectWebOSTablet',0))
-				$devices .= "DetectWebOSTablet,";
-			if(JRequest::getVar('DetectIpad',0))
-				$devices .= "DetectIpad,";
-			if(JRequest::getVar('DetectBlackBerryTablet',0))
-				$devices .= "DetectBlackBerryTablet,";
-			if(JRequest::getVar('DetectAndroidTablet',0))
-				$devices .= "DetectAndroidTablet,";
-			if(JRequest::getVar('DetectGoogleTV',0))
-				$devices .= "DetectGoogleTV,";
-			if(JRequest::getVar('DetectAppleTVTwo',0))
-				$devices .= "DetectAppleTVTwo,";
 				
-			$devices = rtrim($devices,",");
+			$devices 	.= JRequest::getVar('DetectIphoneOrIpod',0) 	? "DetectIphoneOrIpod," 		: "";
+			$devices 	.= JRequest::getVar('DetectAndroid',0)			? "DetectAndroid,"				: "";
+			$devices 	.= JRequest::getVar('DetectBlackBerryTouch',0)	? "DetectBlackBerryTouch,"		: "";
+			$devices 	.= JRequest::getVar('DetectIpad',0)				? "DetectIpad,"					: "";
+			$devices 	.= JRequest::getVar('DetectBlackBerryTablet',0)	? "DetectBlackBerryTablet,"		: "";
+			$devices 	.= JRequest::getVar('DetectAndroidTablet',0)	? "DetectAndroidTablet,"		: "";
+			$devices 	.= JRequest::getVar('DetectGoogleTV',0)			? "DetectGoogleTV,"				: "";
+			$devices 	.= JRequest::getVar('DetectAppleTVTwo',0)		? "DetectAppleTVTwo,"			: "";
+				
+			$devices 	= rtrim( $devices, "," );
 
-			JRequest::setVar('devices',$devices);	
+			JRequest::setVar( 'devices', $devices );	
 			
 		}
 		else
 		{
 		
-			if(JRequest::getVar('DetectTierWeeverSmartphones',0))
-				$devices .= "DetectTierWeeverSmartphones";
-			if(JRequest::getVar('DetectTierWeeverTablets',0))
-				$devices .= ",DetectTierWeeverTablets";		
+			$devices	.= JRequest::getVar('DetectTierWeeverSmartphones',0)	? "DetectTierWeeverSmartphones" : "";
+			$devices	.= JRequest::getVar('DetectTierWeeverTablets',0)		? ",DetectTierWeeverTablets"	: "";
 				
-			$devices = ltrim($devices,",");
+			$devices 	= ltrim( $devices, "," );
 				
-			JRequest::setVar('devices',$devices);	
+			JRequest::setVar( 'devices', $devices );	
 				
 		}
 		
 		/* Local settings storage */
-		for($i = 1; $i <= 15; $i++)
+		for( $i = 1; $i <= 15; $i++ )
 		{
 		
-			if($i == 2 || $i == 1 || $i == 6 || $i == 13 || $i == 14)
+			if( $i == 2 || $i == 1 || $i == 6 || $i == 13 || $i == 14 )
 				continue;
 		
 			$row->load($i); 
 			
-			if($i == 11)
-				$row->setting = JRequest::getVar($row->option,"", "post","string",JREQUEST_ALLOWHTML);
+			if( $i == 11 )
+				$row->setting 	= JRequest::getVar($row->option,"", "post","string",JREQUEST_ALLOWHTML);
+				
 			else 
-				$row->setting = JRequest::getVar($row->option);
+				$row->setting 	= JRequest::getVar($row->option);
 			
 			$row->store();
 		
 		}
 		
-		$options 	= new StdClass();
+		$options 							= new StdClass();
 
-		$options->analytics = array();
+		$options->analytics 				= array();
 		
 		$options->analytics[0] 				= new StdClass();
 		$options->analytics[0]->service 	= "google-analytics";
 		$options->analytics[0]->code 		= JRequest::getVar('google_analytics');
 		
-		$options->custom_domains			= array();
+		$options->domain					= array();
 		
 		if( JRequest::getVar('domain') )
-			$options->custom_domains[0]			= JRequest::getVar('domain');
+			$options->domain[0]				= JRequest::getVar('domain');
 			
-		$options->devices					= JRequest::getVar('devices');
-		$options->ecosystem					= JRequest::getVar('ecosystem');
+		$options->device					= JRequest::getVar('devices');
+		$options->syndication->ecosystem	= JRequest::getVar('ecosystem');
 		$options->online					= JRequest::getVar('app_enabled');
 		$options->localization				= JRequest::getVar('local');
 		
-		$response = $this->setConfig( $options );
+		$response 	= $this->setConfig( $options );
 		
 		return $response;
 	
