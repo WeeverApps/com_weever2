@@ -49,6 +49,8 @@ class WeeverModelAjax extends JModel
 	
 		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
 		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		//print_r($postdata);
 
 		$json		= json_decode( $response );
 
@@ -265,11 +267,17 @@ class WeeverModelAjax extends JModel
 			
 		$remote_query		= array(
 		
-			'online'	=> $row->setting
+			'online'		=> $row->setting,
+			'site_key' 		=> $this->key,
 		
 		);
+
+		$response = $this->makeAPICall( "config/set_online", $remote_query );
 		
-		return $this->makeAPICall( "config/set_online", $remote_query );
+		if( isset($response->success) )
+			$row->store();
+			
+		return $response;
 	
 	}
 

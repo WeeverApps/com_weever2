@@ -50,17 +50,6 @@ else
 $onlineSpan = "";
 $offlineSpan = "";
 
-if($this->appEnabled)
-{
-	$offlineSpan = 'class="wx-app-hide-status"';
-	$offlineStatusClass = "";
-}
-else 
-{
-	$onlineSpan = 'class="wx-app-hide-status"';
-	$offlineStatusClass = "class=\"wx-app-status-button-offline\"";
-}
-
 $themeDir = "http://weeverapp.com/media/themes/";
 
 if( !strstr($this->devices, 'DetectTierWeeverTablets') && !strstr($this->devices, 'DetectIpad') && !strstr($this->devices, 'DetectAndroidTablet') )

@@ -34,9 +34,9 @@ class WeeverViewAccount extends JView
 		$this->assign( 'stagingMode', comWeeverHelper::getStageStatus() );		
 		$this->assign( 'site_key', comWeeverHelper::getKey() );
 		
-		$appData = $this->get('appdata');
+		$accountData	= $this->get('accountdata');
 		
-		$this->assignRef('account',$appData);
+		$this->assignRef('account', $accountData);
 
 		comWeeverHelper::getJsStrings();
 

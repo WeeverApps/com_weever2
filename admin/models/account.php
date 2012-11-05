@@ -36,22 +36,49 @@ class WeeverModelAccount extends JModel
        parent::__construct();
        
        $this->key 	= comWeeverHelper::getKey();
-       $this->json = comWeeverHelper::getJsonAccountSync();
-       
-       $query = " SELECT `setting` FROM #__weever_config WHERE `option`='site_key' ";
-       $db = &JFactory::getDBO();
-       
-       $db->setQuery($query);
-       $key = $db->loadObject();
-       $this->setState('site_key', $key->setting);
        
 	}
-	
-	public function getAppData()
+
+	public function getAccountData()
 	{
-		
+	
+		$this->json = $this->getAccount();
+	
 		return $this->json;
 	
 	}
 	
+	
+	protected function getAccount()
+	{
+	
+		$api_endpoint 		= "account/get_account";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
+		
+			'site_key' 		=> $this->key
+		
+		);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
+
+		if( isset($json->error) && $json->error == true )
+		{
+		
+			 JError::raiseNotice(100, JText::_( "Server replied: " . $json->message ));
+			 return false;
+			 
+		}
+		
+		return $json;
+
+	}
+		
 }

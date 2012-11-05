@@ -601,7 +601,7 @@ class comWeeverHelper
 	
 	}
 	
-	
+
 	public static function sendToWeeverServerFOpen($context, $url = null)
 	{
 		

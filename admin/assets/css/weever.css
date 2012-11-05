@@ -792,7 +792,7 @@ div#wx-nav-icon-preview-wrapper img {
 
 .wx-theme-float {
 	float: left;
-	height: 355px;
+	height: 400px;
 }
 
 .wx-theme-float-line-2 {
@@ -820,7 +820,12 @@ div#wx-nav-icon-preview-wrapper img {
 }
 
 .wx-theme-fieldset {
-	height: 295px;
+	height: 330px;
+	float: left;
+}
+
+#wx-load-spinner {
+	margin-top: 75px;
 }
 
 #wx-install-text-container {

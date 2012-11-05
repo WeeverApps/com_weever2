@@ -50,7 +50,7 @@ defined('_JEXEC') or die;
 
 	<fieldset class='adminForm wx-theme-fieldset'>
 	
-		<legend><?php echo JText::_('WEEVER_THEME_CHOOSE_THEME'); ?></legend>
+		<legend><?php echo JText::_('WEEVER_DESIGN_TITLEBAR'); ?></legend>
 	
 			
 			<div class="wx-theme-titlebar-logo-container">

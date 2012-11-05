@@ -41,7 +41,7 @@ final class comWeeverConst
 	const RELEASE_DATE		= "UNRELEASED";
 	const SUPPORT_WEB		= "http://support.weeverapps.com/";
 	const LIVE_SERVER		= "http://weeverapp.com/";
-	const LIVE_STAGE		= "http://stage.weeverapp.com/";
+	const LIVE_STAGE		= "http://cetus.weeverapp.com/";
 	const API_VERSION		= "api/v2/";
 	const SUPPORTED_TYPES	= "-oldtabs--newtab-";
 	const API_DEBUG			= true;

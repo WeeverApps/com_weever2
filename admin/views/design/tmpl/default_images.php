@@ -29,7 +29,7 @@ defined('_JEXEC') or die;
 
 			<fieldset id="wx-images-fieldset">
 			
-			<legend><?php echo JText::_('WEEVER_IMAGE_SETTINGS'); ?></legend>
+			<legend><?php echo JText::_('WEEVER_DESIGN_LAUNCHSCREEN'); ?></legend>
 			
 			
 			<div class="wx-theme-screen">

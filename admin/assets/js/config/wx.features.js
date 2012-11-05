@@ -4,7 +4,7 @@
 *
 *	Author: 	Robert Gerald Porter <rob@weeverapps.com>
 				Aaron Song	<aaron@weeverapps.com>
-*	Version: 	2.0 alpha 0
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -312,7 +312,7 @@ wx.features = [
 				id:				'user',
 				name:			'Twitter User',
 				defaultTitle:	'On Twitter',
-				content:		'twitter',
+				content:		'twitterUser',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
 				layouts:		'list',
@@ -388,6 +388,102 @@ wx.features = [
 		
 		]
 	
-	}
+	},
+	{
+	
+		vertical:		'all',
+		id:				'foursquare',
+		name:			'Foursquare',
+		defaultTitle:	'Foursquare Photos',
+		url:			'http://foursquare.com/',
+		description:	'<p>Foursquare is a location-based social networking website for mobile devices. Users "check-in" at venues by selecting from a list of venues the app locates nearby. Each check-in awards the user points and sometimes "badges".</p>' +
+		
+			'<p>With Weever Apps, you can add a real-time photo stream for a Foursquare location.'+
+			
+			'<ul>'+
+			
+				    '<li>Add a real-time stream of user-generated Foursquare Venue Photos to your mobile app.</li>'+
+				    '<li>Albums display in a swipe-to-see-next photo stream</li>'+
+				    '<li>Double-tap to display photos at full-screen size</li>'+
+				
+			
+			'</ul>',
+		items:			[{
+		
+			id:				'photos',
+			name:			'Foursquare Photos',
+			content:		'foursquarePhotos',
+			title:			true,
+			types:			['oldtabs', 'newtab'],
+			layouts:		'carousel',
+			icon_id:		25,
+			config:			{
+			
+				venue_id:		':component_behaviour',
+				group:			'venue'
+			
+			},
+			fields:			{
+			
+				component_behaviour:	'#wx-foursquare-photo-url'
+			
+			},
+			defaultValue:	{
+			
+				component_behaviour:	'https://foursquare.com/v/'
+			
+			}
+		
+		},{
+		
+			id:				'tips',
+			name:			'Foursquare Tips',
+			content:		'foursquareTips',
+			title:			true,
+			types:			['oldtabs', 'newtab'],
+			layouts:		'list',
+			icon_id:		25,
+			config:			{
+			
+				venue_id:		':component_behaviour',
+				group:			'venue'
+			
+			},
+			fields:			{
+			
+				component_behaviour:	'#wx-foursquare-tips-url'
+			
+			},
+			defaultValue:	{
+			
+				component_behaviour:	'https://foursquare.com/v/'
+			
+			}
+		
+		}]
+	
+	},
+	{
+	
+		id:				'blogger',
+		name:			'Blogger',
+		content:		'blogger',
+		title:			true,
+		defaultTitle:	'My Blog',
+		types:			['oldtabs', 'newtab'],
+		layouts:		'list',
+		icon_id:		6,
+		config:			{
+		
+			blog_url:	':cms_feed'
+		
+		},
+		fields:			{
+		
+			cms_feed: 	'#wx-add-blog-blogger-url-input'
+		
+		}
+	
+	},
 
 ];

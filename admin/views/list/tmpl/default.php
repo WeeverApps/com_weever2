@@ -46,21 +46,6 @@ $tabsUnpublished 	= 0;
 $onlineSpan 		= "";
 $offlineSpan 		= "";
 
-if($this->appEnabled)
-{
-
-	$offlineSpan = 'class="wx-app-hide-status"';
-	$offlineStatusClass = "";
-	
-}
-else 
-{
-
-	$onlineSpan = 'class="wx-app-hide-status"';
-	$offlineStatusClass = "class=\"wx-app-status-button-offline\"";
-	
-}
-
 echo $this->loadTemplate('banner');
 
 ?>	

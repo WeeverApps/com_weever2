@@ -76,8 +76,6 @@ class WeeverController extends JController
 	
 		$result = $model->saveTabName( JRequest::getVar("name"), JRequest::getVar("id") );
 	
-		//$result = comWeeverHelper::pushTabNameToCloud();
-		
 		if( $result->success )
 			echo "Tab Changes Saved";
 		
@@ -92,8 +90,6 @@ class WeeverController extends JController
 	
 		$result = $model->saveTabItemName( JRequest::getVar("name"), JRequest::getVar("id") );
 	
-		//$result = comWeeverHelper::pushTabNameToCloud();
-		
 		if( $result->success )
 			echo "Tab Changes Saved";
 		
@@ -108,9 +104,7 @@ class WeeverController extends JController
 		$model = $this->getModel('ajax');
 	
 		$result = $model->deleteTab( JRequest::getVar("id") );
-	
-		//$result = comWeeverHelper::pushTabNameToCloud();
-		
+
 		if( $result->success )
 			echo "Item Deleted";
 		
@@ -146,8 +140,6 @@ class WeeverController extends JController
 	
 		$jsonResult = comWeeverHelper::pushTabIconToCloud();
 
-		//comWeeverHelper::saveThemeJson($jsonResult);
-	
 		echo "Icon Saved";
 		
 		jexit();
@@ -171,7 +163,15 @@ class WeeverController extends JController
 	public function ajaxToggleAppStatus()
 	{
 	
-		$response = comWeeverHelper::toggleAppStatus();
+		$model = $this->getModel('ajax');
+		
+		if( JRequest::getVar("app_enabled") == 1 )
+			$r_str	= "App Online";
+		else 
+			$r_str	= "App Offline";
+	
+		$result		= $model->saveAppStatus();
+		$response 	= isset( $result->success ) 	? $r_str 	: "Server Error Occurred";
 		
 		echo $response;
 		
@@ -182,7 +182,7 @@ class WeeverController extends JController
 	public function ajaxUpdateTabSettings()
 	{
 	
-		$response = comWeeverHelper::updateTabSettings();
+		//$response = comWeeverHelper::updateTabSettings();
 		
 		echo $response;
 		

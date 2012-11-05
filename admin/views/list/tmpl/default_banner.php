@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -26,6 +26,22 @@ if(comWeeverHelper::isWebKit())
 	$dashWebKit = "-webkit";
 else 
 	$dashWebKit = "";
+	
+if($this->appEnabled)
+{
+
+	$offlineSpan = 'class="wx-app-hide-status"';
+	$offlineStatusClass = "";
+	
+}
+else 
+{
+
+	$onlineSpan = 'class="wx-app-hide-status"';
+	$offlineStatusClass = "class=\"wx-app-status-button-offline\"";
+	
+}
+
 
 ?>
 

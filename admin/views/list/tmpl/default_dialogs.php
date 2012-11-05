@@ -487,12 +487,23 @@ $note = "";
 </div>
 
 
-<div id="wx-add-foursquare-dialog" class="wx-jquery-dialog wx-hide wx-service-foursquare wx-choose-content">
+<div id="wx-add-foursquare-photos-dialog" class="wx-jquery-dialog wx-hide wx-service-foursquare wx-choose-content">
 
 	<div>
 		
 		<input type='text' value='' placeholder='http://foursquare.com/v/your-venue/abcd123456' id='wx-foursquare-photo-url' class='wx-dialog-input wx-photo-input' name='url' />
 		<label for='wx-foursquare-photo-url' id='wx-foursquare-url' class='wx-photo-label wx-jqui-label'><?php echo JText::_('WEEVER_FOURSQUARE_URL'); ?></label>
+				
+	</div>
+
+</div>
+
+<div id="wx-add-foursquare-tips-dialog" class="wx-jquery-dialog wx-hide wx-service-foursquare wx-choose-content">
+
+	<div>
+		
+		<input type='text' value='' placeholder='http://foursquare.com/v/your-venue/abcd123456' id='wx-foursquare-tips-url' class='wx-dialog-input wx-photo-input' name='url' />
+		<label for='wx-foursquare-tips-url' id='wx-foursquare-url' class='wx-photo-label wx-jqui-label'><?php echo JText::_('WEEVER_FOURSQUARE_URL'); ?></label>
 				
 	</div>
 

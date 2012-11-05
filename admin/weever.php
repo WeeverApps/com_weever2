@@ -52,6 +52,8 @@ $staging 		= $row->setting;
 
 comWeeverHelperJS::loadConfJS($staging);
 
+$document 			=& JFactory::getDocument();
+
 if($staging)
 {
 
@@ -64,8 +66,6 @@ else
 	$weeverIcon = "weever_toolbar_title";
 
 /* Load our Javascripts */
-
-$document 			=& JFactory::getDocument();
 
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery.js?v='.comWeeverConst::VERSION );
 $document->addCustomTag ('<script type="text/javascript">jQuery.noConflict();</script>');

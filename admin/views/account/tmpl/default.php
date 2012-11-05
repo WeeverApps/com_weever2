@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	1.9
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -68,12 +68,12 @@ else
 
 ?>
 
-<?php if(@$this->account->tier_number == 1) : ?>
+<?php if($this->account->tier == "BASIC") : ?>
 	<div class="wx-promotion-basic<?php echo $dashWebKit; ?>">
 	<span class="wx-promotion-basic-title"><?php echo JText::_('WEEVER_PREMIUM_PROMOTION'); ?></span>
 	<span class="wx-promotion-basic-link"><?php echo JText::_('WEEVER_PREMIUM_PROMOTION_LEARN_MORE'); ?></span></div>
 
-<?php elseif(@$this->account->tier_number == 2.1) : ?>
+<?php elseif($this->account->tier == "TRIAL") : ?>
 	<span class="wx-promotion-trial<?php echo $dashWebKit; ?>"><a href="http://weeverapps.com/pricing" class="wx-promotion-trial-button" id="headerbutton"><?php echo JText::_('WEEVER_PREMIUM_UPGRADE_BUTTON'); ?></a><?php echo JText::_('WEEVER_PREMIUM_UPGRADE_CALL'); ?><br><span class="wx-promotion-trial-byline"><?php echo JText::_('WEEVER_PREMIUM_UPGRADE_BYLINE'); ?></span></span>
 	
 <?php endif; ?>
@@ -137,15 +137,15 @@ else
 	</tr>
 	
 	<tr><td class="key"><?php echo JText::_('WEEVER_PRIMARY_DOMAIN'); ?></td>
-	<td><?php echo JText::_("WEEVER_THIS_KEY_IS_LINKED_TO_THE_DOMAIN"); ?><b><?php echo @$this->account->site; ?></b>.</td>
+	<td><?php echo JText::_("WEEVER_THIS_KEY_IS_LINKED_TO_THE_DOMAIN"); ?><b><?php echo $this->account->site; ?></b>.</td>
 	</tr>
 	
 	<tr><td class="key"><?php echo JText::_('WEEVER_ACCOUNT_TIER'); ?></td>
-	<td><b><?php echo @$this->account->tier; ?></b></td>
+	<td><b><?php echo $this->account->tier; ?></b></td>
 	</tr>
 	
 	<tr><td class="key"><?php echo JText::_('WEEVER_ACCOUNT_EXPIRY'); ?></td>
-	<td><?php echo @$this->account->expiry; ?>.</td>
+	<td><?php echo $this->account->expiry; ?>.</td>
 	</tr>
 	
 	</table>

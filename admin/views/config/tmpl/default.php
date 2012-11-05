@@ -222,8 +222,7 @@ else
 		
 		<tr><th>&nbsp;</th>
 		<th><?php echo JText::_('WEEVER_CONFIG_FORWARING'); ?></th>
-		<th><?php echo JText::_('WEEVER_CONFIG_RECOMMENDED'); ?></th>
-		<th><?php echo JText::_('WEEVER_CONFIG_COMPATIBILITY_GRADE'); ?></th></tr>
+		</tr>
 		
 
 		
@@ -234,8 +233,6 @@ else
 		<option value="1" <?php echo $this->DetectIphoneOrIpod; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
 		</select>
 		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_APPLE_IPOD_IPHONE_GRADE'); ?></td>
 		</tr>
 		
 		<tr><td class="key"><?php echo JText::_('WEEVER_CONFIG_GOOGLE_ANDROID'); ?></td>
@@ -245,8 +242,6 @@ else
 		<option value="1" <?php echo $this->DetectAndroid; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
 		</select>
 		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_GOOGLE_ANDROID_GRADE'); ?></td>
 		</tr>
 		
 		<tr><td class="key"><?php echo JText::_('WEEVER_CONFIG_BLACKBERRY_SIX_TOUCH'); ?></td>
@@ -256,8 +251,6 @@ else
 		<option value="1" <?php echo $this->DetectBlackBerryTouch; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
 		</select>
 		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_BLACKBERRY_SIX_TOUCH_GRADE'); ?></td>
 		</tr>
 		
 		<tr><td class="key"><?php echo JText::_('WEEVER_CONFIG_BLACKBERRY_PLAYBOOK'); ?></td>
@@ -267,8 +260,6 @@ else
 		<option value="1" <?php echo $this->DetectBlackBerryTablet; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
 		</select>
 		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_BLACKBERRY_PLAYBOOK_GRADE'); ?></td>
 		</tr>
 		
 		
@@ -279,8 +270,6 @@ else
 		<option value="1" <?php echo $this->DetectIpad; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
 		</select>
 		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_APPLE_IPAD_GRADE'); ?></td>
 		</tr>
 		
 		
@@ -291,8 +280,6 @@ else
 		<option value="1" <?php echo $this->DetectAndroidTablet; ?>><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></option>
 		</select>
 		</td>
-		<td><?php echo JText::_('WEEVER_CONFIG_ENABLED'); ?></td>
-		<td><?php echo JText::_('WEEVER_CONFIG_GOOGLE_ANDROID_TABLETS_GRADE'); ?></td>
 		</tr>
 
 		</table>
