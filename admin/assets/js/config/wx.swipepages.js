@@ -41,8 +41,7 @@ wx.swipePages = [
 			'easyblog.blog',
 			'easyblog.category',
 			'easyblog.item',
-			'easyblog.tag',
-			'virtuemart'
+			'easyblog.tag'
 		
 		]	
 	
@@ -57,10 +56,7 @@ wx.swipePages = [
 		
 			'twitter',
 			'facebook',
-			'blogger',
-			'identica',
-			'google_plus',
-			'tumblr'
+			'blogger'
 		
 		]	
 	
@@ -77,8 +73,8 @@ wx.swipePages = [
 			'vimeo',
 			'foursquare',
 			'facebook',
-			'soundcloud',
-			'bandcamp'
+			'bitsontherun',
+			'ustream'
 		
 		]
 	
@@ -91,9 +87,7 @@ wx.swipePages = [
 		
 			'google_calendar',
 			'wufoo',
-			'facebook',
-			'r3s',
-			'suggestion'
+			'facebook'
 		
 		]
 	

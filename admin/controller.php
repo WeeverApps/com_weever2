@@ -194,6 +194,13 @@ class WeeverController extends JController
 	{
 	
 		$model = $this->getModel('ajax');
+		
+		if(  JRequest::getVar("content") == "contact" ) {
+				
+			$type_method = "_buildContactFeedURL";
+			comWeeverHelper::$type_method();
+			
+		}
 	
 		$result = $model->saveNewTab( 
 		
@@ -203,7 +210,8 @@ class WeeverController extends JController
 			JRequest::getVar("layout"), 
 			JRequest::getVar("icon_id"), 
 			JRequest::getVar("published"),
-			JRequest::getVar("parent_id")
+			JRequest::getVar("parent_id"),
+			JRequest::getVar("config_cache")
 			
 		);
 

@@ -417,17 +417,39 @@ $note = "";
 </div>
 
 
-<div id="wx-add-facebook-dialog" class="wx-jquery-dialog wx-hide wx-service-facebook wx-choose-content">
+<div id="wx-add-facebook-albums-dialog" class="wx-jquery-dialog wx-hide wx-service-facebook wx-choose-content">
 
 	<div>
 
-		<input type='text' value='' class='wx-dialog-input wx-social-input' id='wx-facebook-user-value' name='component_behaviour' placeholder='http://facebook.com/MyPage' />
-		<label for='wx-facebook-stream-value' id='wx-facebook-url' class='wx-social-label  wx-jqui-label'><?php echo JText::_('WEEVER_FACEBOOK_URL'); ?></label>
+		<input type='text' value='' class='wx-dialog-input wx-social-input' id='wx-facebook-albums-value' name='component_behaviour' placeholder='http://facebook.com/MyPage' />
+		<label for='wx-facebook-albums-value' id='wx-facebook-url' class='wx-social-label  wx-jqui-label'><?php echo JText::_('WEEVER_FACEBOOK_URL'); ?></label>
 		
 	</div>
 
 </div>
 
+
+<div id="wx-add-facebook-statuses-dialog" class="wx-jquery-dialog wx-hide wx-service-facebook wx-choose-content">
+
+	<div>
+
+		<input type='text' value='' class='wx-dialog-input wx-social-input' id='wx-facebook-statuses-value' name='component_behaviour' placeholder='http://facebook.com/MyPage' />
+		<label for='wx-facebook-statuses-value' id='wx-facebook-url' class='wx-social-label  wx-jqui-label'><?php echo JText::_('WEEVER_FACEBOOK_URL'); ?></label>
+		
+	</div>
+
+</div>
+
+<div id="wx-add-facebook-events-dialog" class="wx-jquery-dialog wx-hide wx-service-facebook wx-choose-content">
+
+	<div>
+
+		<input type='text' value='' class='wx-dialog-input wx-social-input' id='wx-facebook-events-value' name='component_behaviour' placeholder='http://facebook.com/MyPage' />
+		<label for='wx-facebook-events-value' id='wx-facebook-url' class='wx-social-label  wx-jqui-label'><?php echo JText::_('WEEVER_FACEBOOK_URL'); ?></label>
+		
+	</div>
+
+</div>
 
 <div id="wx-add-youtube-channel-dialog" class="wx-jquery-dialog wx-hide wx-service-youtube wx-choose-content">
 
@@ -458,6 +480,35 @@ $note = "";
 </div>
 
 
+<div id="wx-add-ustream-uservideos-dialog" class="wx-jquery-dialog wx-hide wx-service-ustream wx-choose-content">
+
+	<div>
+		
+		
+		<input type='text' value='' name='component_behaviour' id='wx-ustream-uservideos-url' class='wx-dialog-input wx-video-input' placeholder='MyChannelName' />
+		<label for='wx-ustream-uservideos-url' id='wx-ustream-uservideos-url' class='wx-video-label wx-jqui-label'><?php echo JText::_('WEEVER_USTREAM_URL'); ?></label>
+				
+				
+	</div>
+
+</div>
+
+
+
+<div id="wx-add-ustream-userchannels-dialog" class="wx-jquery-dialog wx-hide wx-service-ustream wx-choose-content">
+
+	<div>
+		
+		
+		<input type='text' value='' placeholder='http://ustream.tv/user/myname' name='component_behaviour' id='wx-ustream-userchannels-url' class='wx-dialog-input wx-video-input' />
+		<label for='wx-ustream-userchannels-url' id='wx-ustream-userchannels-url-label' class='wx-video-label wx-jqui-label'><?php echo JText::_('WEEVER_USTREAM_URL'); ?></label>
+				
+				
+	</div>
+
+</div>
+
+
 <div id="wx-add-vimeo-dialog" class="wx-jquery-dialog wx-hide wx-service-vimeo wx-choose-content">
 
 	<div>
@@ -470,6 +521,22 @@ $note = "";
 	</div>
 
 </div>
+
+
+<div id="wx-add-bitsontherun-dialog" class="wx-jquery-dialog wx-hide wx-service-bitsontherun wx-choose-content">
+
+	<div>
+		
+		
+		<input type='text' value='' placeholder='Playlist URL' name='component_behaviour' id='wx-bitsontherun-playlist-url' class='wx-dialog-input wx-video-input' />
+		<label for='wx-bitsontherun-playlist-url' id='wx-bitsontherun-url' class='wx-video-label wx-jqui-label'><?php echo JText::_('WEEVER_BOTR_URL'); ?></label>
+				
+				
+	</div>
+
+</div>
+
+
 
 
 <div id="wx-add-wufoo-dialog" class="wx-jquery-dialog wx-hide wx-service-wufoo wx-choose-content">
@@ -510,12 +577,23 @@ $note = "";
 </div>
 
 
-<div id="wx-add-picasa-dialog" class="wx-jquery-dialog wx-hide wx-service-picasa wx-choose-content">
+<div id="wx-add-picasa-albumphotos-dialog" class="wx-jquery-dialog wx-hide wx-service-picasa wx-choose-content">
 
 	<div>
 		
-		<input type='text' value='' placeholder='your.email@gmail.com' id='wx-picasa-photo-url' class='wx-dialog-input wx-photo-input' name='url' />
-		<label for='wx-picasa-photo-url' id='wx-google-picasa-email' class='wx-photo-label wx-jqui-label'><?php echo JText::_('WEEVER_GOOGLE_PICASA_EMAIL'); ?></label>
+		<input type='text' value='' placeholder='your.email@gmail.com' id='wx-picasa-albumphotos-url' class='wx-dialog-input wx-photo-input' name='url' />
+		<label for='wx-picasa-albumphotos-url' id='wx-google-picasa-email' class='wx-photo-label wx-jqui-label'><?php echo JText::_('WEEVER_GOOGLE_PICASA_EMAIL'); ?></label>
+				
+	</div>
+
+</div>
+
+<div id="wx-add-picasa-albums-dialog" class="wx-jquery-dialog wx-hide wx-service-picasa wx-choose-content">
+
+	<div>
+		
+		<input type='text' value='' placeholder='your.email@gmail.com' id='wx-picasa-albums-url' class='wx-dialog-input wx-photo-input' name='url' />
+		<label for='wx-picasa-albums-url' id='wx-google-picasa-email' class='wx-photo-label wx-jqui-label'><?php echo JText::_('WEEVER_GOOGLE_PICASA_EMAIL'); ?></label>
 				
 	</div>
 
@@ -605,6 +683,20 @@ $note = "";
 	</div>
 
 </div>
+
+
+<div id="wx-add-flickr-galleries-dialog" class="wx-jquery-dialog wx-hide wx-service-flickr wx-choose-content">
+
+	<div>
+		
+		
+		<input type='text' value='' placeholder='http://flickr.com/photos/123456@N01' id='wx-flickr-galleries-photo-url' class='wx-dialog-input wx-photo-input' name='url' />
+		<label for='wx-flickr-galleries-photo-url' id='wx-flickr-galleries-url' class='wx-photo-label wx-jqui-label'><?php echo JText::_('WEEVER_FLICKR_URL'); ?></label>
+				
+	</div>
+
+</div>
+
 
 
 <div id="wx-add-soundcloud-set-dialog" class="wx-jquery-dialog wx-hide wx-service-soundcloud wx-choose-content">

@@ -232,7 +232,7 @@ class WeeverModelAjax extends JModel
 	}
 	
 	
-	public function saveNewTab( $config, $title, $content, $layout, $icon_id, $published, $parent_id ) 
+	public function saveNewTab( $config, $title, $content, $layout, $icon_id, $published, $parent_id, $config_cache ) 
 	{
 
 		$remote_query 		= array( 	
@@ -244,7 +244,8 @@ class WeeverModelAjax extends JModel
 			'layout'		=> $layout,
 			'icon_id'		=> $icon_id,
 			'published'		=> $published,
-			'parent_id'		=> $parent_id
+			'parent_id'		=> $parent_id,
+			'config_cache'	=> $config_cache
 		
 		);
 		

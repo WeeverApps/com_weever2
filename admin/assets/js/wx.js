@@ -409,6 +409,13 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		
 			checkboxOptions 	+= " in the tab \"" + wx.types[ serviceTypes[0] ].name + "\".</p>";	
 			
+		}
+		else
+		{
+		
+			var checked, label, disabled, tabList = [], tabDropdown,
+				extraClass		= '';
+				
 			if( featureData.options ) {
 			
 				for( var i in featureData.options ) {
@@ -424,13 +431,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 				}			
 			
 			}
-		
-		}
-		else
-		{
-		
-			var checked, label, disabled, tabList = [], tabDropdown,
-				extraClass		= '';
+			
 				
 			tabDropdown = "<select id='wxSelectOldTab'>";
 			

@@ -764,22 +764,22 @@ class comWeeverHelper
 	public static function _buildContactFeedURL() 
 	{
 	
-		$service = JRequest::getVar('component_id');
+		$config 	= JRequest::getVar('config');
+		$id 		= json_decode($config)->component_id;
 
 		if(JRequest::getVar('weever_action') == 'add')
 		{
-			
-			$type = JRequest::getVar('component_behaviour');
-			
-			$query = 	
+
+			$query 	= 	
 				"SELECT #__contact_details.* ".
 				"FROM #__contact_details ".
-				"WHERE #__contact_details.id = '".JRequest::getVar('component_id')."' ";
+				"WHERE #__contact_details.id = '".$id."' ";
 			
-			$db = &JFactory::getDBO();
+			$db		= &JFactory::getDBO();
 			
 			$db->setQuery($query);
-			$contact = $db->loadObject();
+			
+			$contact 	= $db->loadObject();
 			
 			$json = new StdClass();
 			
@@ -795,10 +795,11 @@ class comWeeverHelper
 			
 			if(substr($joomla,0,3) == '1.5')
 				$json->image = "images/stories/".$contact->image;
+				
 			else 
 				$json->image = $contact->image;
 				
-			$json->misc 			= $contact->misc;
+			$json->misc 	= $contact->misc;
 			
 			// destringify our options
 			
@@ -809,10 +810,15 @@ class comWeeverHelper
 			
 			if($json->emailform == "0")
 				$json->emailform = 0;
+				
+			$contacts				= array();
+			$contacts[] 			= $json;
+			$json_result			= new stdClass();
+			$json_result->contacts	= $contacts;
+			$json_result 			= json_encode($json_result);
 			
-			$json = json_encode($json);
-			
-			JRequest::setVar('var', $json);
+			JRequest::setVar('config_cache', $json_result);
+			JRequest::setVar('config', null);
 			
 		}
 		
