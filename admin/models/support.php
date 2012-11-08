@@ -24,7 +24,14 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
 
-class WeeverModelSupport extends JModel
+if( !class_exists("JModelLegacy") ) 
+{
+
+	class JModelLegacy extends JModel{};
+	
+}
+
+class WeeverModelSupport extends JModelLegacy
 {
 
 	public 	$json = null;
@@ -33,8 +40,6 @@ class WeeverModelSupport extends JModel
 	{
        
        parent::__construct();
-       
-       $this->json = comWeeverHelper::getJsonAccountSync();
        
        $query = " SELECT `setting` FROM #__weever_config WHERE `option`='site_key' ";
        $db = &JFactory::getDBO();

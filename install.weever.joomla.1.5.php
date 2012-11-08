@@ -24,7 +24,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.installer.installer');
 
-$release = "2.0";
+$release = "2.0 Beta 1";
 
 $detailsTemplate = null; $cartographerId = null; $cartographerK2Id = null; $mobileespId = null;
 
@@ -40,7 +40,7 @@ $check = $db->loadResultArray();
 echo "
 		<div style='clear:both'>
 		
-				<img src='components/com_weever/assets/icons/icon-48-weever_toolbar_title.png' style='float:left;padding-right:2em' />
+				<img src='components/com_weever/assets/icons/icon-48-weever_toolbar_title.png' style='float:left;padding-right:2em;height:6em' /><br />
 				<h1 style='padding-top:0.625em;padding-bottom:1em;'>Weever Apps for Joomla version ". $release ."</h1>
 				
 		</div>
@@ -244,9 +244,6 @@ else
 		<tr>
 		<td><input type="text" name="site_key" maxlength="42" style="width:250px;" placeholder="<?php JText::_("WEEVER_PASTE_WEEVER_SITE_KEY_HERE"); ?>" value="" /><input type="submit" value="<?php echo JText::_("WEEVER_INSTALL_SUBMIT_KEY"); ?>" /><p></p></td>
 		</tr>	
-	
-		<tr>
-		<td><input type="checkbox" name="staging" value="1" id="checkStaging" /> <label for="checkStaging"><?php echo JText::_("WEEVER_INSTALL_STAGING_MODE"); ?></label></td></tr>
 	
 
 	</table>

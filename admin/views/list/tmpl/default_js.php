@@ -22,12 +22,14 @@
 
 defined('_JEXEC') or die;
 
-$document 		= &JFactory::getDocument();
+$document 		= JFactory::getDocument();
 
 if(comWeeverHelper::joomlaVersion() == '1.5')  // ### 1.5 only
 	$js_close = "document.getElementById('sbox-window').close();";
 else 
 	$js_close = "window.parent.SqueezeBox.close();";
+	
+$extraScript = "";
 	
 if( !comWeeverHelper::componentExists("com_k2") )
 	$extraScript .= "var wxComK2	= false;";

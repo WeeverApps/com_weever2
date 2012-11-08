@@ -92,7 +92,7 @@ wx.swipePages = [
 	},
 	{
 	
-		helpHtml:	'<div id="wxnavtip-alltabs" class="wx_box info wxblk"><h2 class="navtip-title">...and Done!<span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> </span></h2><p class="wxnavtip-description">Easy, eh?  Well, we certainly hope so!  &#x263A; &nbsp; Here are all the <strong>&ldquo;tab-types&rdquo;</strong> we support (tabs are those little icon-buttons at the bottom of the app). Pick from the icons below to add a new feature to that tab &ndash; or just use the slides again if you like that better.<br/><br/>All set with features? Great! &nbsp;<a style="color:#2B6181;" class="wxreverse-decor" href="index.php?option=com_weever&view=theme&task=theme">Now let\'s make this app look fantastic</a>!</p></div>',		
+		helpHtml:	'<div id="wxnavtip-alltabs" class="wx_box info wxblk"><h2 class="navtip-title">...and Done!<span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> </span></h2><p class="wxnavtip-description">Easy, eh?  Well, we certainly hope so!  &#x263A; &nbsp; <br/><br/>All set with features? Great! &nbsp;<a style="color:#2B6181;" class="wxreverse-decor" href="index.php?option=com_weever&view=theme&task=theme">Now let\'s make this app look fantastic</a>!</p></div>',		
 		
 		
 		items:		[

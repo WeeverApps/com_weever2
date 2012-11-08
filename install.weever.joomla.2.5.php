@@ -38,11 +38,11 @@ class com_WeeverInstallerScript
 		$parent 			= $parent->getParent();	
 		$this->src 			= $parent->getPath("source");
 		$this->installer 	= new JInstaller();
-		$lang 				= &JFactory::getLanguage();
+		$lang 				= JFactory::getLanguage();
 		
 		$lang->load("com_weever");
 		
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		
 		$this->installPackagedExtensions($manifest);
 			
@@ -94,10 +94,6 @@ class com_WeeverInstallerScript
 						<tr>
 							<td><input type="text" name="site_key" maxlength="42" style="width:250px;" placeholder="Paste your Site Key here" value="" /><input type="submit" value="<?php echo JText::_("WEEVER_INSTALL_SUBMIT_KEY"); ?>" /> </td>
 						</tr>	
-					
-						<tr>
-							<td><input type="checkbox" name="staging" value="1" id="checkStaging" style="float: left;" /> <label for="checkStaging"><?php echo JText::_("WEEVER_INSTALL_STAGING_MODE"); ?></label></td>
-						</tr>
 				
 					</table>
 				
@@ -126,7 +122,7 @@ class com_WeeverInstallerScript
 		$output = "
 				<div style='clear:both'>
 				
-						<img src='components/com_weever/assets/icons/icon-48-weever_toolbar_title.png' style='float:left;padding-right:2em' />
+						<img src='components/com_weever/assets/icons/icon-48-weever_toolbar_title.png' style='float:left;padding-right:2em;height:6em' /><br />
 						<h1 style='padding-top:0.625em;padding-bottom:1em;'>Weever Apps for Joomla version ". $manifest->version ."</h1>
 						
 				</div>
@@ -245,7 +241,7 @@ class com_WeeverInstallerScript
 	protected function enablePlugin($ext, $type = 'plugin')
 	{
 	   
-	   	$db = &JFactory::getDBO();
+	   	$db = JFactory::getDBO();
 	   	
 	   	$query = "UPDATE #__extensions ".
 	   			"SET 	".$db->nameQuote('enabled')	." = 1 ".
@@ -263,7 +259,7 @@ class com_WeeverInstallerScript
 	protected function getExtensionId($type, $name, $group='')
 	{
 	
-	   	$db = &JFactory::getDBO();
+	   	$db = JFactory::getDBO();
 	
 		if($type=='plugin')
 		{
@@ -306,7 +302,7 @@ class com_WeeverInstallerScript
 		$parent = $parent->getParent();
 		$source = $parent->getPath("source");
 		
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		$lang->load("com_weever");
 		
 		$uninstaller = new JInstaller();
@@ -357,11 +353,11 @@ class com_WeeverInstallerScript
 	public function update($parent) 
 	{
 	
-			$manifest 			= $parent->get("manifest");
-			$parent 			= $parent->getParent();	
-			$this->src 			= $parent->getPath("source");
+		$manifest 			= $parent->get("manifest");
+		$parent 			= $parent->getParent();	
+		$this->src 			= $parent->getPath("source");
 		$this->installer 	= new JInstaller();
-		$lang 				= &JFactory::getLanguage();
+		$lang 				= JFactory::getLanguage();
 		
 		$lang->load("com_weever");
 	
@@ -388,14 +384,14 @@ class com_WeeverInstallerScript
 		}		
 		
 		$query = " SELECT `setting` FROM #__weever_config WHERE `option`='site_key' ";
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		
 		$db->setQuery($query);
 		$key = @$db->loadObject();
 		
 		$query = " SELECT `setting` FROM #__weever_config WHERE `option`='loadspinner' ";
 		
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		
 		$db->setQuery($query);
 		$code = @$db->loadObject();
@@ -404,18 +400,18 @@ class com_WeeverInstallerScript
 		{
 		
 			$query = " INSERT IGNORE INTO `#__weever_config` VALUES(9, 'google_analytics', ''); ";
-			$db = &JFactory::getDBO();
+			$db = JFactory::getDBO();
 			$db->setQuery($query);
 			@$db->query();
 			
 		
 			$query = " INSERT IGNORE INTO `#__weever_config` VALUES(10, 'domain', ''); ";
-			$db = &JFactory::getDBO();
+			$db = JFactory::getDBO();
 			$db->setQuery($query);	
 			@$db->query();
 		
 			$query = " INSERT IGNORE INTO `#__weever_config` VALUES(11, 'loadspinner', ''); ";
-			$db = &JFactory::getDBO();
+			$db = JFactory::getDBO();
 			$db->setQuery($query);
 			@$db->query();
 		

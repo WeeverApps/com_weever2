@@ -24,7 +24,14 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
 
-class WeeverModelDesign extends JModel
+if( !class_exists("JModelLegacy") ) 
+{
+
+	class JModelLegacy extends JModel{};
+	
+}
+
+class WeeverModelDesign extends JModelLegacy
 {
 
 	public 		$json = null;

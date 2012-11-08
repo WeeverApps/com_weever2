@@ -46,13 +46,13 @@ jimport('joomla.plugin.helper');
 
 /* Find out if we're in staging mode */
 
-$row 			=& JTable::getInstance('WeeverConfig', 'Table');
+$row 			= JTable::getInstance('WeeverConfig', 'Table');
 $row->load(7); 
 $staging 		= $row->setting;
 
 comWeeverHelperJS::loadConfJS($staging);
 
-$document 			=& JFactory::getDocument();
+$document 			= JFactory::getDocument();
 
 if($staging)
 {

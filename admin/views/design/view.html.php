@@ -24,7 +24,14 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
-class WeeverViewDesign extends JView
+if( !class_exists("JViewLegacy") ) 
+{
+
+	class JViewLegacy extends JView{};
+	
+}
+
+class WeeverViewDesign extends JViewLegacy
 {
 
 	public function display($tpl = null)
@@ -33,8 +40,20 @@ class WeeverViewDesign extends JView
 		$this->assign('appEnabled', 	comWeeverHelper::getAppStatus() );
 		$this->assign('devices', 		comWeeverHelper::getDeviceSettings() );
 		$this->assign('site_key', 		comWeeverHelper::getKey() );
+		
+		$design		= $this->get('designdata');
 
-		$this->assignRef('design', 		$this->get('designdata')->design );
+		if( comWeeverHelper::getKey() )
+			$this->assignRef('design', 		$design->design );
+		
+		else
+		{
+			
+			echo "<div style='font-size: 1.5em;'>You need to <a href='index.php?option=com_weever&view=account'>enter a valid app key</a> to use appBuilder.</div>";
+			
+			return;
+			
+		}
 		
 		if( JRequest::getVar("wxDesignDump") )
 			var_dump( $this->get('designdata') );

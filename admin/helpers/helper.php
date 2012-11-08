@@ -138,7 +138,7 @@ class comWeeverHelper
 	public static function getSetting($id)
 	{
 	
-		$row =& JTable::getInstance('WeeverConfig', 'Table');
+		$row = JTable::getInstance('WeeverConfig', 'Table');
 		$row->load($id);
 		
 		return $row->setting;
@@ -451,7 +451,7 @@ class comWeeverHelper
 	
 		$site_key = JRequest::getVar('site_key','');
 		
-		$db = &JFactory::getDBO();		
+		$db = JFactory::getDBO();		
 
 		$query = "		UPDATE	#__weever_config".
 				"		SET		`setting` = ".$db->Quote($site_key)." ".
@@ -459,49 +459,34 @@ class comWeeverHelper
 		
 		$db->setQuery($query);
 		$db->loadObject();
+		
+		$api_endpoint 		= "account/get_account";
+		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
+		$stage_url 			= '';
+		$remote_query 		= array( 	
+		
+			'app_key' 		=> $site_key
+		
+		);
+		
+		if( comWeeverHelper::getStageStatus() )
+			$remote_url = comWeeverConst::LIVE_STAGE . comWeeverConst::API_VERSION . $api_endpoint;
+	
+		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
+		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
+		
+		$json		= json_decode( $response );
+		
+		$row 		= JTable::getInstance('WeeverConfig', 'Table');
+		
+		$row->load(4);
+		$row->setting = $json->account->site;
+		
+		$row->setting = rtrim( str_replace( "http://", "", $row->setting ), "/" );
+		
+		$row->store();
 
 	}	
-	
-
-	public static function getJsonAccountSync()
-	{
-		
-		if(self::getStageStatus())
-		{
-			$weeverServer = comWeeverConst::LIVE_STAGE;
-			$stageUrl = comWeeverHelper::getSiteDomain();
-		}
-		else
-		{
-			$weeverServer = comWeeverConst::LIVE_SERVER;
-			$stageUrl = '';
-		}
-			
-		$url = $weeverServer;
-		$key = self::getKey();
-		
-		$query = array( 	
-					'stage' 		=> $stageUrl,
-					'app' 			=> 'json',
-					'site_key' 		=> $key,
-					'm' 			=> "account_sync"
-				);
-			
-		$postdata = self::buildWeeverHttpQuery($query, false);
-		
-		$json = self::sendToWeeverServer($postdata, null);
-
-		if($json == "Site key missing or invalid.")
-		{
-			 JError::raiseNotice(100, JText::_('WEEVER_NOTICE_NO_SITEKEY'));
-			 return false;
-		}
-		
-		$j_array = json_decode($json);
-		
-		return $j_array->results;	
-	
-	}
 	
 
 	public static function buildWeeverHttpQuery($array, $ajax = false)

@@ -433,7 +433,8 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			}
 			
 				
-			tabDropdown = "<select id='wxSelectOldTab'>";
+			tabDropdown 		= "<select id='wxSelectOldTab'>";
+
 			
 			for( var i=0; i < wx.tabSyncData.tabs.length; i++ ) {
 			
@@ -450,7 +451,14 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 
 			for( var i=0; i < serviceTypes.length; i++ ) {
 			
-				if( i == 0 && wx.activeTypeDialog == null)
+				if( i == 0 && wx.tabSyncData.tabs.length == 0 ) {
+				
+					tabDropdown 	= "";
+					continue;
+					
+				}
+			
+				if( ( i == 0 && wx.activeTypeDialog == null ) || ( wx.tabSyncData.tabs.length == 0 ) )
 					checked = " checked='checked'";
 					
 				else {

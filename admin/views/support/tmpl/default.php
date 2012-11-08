@@ -23,7 +23,12 @@
 defined('_JEXEC') or die;
 
 $option = JRequest::getCmd('option');
-JHTML::_('behavior.mootools');
+
+if( comWeeverHelper::joomlaVersion() < 3.0 )
+	JHTML::_('behavior.mootools');
+	
+else 
+	JHtmlBehavior::framework();
 
 if(comWeeverHelper::joomlaVersion() != '1.5')  // ### non-1.5 only
 	$jsJoomla = "Joomla.";

@@ -25,11 +25,11 @@
 		</sql>
 	</uninstall>
 	
-	<update> <!-- Runs on update; New in 1.7 -->
+	<!--update> 
 			<schemas>
 				<schemapath type="mysql">sql/updates/mysql</schemapath>
 			</schemas>
-	</update>
+	</update-->
 	
 	<administration>
 	

@@ -26,11 +26,17 @@ $option = JRequest::getCmd('option');
 
 $plugin_html_enabled = "";
 $plugin_html_disabled = "";
-JHTML::_('behavior.mootools');
+
+if( comWeeverHelper::joomlaVersion() < 3.0 )
+	JHTML::_('behavior.mootools');
+	
+else 
+	JHtmlBehavior::framework();
+
 JHTML::_('behavior.modal', 'a.popup');
 JHTML::_('behavior.tooltip');
 
-$document = &JFactory::getDocument();
+$document = JFactory::getDocument();
 	
 $document->addScript( JURI::base(true).'/components/com_weever/assets/js/fileuploader.js' );
 $document->addScript( JURI::base(true).'/components/com_weever/assets/js/design/design.js?v='.comWeeverConst::VERSION );

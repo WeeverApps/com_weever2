@@ -38,13 +38,13 @@ final class comWeeverConst
 	const COPYRIGHT_URL		= "http://www.weeverapps.com/";
 	const LICENSE			= "GPL v3.0";
 	const LICENSE_URL		= "http://www.gnu.org/licenses/gpl-3.0.html";
-	const RELEASE_DATE		= "UNRELEASED";
+	const RELEASE_DATE		= "November 8, 2012";
 	const SUPPORT_WEB		= "http://support.weeverapps.com/";
 	const LIVE_SERVER		= "http://weeverapp.com/";
-	const LIVE_STAGE		= "http://cetus.weeverapp.com/";
+	const LIVE_STAGE		= "http://stage.weeverapp.com/";
 	const API_VERSION		= "api/v2/";
 	const SUPPORTED_TYPES	= "-oldtabs--newtab-";
-	const API_DEBUG			= true;
+	const API_DEBUG			= false;
 
 }
 
@@ -56,7 +56,7 @@ class comWeeverHelperJS
 	{
 	
 		
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		
 		if($staging)
 			$server = comWeeverConst::LIVE_STAGE;

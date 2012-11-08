@@ -24,13 +24,30 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
-class WeeverViewConfig extends JView
+if( !class_exists("JViewLegacy") ) 
+{
+
+	class JViewLegacy extends JView{};
+	
+}
+
+class WeeverViewConfig extends JViewLegacy
 {
 
 	public function display($tpl = null)
 	{
 
-		$configData 	= $this->get('configdata')->config;
+		$config			= $this->get('configdata');
+		$configData 	= is_object($config) ? $config->config : null;
+		
+		if( !comWeeverHelper::getKey() )
+		{
+			
+			echo "<div style='font-size: 1.5em;'>You need to <a href='index.php?option=com_weever&view=account'>enter a valid app key</a> to use appBuilder.</div>";
+			
+			return;
+			
+		}
 		
 		if( JRequest::getVar("wxConfigSync") )
 		{

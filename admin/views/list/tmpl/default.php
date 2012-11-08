@@ -23,12 +23,17 @@
 defined('_JEXEC') or die;
 
 $option 		= JRequest::getCmd('option');
-$document 		= &JFactory::getDocument();
+$document 		= JFactory::getDocument();
 
 $extraScript	= '';
 
+if( comWeeverHelper::joomlaVersion() < 3.0 )
+	JHTML::_('behavior.mootools');
+	
+else 
+	JHtmlBehavior::framework();
+
 JHTML::_('behavior.tooltip');
-JHTML::_('behavior.mootools');
 JHTML::_('behavior.modal', 'a.modal');
 
 jimport('joomla.html.pane');

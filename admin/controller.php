@@ -28,7 +28,14 @@ JTable::addIncludePath( JPATH_COMPONENT.DS.'tables' );
 
 require_once (JPATH_COMPONENT.DS.'helpers'.DS.'helper'.'.php');
 
-class WeeverController extends JController
+if( !class_exists("JControllerLegacy") ) 
+{
+
+	class JControllerLegacy extends JController{};
+	
+}
+
+class WeeverController extends JControllerLegacy
 {
 
 	public function phpinfo()
@@ -368,7 +375,6 @@ class WeeverController extends JController
 			return;
 		}
 		
-		
 		JRequest::setVar('rss', $rss, 'post');
 		JRequest::setVar('hash', $hash, 'post');
 		JRequest::setVar('weever_server_response', comWeeverHelper::pushSettingsToCloud(), 'post');
@@ -418,7 +424,7 @@ class WeeverController extends JController
 	}
 
 	
-	public function display()
+	public function display( $tpl = null )
 	{
 	
 		$view = JRequest::getVar('view');

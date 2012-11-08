@@ -25,7 +25,14 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 jimport('joomla.plugin.helper');
 
-class WeeverViewSupport extends JView
+if( !class_exists("JViewLegacy") ) 
+{
+
+	class JViewLegacy extends JView{};
+	
+}
+
+class WeeverViewSupport extends JViewLegacy
 {
 
 	public function display($tpl = null)

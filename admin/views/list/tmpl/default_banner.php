@@ -22,10 +22,15 @@
 
 defined('_JEXEC') or die;
 
-if(comWeeverHelper::isWebKit())
+if( comWeeverHelper::isWebKit() )
 	$dashWebKit = "-webkit";
+	
 else 
 	$dashWebKit = "";
+	
+$onlineSpan 		= "";
+$offlineSpan 		= "";
+$offlineStatusClass = "";
 	
 if($this->appEnabled)
 {

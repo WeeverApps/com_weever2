@@ -24,7 +24,14 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
 
-class WeeverModelAjax extends JModel
+if( !class_exists("JModelLegacy") ) 
+{
+
+	class JModelLegacy extends JModel{};
+	
+}
+
+class WeeverModelAjax extends JModelLegacy
 {
 
 	protected $key;

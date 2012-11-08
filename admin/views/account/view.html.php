@@ -25,19 +25,42 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 jimport('joomla.plugin.helper');
 
-class WeeverViewAccount extends JView
+if( !class_exists("JViewLegacy") ) 
+{
+
+	class JViewLegacy extends JView{};
+	
+}
+
+class WeeverViewAccount extends JViewLegacy
 {
 
 	public function display($tpl = null)
 	{
 
-		$this->assign( 'appEnabled', comWeeverHelper::getAppStatus() );
-		$this->assign( 'stagingMode', comWeeverHelper::getStageStatus() );		
-		$this->assign( 'site_key', comWeeverHelper::getKey() );
+		$this->assign( 'appEnabled', 	comWeeverHelper::getAppStatus() );
+		$this->assign( 'stagingMode', 	comWeeverHelper::getStageStatus() );		
+		$this->assign( 'site_key', 		comWeeverHelper::getKey() );
 		
 		$accountData	= $this->get('accountdata');
 		
-		$this->assignRef('account', $accountData->account);
+		if( !$accountData )
+		{
+			
+			echo "<div style='font-size: 1.5em;'>You need to enter a valid app key to use appBuilder.</div>";
+			
+			$account = new stdClass();
+			
+			$account->tier 			= "";
+			$account->site			= "";
+			$account->expiry		= "";
+			
+			$this->assignRef('account', $account);
+			
+		}
+		
+		else 
+			$this->assignRef('account', $accountData->account);
 
 		comWeeverHelper::getJsStrings();
 

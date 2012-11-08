@@ -24,7 +24,14 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
-class WeeverViewList extends JView
+if( !class_exists("JViewLegacy") ) 
+{
+
+	class JViewLegacy extends JView{};
+	
+}
+
+class WeeverViewList extends JViewLegacy
 {
 
 	public function display($tpl = null)
@@ -32,16 +39,22 @@ class WeeverViewList extends JView
 	
 		comWeeverHelper::phpVersionCheck();
 		
-		$document 		= &JFactory::getDocument();
+		$document 		= JFactory::getDocument();
 
 		JRequest::setVar( 'layout', 'default' );
 		
-		$state 			= &$this->get( 'state' );
-		$nav_tabs 		= $this->get('tabsdata');
-		$accountData 	= $this->get('AccountData');
+		$state 			= $this->get( 'state' );
+		$nav_tabs 		= $this->get( 'tabsdata' );
+		//$accountData 	= $this->get('AccountData');
 		
-		if( $nav_tabs == false )
+		if( !comWeeverHelper::getKey() )
+		{
+			
+			echo "<div style='font-size: 1.5em;'>You need to <a href='index.php?option=com_weever&view=account'>enter a valid app key</a> to use appBuilder.</div>";
+			
 			return;
+			
+		}
 			
 	//	print_r($nav_tabs);
 			
