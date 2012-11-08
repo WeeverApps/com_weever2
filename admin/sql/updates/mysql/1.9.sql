@@ -1,1 +1,0 @@
-INSERT IGNORE INTO `#__weever_config` VALUES(15, 'platform_version', '1');

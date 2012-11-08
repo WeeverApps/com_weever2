@@ -1,10 +1,10 @@
 /*	
 *	Weever Apps Administrator Component for Joomla
-*	(c) 2010-2011 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
-				Aaron Song	<aaron@weeverapps.com>
-*	Version: 	2.0 beta 1
+*	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
+*				Aaron Song 				<aaron@weeverapps.com>
+*	Version: 	2.0 Beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -18,7 +18,6 @@
 *   GNU General Public License for more details <http://www.gnu.org/licenses/>.
 *
 */
-
 	var weever = weever || {};
 	
 	weever.checkTabletImg = function(src) {

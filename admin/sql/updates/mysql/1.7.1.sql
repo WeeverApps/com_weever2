@@ -1,1 +1,0 @@
-INSERT IGNORE INTO `#__weever_config` VALUES(13, 'login', '0');
