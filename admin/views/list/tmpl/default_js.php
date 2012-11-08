@@ -124,8 +124,6 @@ $document->addCustomTag ('<script type="text/javascript">
                 
 	');
 	
-$document->addScript( JURI::base(true).'/components/com_weever/assets/js/list_icons.js?v='.comWeeverConst::VERSION );
-//99$document->addScript( JURI::base(true).'/components/com_weever/assets/js/list.js?v='.comWeeverConst::VERSION );
 
 $document->addScript( JURI::base(true).'/components/com_weever/assets/js/config/wx.tabtypes.js?v='.comWeeverConst::VERSION );
 $document->addScript( JURI::base(true).'/components/com_weever/assets/js/config/wx.features.js?v='.comWeeverConst::VERSION );

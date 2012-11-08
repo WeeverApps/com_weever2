@@ -36,7 +36,7 @@ class WeeverViewAccount extends JView
 		
 		$accountData	= $this->get('accountdata');
 		
-		$this->assignRef('account', $accountData);
+		$this->assignRef('account', $accountData->account);
 
 		comWeeverHelper::getJsStrings();
 

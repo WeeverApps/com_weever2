@@ -214,7 +214,7 @@ wx.confirmAddTabItem	= function(a) {
 		
 			jQuery('.ui-widget-overlay').bind('click', function() { 
 			
-				jQuery(dialogId).dialog('close');
+				jQuery(dialogId).dialog('destroy');
 				
 			});
 			
@@ -239,7 +239,7 @@ wx.setButtonActions		= function(a) {
 			text:	a.buttonName[0],
 			click:	function() {
 			
-				jQuery(a.dialogId).dialog( "close" );
+				jQuery(a.dialogId).dialog( "destroy" );
 	
 				a.action(a.actionArg);
 				
@@ -250,7 +250,7 @@ wx.setButtonActions		= function(a) {
 		/* cancel button */
 		buttons[ a.buttonName[1] ] = function() {
 		
-			jQuery(a.dialogId).dialog( "close" );
+			jQuery(a.dialogId).dialog( "destroy" );
 			
 			if( isFunction(a.backAction) )
 				a.backAction();
@@ -263,7 +263,7 @@ wx.setButtonActions		= function(a) {
 		/* solo cancel button */
 		buttons[ a.buttonName[0] ] = function() {
 		
-			jQuery(a.dialogId).dialog( "close" );
+			jQuery(a.dialogId).dialog( "destroy" );
 			
 			if( isFunction(a.backAction) )
 				a.backAction();
@@ -486,13 +486,18 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		
 		jQuery(dialogId).append( checkboxOptions );
 		
-		var layoutOptions = "";
+		var layoutOptions = "",
+			initLayoutVal = 0;
 		
 		if( featureData.layouts instanceof Array ) {
 		
 			for( var i = 0; i < featureData.layouts.length; i ++ ) {
 			
-				layoutOptions += "<option value='" + featureData.layouts[i] + "'>" + featureData.layouts[i] + "</option>";
+				selectedText = ( 0 == i ) ? " selected='selected'" : "";
+				
+				initLayoutVal = featureData.layouts[i];
+			
+				layoutOptions += "<option value='" + featureData.layouts[i] + "'"+ selectedText +">" + wx.layoutTypes[  featureData.layouts[i] ] + "</option>";
 			
 			}
 			
@@ -500,10 +505,11 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		
 		else {
 		
-			layoutOptions = "<option value='" + featureData.layouts + "'>" + featureData.layouts + "</option>";
+			layoutOptions = "<option selected='selected' value='" + featureData.layouts + "'>" + wx.layoutTypes[ featureData.layouts ] + "</option>";
 		
 		}
 		
+		// kill old version		
 		jQuery(dialogId).append( "<div class='wx-add-layout-dropdown-container'>" +
 		
 			"<select id='wxLayoutType'>" + 
@@ -513,6 +519,8 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			"</select></div>"	
 			
 		);
+		
+		jQuery('#wxLayoutType').val( initLayoutVal );
 		
 	}
 	
@@ -551,7 +559,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			/* click outside dialog to close */
 			jQuery('.ui-widget-overlay').bind('click', function() { 
 			
-				jQuery(dialogId).dialog('close');
+				jQuery(dialogId).dialog('destroy');
 				
 			});
 			

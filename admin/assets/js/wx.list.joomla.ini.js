@@ -168,7 +168,7 @@ wx.ajaxUrl			= function(a) {
 
 wx.navLabelDialog	= function(e) {
 
-	var tabId 		= jQuery(this).attr('ref'),
+	var tabId 		= jQuery(this).attr('title').replace("ID #", ""),
 		siteKey 	= jQuery( 'input#wx-site-key' ).val(),
 		htmlName 	= jQuery( '#wx-nav-label-' + tabId ).html(),
 		clickedElem	= jQuery( '#wx-nav-label-' + tabId ),
@@ -263,40 +263,108 @@ wx.navLabelDialog	= function(e) {
 
 };
 
+wx.iconBase64		= "";
+
+wx.updateIconPreview = function(evt) {
+
+	var xmlhttp 		= new XMLHttpRequest()
+
+	// nav-icons when creating a new tab
+	var val = jQuery("select#wx-icons-dropdown-select").val() || jQuery("select#wx-nav-icons-dropdown-select").val();
+
+	var xmlhttp 		= new XMLHttpRequest();
+	
+	xmlhttp.open("GET", Joomla.comWeeverConst.server + "api/v2/icons/get_icon_base64?icon_id=" + val );	
+	xmlhttp.send();
+	
+	xmlhttp.onreadystatechange = function()	{
+	
+		if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+		
+			jQuery("img.wx-nav-icon-preview").attr(
+				"src", 
+				"data:image/png;base64," + 
+					xmlhttp.responseText
+				);
+			
+			wx.iconBase64 = xmlhttp.responseText;
+		
+		}
+		
+	}
+
+
+};
+
 /* Change Tab Icon */
 
 wx.navIconDialog	= function(e) {
+
+	var xmlhttp 		= new XMLHttpRequest(),
+		iconId			= jQuery(this).attr('ref');
+	
+	xmlhttp.open("GET", Joomla.comWeeverConst.server + "api/v2/icons/get_icons");	
+	xmlhttp.send();
+	
+	xmlhttp.onreadystatechange = function()	{
+	
+		if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+		
+			insert 			= document.getElementById("wx-icons-dropdown");
+			json 			= jQuery.parseJSON( xmlhttp.responseText );
+			icons 			= json.icons;
+			dropdownHtml 	= "<select id='wx-icons-dropdown-select' name='nav_icon'>";
+			
+			for( var i = 0; i < icons.length; i++ ) {
+			
+				var selectedText = "";
+			
+				if( iconId == icons[i].id )
+					selectedText = " selected='selected'";
+			
+				dropdownHtml += "<option value='"+ icons[i].id +"'"+ selectedText +">" + icons[i].name + "</option>";
+			
+			}			
+			
+			insert.innerHTML 	= dropdownHtml + "</select>";	
+			
+			wx.updateIconPreview();
+			
+			jQuery("select#wx-icons-dropdown-select").change(wx.updateIconPreview)
+			jQuery("select#wx-icons-dropdown-select").bind("keyup", wx.updateIconPreview);
+			
+		
+		}
+		
+	}
 	
 	var tabType 		= jQuery(this).attr('title'),
 		siteKey 		= jQuery("input#wx-site-key").val(),
+		tabId			= jQuery(this).attr('title'),
 		txt 			= 	'<div class="jqimessage">'+
 						'<h3 class="wx-imp-h3">' + 
 							Joomla.JText._('WEEVER_JS_CHANGING_NAV_ICONS') + 
 						'</h3>'+
-						Joomla.JText._('WEEVER_JS_CHANGING_NAV_ICONS_INSTRUCTIONS') +
-						'<div id="wx-nav-icon-preview-wrapper">'+
-							'<img id="wx-nav-icon-preview" src="">'+
-							'<img src="components/com_weever/assets/icons/no-image.png">'+
+						'<div class="wx-nav-icon-preview-wrapper">'+
+							'<img class="wx-nav-icon-preview" src="">'+
+							'<img id="wx-nav-icon-no-image" src="components/com_weever/assets/icons/no-image.png">'+
 						'</div>'+
-						'<div id="wx-nav-icon-textarea-wrapper">'+
-							'<textarea name="nav_icon" id="wx-nav-icon-textarea" placeholder="'+Joomla.JText._('WEEVER_JS_CHANGING_NAV_PASTE_CODE')+'"></textarea>'+
-						'<br/><br/></div></div>',
-		tabRef			= jQuery(this).attr('ref'),
-		tabElem 		= jQuery( '#wx-nav-icon-' + tabRef ),		
+						'<div id="wx-icons-dropdown"></div><div></div></div>',		
 		myCallbackForm 	= function(v,m,f) {
 	
 			if( false == v )
 				return;
 		
-			tabIcon = f["nav_icon"];
-			
+			var tabIcon = f.nav_icon;
+			var tabElem = jQuery( '#wx-nav-icon-' + tabId );
+
 			jQuery.ajax({
 			
 			   type: 	"POST",
 			   url: 	"index.php",
-			   data: 	"option=com_weever&task=ajaxSaveTabIcon&icon=" + 
-			   				encodeURIComponent(tabIcon) + 
-			   			"&type=" + tabType + '&site_key=' + siteKey,
+			   data: 	"option=com_weever&task=ajaxSaveTabIcon&icon_id=" + 
+			   				tabIcon + 
+			   			"&tab_id=" + tabId,
 			   success: function(msg) {
 			   
 				   jQuery('#wx-modal-loading-text').html(msg);
@@ -308,7 +376,7 @@ wx.navIconDialog	= function(e) {
 				   		
 					 	tabElem.html(
 					 	
-					 		'<img class="wx-nav-icon-img" src="data:image/png;base64,' + tabIcon + '" />'
+					 		'<img class="wx-nav-icon-img" src="data:image/png;base64,' + wx.iconBase64 + '" />'
 					 	
 					 	);
 					 	
@@ -328,35 +396,6 @@ wx.navIconDialog	= function(e) {
 		},	
 		submitCheck 	= function(v,m,f) {
 		
-			var previewIcon 	= function() {
-			
-					jQuery("img#wx-nav-icon-preview").attr(
-						"src", 
-						"data:image/png;base64," + 
-							jQuery("textarea#wx-nav-icon-textarea").val()
-						);
-					
-				};
-		
-			an = m.children('#wx-nav-icon-textarea');
-			
-			if(v == "reset")
-			{ 
-				
-				jQuery("textarea#wx-nav-icon-textarea").val(iconDefault[tabType]);
-				previewIcon();
-				
-				return false;
-				
-			}
-			
-		
-			if(f.nav_icon == "" && v == true) {
-			
-				an.css("border","solid #ff0000 1px");
-				return false;
-				
-			}
 			
 			return true;
 	
@@ -366,21 +405,11 @@ wx.navIconDialog	= function(e) {
 			callback: 		myCallbackForm, 
 			submit: 		submitCheck,
 			overlayspeed: 	"fast",
-			buttons: 		{ Cancel: false, "Reset to Default": "reset", Submit: true },
+			buttons: 		{ Cancel: false, Submit: true },
 			focus: 			2
 			
 		});	
-			
-	jQuery("textarea#wx-nav-icon-textarea").bind("paste", function() {
-
-		jQuery("img#wx-nav-icon-preview").attr(
-			"src", 
-			"data:image/png;base64," + 
-				jQuery("textarea#wx-nav-icon-textarea").val()
-			);
-	
-	});
-	
+				
 	e.preventDefault();
 	
 };

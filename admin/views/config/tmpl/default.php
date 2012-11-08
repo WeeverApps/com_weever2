@@ -147,6 +147,7 @@ else
 	
 
 		<fieldset class='adminForm'>
+		
 			<legend><?php echo JText::_('WEEVER_CONFIG_ADDITIONAL_SERVICES'); ?></legend>
 		
 			<table class="admintable">
@@ -180,27 +181,12 @@ else
 			<td><input type="checkbox" name="ecosystem" value="1" <?php echo ($this->ecosystem == 1 ? "checked='checked'":""); ?> /> <label for="checkEcosystem"><?php echo JText::_('WEEVER_ECOSYSTEM_ENABLE'); ?></label></td>	
 			</tr>
 			</table>
-		</fieldset>
-
-
-		<fieldset class='adminForm'>
-			<legend><?php echo JText::_('WEEVER_CONFIG_PRO_FEATURES'); ?></legend>
+			
 			
 			<p><b><?php echo ( comWeeverHelper::componentExists('com_weeverlogin') ) ? "<a href='index.php?option=com_weeverlogin'>".JText::_("WEEVER_LOGIN_SETTINGS")."</a>" : "<a href='http://weeverapps.com/downloads/' target='_blank'>".JText::_('WEEVER_LOGIN_DOWNLOAD')."</a>"; ?></b></p>
-		
-			<p><?php echo JText::_("WEEVER_DOMAIN_MAPPING_INSTRUCTIONS"); ?></p>
-		
-			<table class="admintable">
 			
-			<tr>
-			<td class="key hasTip" title="<?php echo JText::_("WEEVER_DOMAIN_MAPPING_TOOLTIP"); ?>"><?php echo JText::_('WEEVER_DOMAIN_MAPPING'); ?></td>
-			<td><input type="textbox" name="domain"  value="<?php echo $this->domain; ?>" id="wx-domain-map-input" placeholder="app.yourdomain.com" /> </td>	
-			</tr>		
 			
-			</table>
-		
 		</fieldset>
-
 
 
 	</div>

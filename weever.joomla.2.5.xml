@@ -2,14 +2,14 @@
 <extension type="component" version="2.5" method="upgrade">
 
 	<name>COM_WEEVER</name>
-	<creationDate>2012-09-28</creationDate>
+	<creationDate>2012-11-08</creationDate>
 	<author>Robert Gerald Porter, Aaron Song</author>
 	<authorEmail>rob@weeverapps.com</authorEmail>
 	<authorUrl>http://www.weeverapps.com/</authorUrl>
 	<copyright>(c) 2010-2012 Weever Apps Inc.</copyright>
 	<license>GPLv3</license>
-	<version>2.0</version>
-	<releaseType>Development</releaseType>
+	<version>2.0 Beta 1</version>
+	<releaseType>Beta</releaseType>
 	<description>COM_WEEVER_DESCRIPTION</description>
 	
 	<scriptfile>install.weever.joomla.2.5.php</scriptfile>

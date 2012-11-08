@@ -42,7 +42,6 @@ class WeeverViewConfig extends JView
 		$this->assign('appEnabled', 		$configData->online );
 		$this->assign('ecosystem', 			$configData->syndication->ecosystem );
 		$this->assign('google_analytics', 	isset($configData->analytics[0]) ? $configData->analytics[0]->code : null );
-		$this->assign('domain', 			$configData->domain[0]);
 		$this->assign('site_key', 			comWeeverHelper::getKey() );
 		
 		$this->assign('granular',				'');

@@ -4,7 +4,7 @@
 *
 *	Author: 	Robert Gerald Porter <rob@weeverapps.com>
 				Aaron Song	<aaron@weeverapps.com>
-*	Version: 	2.0 alpha 0
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ wx.swipePages = [
 	
 		/* name:		'1. Add Website Content to Your Mobile App', */
 		
-		helpHtml:	'<div id="wxnavtip-content" class="wx_box info wxblk"><h2 class="wxnavtip-title">Welcome to Weever Apps! <span style="font-size:14px; float:right;"> <span onclick="wx.swipe.next()" class="wxnavtip-slide-info">next &rarr;</span></span></h2><p class="wxnavtip-description">You\'re currently using an alpha release version of our version 2.x platform. There\'s only a few items available to add right now.</p></div>',
+		helpHtml:	'<div id="wxnavtip-content" class="wx_box info wxblk"><h2 class="wxnavtip-title">Welcome to Weever Apps! <span style="font-size:14px; float:right;"> <span onclick="wx.swipe.next()" class="wxnavtip-slide-info">next &rarr;</span></span></h2><p class="wxnavtip-description">You\'re currently using a Beta release version of our version 2.x platform. A few things are missing, but keep checking for updates to the component!</p></div>',
 		
 		
 		items:		[
@@ -72,9 +72,7 @@ wx.swipePages = [
 			'youtube',
 			'vimeo',
 			'foursquare',
-			'facebook',
-			'bitsontherun',
-			'ustream'
+			'facebook'
 		
 		]
 	

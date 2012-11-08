@@ -36,7 +36,7 @@ wx.features = [
 				name:			'Blog',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list','grid','carousel'],
+				layouts:		['list'],
 				fields:			{
 				
 					'cms_feed':	'#wx-add-joomla-blog-select',
@@ -57,7 +57,7 @@ wx.features = [
 				content:		'html',
 				name:			'Category',
 				title:			true,
-				layouts:		['list','grid','carousel'],
+				layouts:		['list'],
 				types:			['oldtabs', 'newtab'],
 				fields:			{
 				
@@ -146,7 +146,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layouts:		['list','grid','carousel'],
+				layouts:		['list'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -169,7 +169,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layouts:		['list','grid','carousel'],
+				layouts:		['list'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -216,7 +216,7 @@ wx.features = [
 				content:		'html',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list', 'grid', 'carousel'],
+				layouts:		['list'],
 				icon_id:		12,
 				config:			{
 				
@@ -253,7 +253,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layouts:		['list','grid','carousel'],
+				layouts:		['list'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -277,7 +277,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layouts:		['list','grid','carousel'],
+				layouts:		['list'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -325,7 +325,7 @@ wx.features = [
 				title:			true,
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list','carousel','grid'],
+				layouts:		['list'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -624,7 +624,7 @@ wx.features = [
 				content:		'flickrPhotosets',
 				types:			['oldtabs', 'newtab'],
 				icon_id:		15,
-				layouts:		['list', 'grid', 'map'],
+				layouts:		['list'],
 				config:			{
 				
 					user_id:		':component_behaviour'
@@ -651,7 +651,7 @@ wx.features = [
 				content:		'flickrGalleries',
 				types:			['oldtabs', 'newtab'],
 				icon_id:		15,
-				layouts:		['list', 'grid', 'map'],
+				layouts:		['list'],
 				config:			{
 				
 					user_id:		':component_behaviour'
@@ -695,9 +695,9 @@ wx.features = [
 			id:				'albums',
 			defaultTitle:	'Photo Albums',
 			title:			true,
-			content:		'PicasaAlbums',
+			content:		'picasaAlbums',
 			types:			['oldtabs', 'newtab'],
-			layouts:		['list', 'grid', 'map'],
+			layouts:		['list'],
 			icon_id:		17,
 			config:			{
 			
@@ -711,15 +711,15 @@ wx.features = [
 			}
 		
 		
-		},{
+		}/*,{
 		
 			name:			'Photos From Album',
 			id:				'albumphotos',
 			defaultTitle:	'Photo Album',
 			title:			true,
-			content:		'PicasaAlbumPhotos',
+			content:		'picasaAlbumPhotos',
 			types:			['oldtabs', 'newtab'],
-			layouts:		['carousel', 'list', 'grid', 'map'],
+			layouts:		['carousel', 'list', 'grid'],
 			icon_id:		15,
 			unavailable:	'Feature coming soon!',
 			config:			{
@@ -734,7 +734,7 @@ wx.features = [
 			}
 		
 		
-		}]
+		}*/]
 	
 	},
 	{
@@ -765,7 +765,7 @@ wx.features = [
 				defaultTitle:	'Videos',
 				icon_id:		18,
 				content:		'youtube',
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				config:			{
 				
 					url:		':component_behaviour'
@@ -855,12 +855,13 @@ wx.features = [
 		}
 	
 	
-	},
+	}/*,
 	{
 	
 		id:				'bitsontherun',
 		name:			'BitsOnTheRun',
 		content:		'bitsontherunPlaylist',
+		unavailable:	'Coming soon!',
 		url:			'http://www.longtailvideo.com/bits-on-the-run',
 		description:	'<p><b>Bits on the Run</b> manages the complete video workflow: upload, transcode, stream, and analyze. We handle the complexities so that you don\'t have to. With just a few clicks you can design your own video player, encode to multiple bitrates, deliver to the iPad, and more.</p>',			
 		types:			['oldtabs', 'newtab'],
@@ -879,7 +880,7 @@ wx.features = [
 		
 		}	
 	
-	},
+	}*//*,
 	{
 	
 		id:				'ustream',
@@ -972,7 +973,7 @@ wx.features = [
 		
 		]
 	
-	},
+	}*/,
 	{
 	
 		vertical:		'all',

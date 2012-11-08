@@ -137,11 +137,13 @@ class WeeverController extends JController
 
 	public function ajaxSaveTabIcon()
 	{
-	
-		$jsonResult = comWeeverHelper::pushTabIconToCloud();
-
-		echo "Icon Saved";
+			
+		$model 		= $this->getModel('ajax');
+		$result 	= $model->saveTabIcon();
 		
+		if( $result->success )
+			echo "Icon Saved";
+	
 		jexit();
 	
 	}

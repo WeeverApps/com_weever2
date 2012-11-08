@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 alpha 1
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -30,19 +30,7 @@ defined('_JEXEC') or die;
 			<fieldset id="wx-images-fieldset">
 			
 			<legend><?php echo JText::_('WEEVER_DESIGN_LAUNCHSCREEN'); ?></legend>
-			
-			
-			<div class="wx-theme-screen">
-			
-			
-				<div class="wx-theme-caption"><?php echo JText::_('WEEVER_LOADING_SPINNER_TEXT'); ?></div>
-				<div class="wx-theme-note"><?php echo JText::_('WEEVER_LOADING_SPINNER_TOOLTIP'); ?></div>
-				
-				<textarea type="textbox" name="loadspinner" id="wx-load-spinner" placeholder="<?php echo JText::_("WEEVER_LOADING_SPINNER_PLACEHOLDER"); ?>"><?php echo htmlspecialchars($this->design->loadspinner->text); ?></textarea>
-			
-			</div>
-			
-			
+						
 			
 			<div class="wx-theme-screen">
 			

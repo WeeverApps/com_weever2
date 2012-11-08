@@ -81,6 +81,22 @@ class WeeverModelAjax extends JModel
 		return $this->makeAPICall( "tabs/set_tabTitle", $remote_query );
 	
 	}
+
+
+	public function saveTabIcon() 
+	{
+	
+		$remote_query 		= array( 	
+			
+			'app_key' 		=> $this->key,
+			'icon_id'		=> JRequest::getVar("icon_id", 1),
+			'tab_id'		=> JRequest::getVar("tab_id")
+		
+		);
+	
+		return $this->makeAPICall( "tabs/set_icon_id", $remote_query );
+	
+	}	
 	
 	
 	public function saveTabItemName( $name, $tab_id ) 
@@ -182,10 +198,9 @@ class WeeverModelAjax extends JModel
 		
 			case "phone_load":
 			
-				$remote_query["launchscreen_type"]	= "phone";
-				$remote_query["launchscreen"]		= $url;
+				$remote_query["launchscreen_phone"]		= $url;
 			
-				return $this->makeAPICall( "design/set_launchscreen", $remote_query );
+				return $this->makeAPICall( "design/set_launchscreen_phone", $remote_query );
 				
 				break;
 				
@@ -201,29 +216,27 @@ class WeeverModelAjax extends JModel
 			
 			case "tablet_load":
 			
-				$remote_query["launchscreen_type"]	= "tablet";
-				$remote_query["launchscreen"]		= $url;
+				$remote_query["launchscreen_tablet"]		= $url;
 			
-				return $this->makeAPICall( "design/set_launchscreen", $remote_query );
+				return $this->makeAPICall( "design/set_launchscreen_tablet", $remote_query );
 				
 				break;
 				
 			
 			case "tablet_landscape_load":
 			
-				$remote_query["launchscreen_type"]	= "tablet_landscape";
-				$remote_query["launchscreen"]		= $url;
+				$remote_query["launchscreen_tablet_landscape"]		= $url;
 			
-				return $this->makeAPICall( "design/set_launchscreen", $remote_query );
+				return $this->makeAPICall( "design/set_launchscreen_tablet_landscape", $remote_query );
 				
 				break;
 				
 				
-			case "titlebar_logo":
+			case "titlebar_image":
 			
-				$remote_query["titlebar_logo"]		= $url;
+				$remote_query["titlebar_image"]		= $url;
 				
-				return $this->makeAPICall( "design/set_titlebar_logo", $remote_query );
+				return $this->makeAPICall( "design/set_titlebar_image", $remote_query );
 				
 				break;
 		

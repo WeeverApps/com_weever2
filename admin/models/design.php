@@ -128,8 +128,16 @@ class WeeverModelDesign extends JModel
 		$design->install			= new StdClass();
 		$design->install->prompt	= JRequest::getVar("install_prompt");
 		$design->install->name		= JRequest::getVar('title');
+		
+		$design->loadspinner		= new stdClass();
+		$design->loadspinner->text	= JRequest::getVar("loadspinner_text");
+		
+		$design->domain					= array();
+		
+		if( JRequest::getVar('domain') )
+			$design->domain[0]				= JRequest::getVar('domain');
 
-		$response	= $this->setDesign( $design );
+		$response					= $this->setDesign( $design );
 		
 		return $response;	
 		

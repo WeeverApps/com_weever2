@@ -746,17 +746,29 @@ div#wx-nav-icon-textarea-wrapper {
 	margin-left: 90px;
 }
 
-div#wx-nav-icon-preview-wrapper {
-	padding: 4px;
-	border: 1px solid #aaaaaa;
-	width: 64px;
-	height: 64px;
-	float: left;
-	overflow: hidden;
+select#wx-icons-dropdown-select {
+	
+	font-size: 1.25em;
+	
 }
 
-div#wx-nav-icon-preview-wrapper img {
+div.wx-nav-icon-preview-wrapper {
+	padding: 4px;
+	border: 1px solid #aaaaaa;
+	width: 68px;
+	height: 68px;
+	overflow: hidden;
+	margin: 2em;
+}
 
+img.wx-nav-icon-preview {
+
+	height: 64px !important;
+
+}
+
+img#wx-nav-icon-no-image {
+	padding-top: 4px;
 }
 
 #wx-modal-loading-text {
@@ -1576,7 +1588,7 @@ ul.supportlistarrow li.ui-state-hover a, ul.supportlistarrow li.ui-state-hover a
 
 #wx-css-overrides {
 	width: 45em;
-	height: 15em;
+	height: 5em;
 }
 
 #wx-css-url {

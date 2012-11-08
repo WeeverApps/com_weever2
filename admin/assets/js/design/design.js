@@ -200,7 +200,7 @@
 	}); 
 	var titlebarUploader = new qq.FileUploader({
 	    element: document.getElementById('wx-titlebar-upload'),
-	    action: 'index.php?option=com_weever&task=upload&type=titlebar_logo&site_key=' + jQuery("input#wx-site-key").val(),
+	    action: 'index.php?option=com_weever&task=upload&type=titlebar_image&site_key=' + jQuery("input#wx-site-key").val(),
 	    template: themeUploadTemplate({
 	    	uploadButton: Joomla.JText._('WEEVER_UPLOAD_NEW'),
 	    	dropUpload: Joomla.JText._('WEEVER_DROP_TITLEBAR'),

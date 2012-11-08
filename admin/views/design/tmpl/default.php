@@ -101,17 +101,30 @@ echo $this->loadTemplate('banner');
 	<div style="clear:both;"></div>
 		
 	<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>
-	<?php echo comWeeverHelper::startJHtmlTabPanel( JText::_("WEEVER_ADVANCED_LAUNCHSCREEN_SETTINGS"), 'advanced-launch-settings', $pane ); ?>
+	<?php 
 	
-	<div class="wx-submitcontainer">
+	//echo comWeeverHelper::startJHtmlTabPanel( JText::_("WEEVER_ADVANCED_LAUNCHSCREEN_SETTINGS"), 'advanced-launch-settings', $pane ); 
+	
+	?>
+	
+	<!--div class="wx-submitcontainer">
 	        <a href="#" onclick="javascript:<?php echo $jsJoomla; ?>submitbutton('apply')"><button class="wxui-btn orange medium radius3">&#x2713; &nbsp;<?php echo JText::_('WEEVER_SAVE_BUTTON'); ?></button></a>
-	</div>    
+	</div-->    
 	    		
 	
-   		<?php echo $this->loadTemplate('launchsettings'); ?>
+   		<?php 
+   		
+   		//echo $this->loadTemplate('launchsettings'); 
+   		
+   		?>
    		
 	
-	<?php echo comWeeverHelper::endJHtmlTabPanel( $pane ); ?>
+	<?php 
+	
+	//echo comWeeverHelper::endJHtmlTabPanel( $pane ); 
+	
+	?>
+	
 	<?php echo comWeeverHelper::startJHtmlTabPanel( JText::_("WEEVER_ADVANCED_THEME_SETTINGS"), 'advanced-settings', $pane ); ?>
 
 	<div class="wx-submitcontainer">

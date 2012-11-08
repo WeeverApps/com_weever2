@@ -52,10 +52,40 @@ defined('_JEXEC') or die;
 		</table>
 		
 		</fieldset>
+		
+		<fieldset class='adminForm wx-theme-fieldset'><legend><?php echo JText::_('WEEVER_WHITE_LABELLING'); ?></legend>
+		
+			<div class="wx-theme-screen">
+			
+			
+				<div class="wx-theme-caption"><?php echo JText::_('WEEVER_LOADING_SPINNER_TEXT'); ?></div>
+				<div class="wx-theme-note"><?php echo JText::_('WEEVER_LOADING_SPINNER_TOOLTIP'); ?></div>
+				
+				<textarea type="textbox" name="loadspinner_text" id="wx-load-spinner" placeholder="<?php echo JText::_("WEEVER_LOADING_SPINNER_PLACEHOLDER"); ?>"><?php echo htmlspecialchars($this->design->loadspinner->text); ?></textarea>
+			
+			</div>
+			
 	
+		</fieldset>
+		
+		<fieldset class='adminForm wx-theme-fieldset'>
+			<legend><?php echo JText::_('WEEVER_DOMAIN_MAPPING'); ?></legend>
+		
+			<p><?php echo JText::_("WEEVER_DOMAIN_MAPPING_INSTRUCTIONS"); ?></p>
+		
+			<table class="admintable">
+			
+			<tr>
+			<td class="key hasTip" title="<?php echo JText::_("WEEVER_DOMAIN_MAPPING_TOOLTIP"); ?>"><?php echo JText::_('WEEVER_DOMAIN_MAPPING'); ?></td>
+			<td><input type="textbox" name="domain"  value="<?php echo isset($this->design->domain[0]->domain) ? $this->design->domain[0]->domain : ""; ?>" id="wx-domain-map-input" placeholder="app.yourdomain.com" /> </td>	
+			</tr>		
+			
+			</table>
+		
+		</fieldset>
 		
 		
-	<fieldset class='adminForm'>
+	<!--fieldset class='adminForm'>
 	<legend><?php echo JText::_('WEEVER_TITLEBAR_CUSTOM_HTML'); ?></legend>
 	
 	<p><?php echo JText::_('WEEVER_TITLEBAR_CUSTOM_HTML_DESCRIPTION'); ?></p>
@@ -69,6 +99,6 @@ defined('_JEXEC') or die;
 	</table>
 	
 	
-	</fieldset>
+	</fieldset-->
 	
 </div>

@@ -142,13 +142,8 @@ class WeeverModelConfig extends JModel
 		$options->analytics[0] 				= new StdClass();
 		$options->analytics[0]->service 	= "google-analytics";
 		$options->analytics[0]->code 		= JRequest::getVar('google_analytics');
-		
-		$options->domain					= array();
-		
-		if( JRequest::getVar('domain') )
-			$options->domain[0]				= JRequest::getVar('domain');
 			
-		$options->device					= JRequest::getVar('devices');
+		$options->device					= $devices;
 		$options->syndication->ecosystem	= JRequest::getVar('ecosystem');
 		$options->online					= JRequest::getVar('app_enabled');
 		$options->localization				= JRequest::getVar('local');

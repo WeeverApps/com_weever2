@@ -528,7 +528,7 @@ $note = "";
 	<div>
 		
 		
-		<input type='text' value='' placeholder='Playlist URL' name='component_behaviour' id='wx-bitsontherun-playlist-url' class='wx-dialog-input wx-video-input' />
+		<input type='text' value='' placeholder='Playlist RSS URL' name='component_behaviour' id='wx-bitsontherun-playlist-url' class='wx-dialog-input wx-video-input' />
 		<label for='wx-bitsontherun-playlist-url' id='wx-bitsontherun-url' class='wx-video-label wx-jqui-label'><?php echo JText::_('WEEVER_BOTR_URL'); ?></label>
 				
 				

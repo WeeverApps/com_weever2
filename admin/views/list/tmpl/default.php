@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0
+*	Version: 	2.0 beta 1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -34,7 +34,6 @@ JHTML::_('behavior.modal', 'a.modal');
 jimport('joomla.html.pane');
 
 echo $this->loadTemplate('js');
-echo $this->loadTemplate('base64images');
 
 jimport('joomla.filter.output');
 
@@ -98,7 +97,7 @@ foreach( (array) $this->tabs as $k=>$v )
 		echo '<li class="wx-nav-tabs wx-sort" id="' . $v[0]->id . '" rel="unpublished" style="float:center;">
 				<a href="#Tab-' . $v[0]->id . '" class="wx-tab-sortable' . $trialClass.'">
 				
-					<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-grayed-out wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
+					<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->icon_id . '"  title="' . $v[0]->id . '" class="wx-grayed-out wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
 					
 						<img class="wx-nav-icon-img" src="data:image/png;base64,' . file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id) . '" />
 						
@@ -114,13 +113,13 @@ foreach( (array) $this->tabs as $k=>$v )
 			echo '<li class="wx-nav-tabs wx-sort" id="' . $v[0]->id . '">
 						<a href="#Tab-' . $v[0]->id . '" class="wx-tab-sortable' . $trialClass.'">
 						
-							<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
+							<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->icon_id . '" title="' . $v[0]->id . '" class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
 							
 								<img class="wx-nav-icon-img" src="data:image/png;base64,'.file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id).'" />
 							
 							</div>
 							
-							<div id="wx-nav-label-' . $v[0]->id . '" ref="' . $v[0]->id . '" class="wx-nav-label" title="ID #'.$v[0]->id.'">'.( $v[0]->tabTitle ? $v[0]->tabTitle : $v[0]->title ).'</div>
+							<div id="wx-nav-label-' . $v[0]->id . '" ref="' . $v[0]->icon_id . '" class="wx-nav-label" title="ID #'.$v[0]->id.'">'.( $v[0]->tabTitle ? $v[0]->tabTitle : $v[0]->title ).'</div>
 							
 						</a>
 					</li>';	
@@ -183,9 +182,8 @@ foreach( (array) $this->tabs as $k=>$v )
 		
 			<div class="wx-tab-top-buttons-container">
 			
-				<button class="wxui-btn white medium radius3 wx-add-source-icon" style="margin-right:1.5em;" ref="add-<?php echo $row->component; ?>-type">+ &nbsp;Add More Content (nonfunc)</button>
-				<button class="wxui-btn white medium radius3 wx-nav-label" style="margin-right:1.5em;" ref="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Name</button>
-				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon (nonfunc)</button>
+				<button class="wxui-btn white medium radius3 wx-nav-label" style="margin-right:1.5em;" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Name</button>
+				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->icon_id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon</button>
 				
 				<?php if( $row->component == "panel" || $row->component == "aboutapp" || $row->component == "map" ) : ?>
 				
@@ -292,6 +290,25 @@ foreach( (array) $this->tabs as $k=>$v )
 	
 		$iii++; $sub++;		
 		
+		if( $vv->layout == "share" ) 
+		{
+		
+			?>
+			
+			<tr class='row<?php echo $vv->id; ?>'>
+				<td></td>
+				<td><img class="wx-sort-icon" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link">&nbsp;<?php echo $vv->title; ?>&nbsp;</a></td>
+				<td></td>
+				<td></td>
+				<td></td>			
+			</tr>
+			
+			<?php
+			
+			continue; 
+		
+		}
+		
 		?>
 		
 					<tr id='<?php echo $vv->id; ?>' class='row<?php echo $vv->id; ?>'>
@@ -301,7 +318,7 @@ foreach( (array) $this->tabs as $k=>$v )
 						</td>
 						
 						<td>
-							<img class="wx-sort-icon" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link"><?php echo $vv->title; ?></a>
+							<img class="wx-sort-icon" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link">&nbsp;<?php echo $vv->title; ?>&nbsp;</a>
 						</td>
 						
 						<td align='center'>
