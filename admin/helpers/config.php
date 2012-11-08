@@ -1,6 +1,6 @@
 <?php
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
@@ -32,7 +32,7 @@ final class comWeeverConst
 	const VERSION			= "2.0";
 	const RELEASE_TYPE		= "Beta Release 1";
 	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/nt/aulavik/index.aspx' target='_blank'>Aulavik</a>";
-	const NAME				= "Weever Apps Administrator Component for Joomla!";
+	const NAME				= "Weever appBuilder&trade; for Joomla!";
 	const COPYRIGHT_YEAR	= "(c) 2010-2012";
 	const COPYRIGHT			= "Weever Apps Inc.";
 	const COPYRIGHT_URL		= "http://www.weeverapps.com/";

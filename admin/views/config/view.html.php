@@ -1,6 +1,6 @@
 <?php
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
@@ -56,7 +56,7 @@ class WeeverViewConfig extends JViewLegacy
 		
 		$this->assignRef('local', 			$configData->localization);
 		$this->assignRef('locales', 		$configData->available_locales);
-		$this->assign('appEnabled', 		$configData->online );
+		$this->assign('appEnabled', 		comWeeverHelper::getAppStatus() );
 		$this->assign('ecosystem', 			$configData->syndication->ecosystem );
 		$this->assign('google_analytics', 	isset($configData->analytics[0]) ? $configData->analytics[0]->code : null );
 		$this->assign('site_key', 			comWeeverHelper::getKey() );

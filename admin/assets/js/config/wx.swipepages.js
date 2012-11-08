@@ -1,5 +1,5 @@
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
@@ -92,7 +92,7 @@ wx.swipePages = [
 	},
 	{
 	
-		helpHtml:	'<div id="wxnavtip-alltabs" class="wx_box info wxblk"><h2 class="navtip-title">...and Done!<span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> </span></h2><p class="wxnavtip-description">Easy, eh?  Well, we certainly hope so!  &#x263A; &nbsp; <br/><br/>All set with features? Great! &nbsp;<a style="color:#2B6181;" class="wxreverse-decor" href="index.php?option=com_weever&view=theme&task=theme">Now let\'s make this app look fantastic</a>!</p></div>',		
+		helpHtml:	'<div id="wxnavtip-alltabs" class="wx_box info wxblk"><h2 class="navtip-title">...and Done!<span style="font-size:14px; float:right;"><span onclick="wx.swipe.prev()" class="wxnavtip-slide-info">&larr; previous</span> </span></h2><p class="wxnavtip-description">Easy, eh?  Well, we certainly hope so!  &#x263A; &nbsp; <br/><br/>All set with features? Great! &nbsp;<a style="color:#2B6181;" class="wxreverse-decor" href="index.php?option=com_weever&view=design">Now let\'s make this app look fantastic</a>!</p></div>',		
 		
 		
 		items:		[

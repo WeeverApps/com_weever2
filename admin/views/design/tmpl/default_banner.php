@@ -1,6 +1,6 @@
 <?php
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>

@@ -1,6 +1,6 @@
 <?php
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
@@ -122,8 +122,8 @@ class com_WeeverInstallerScript
 		$output = "
 				<div style='clear:both'>
 				
-						<img src='components/com_weever/assets/icons/icon-48-weever_toolbar_title.png' style='float:left;padding-right:2em;height:6em' /><br />
-						<h1 style='padding-top:0.625em;padding-bottom:1em;'>Weever Apps for Joomla version ". $manifest->version ."</h1>
+						<img src='components/com_weever/assets/icons/icon-48-weever_toolbar_title.png' style='padding-right:2em;height:6em' /><br />
+						<h1 style='padding-top:0.625em;padding-bottom:1em;'>Weever appBuilder&trade; for Joomla!</h1><br /><span>version ". $manifest->version ."</span>
 						
 				</div>
 				";

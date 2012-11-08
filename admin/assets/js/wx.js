@@ -1,5 +1,5 @@
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
@@ -438,7 +438,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			
 			for( var i=0; i < wx.tabSyncData.tabs.length; i++ ) {
 			
-				if( wx.tabSyncData.tabs[i].parent_id != null )
+				if( wx.tabSyncData.tabs[i].parent_id != null || wx.tabSyncData.tabs[i].layout == "share" )
 					continue;
 					
 				var name = wx.tabSyncData.tabs[i].tabTitle || wx.tabSyncData.tabs[i].title;
@@ -451,14 +451,14 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 
 			for( var i=0; i < serviceTypes.length; i++ ) {
 			
-				if( i == 0 && wx.tabSyncData.tabs.length == 0 ) {
+				if( i == 0 && wx.tabSyncData.tabs.length < 2 ) {
 				
 					tabDropdown 	= "";
 					continue;
 					
 				}
 			
-				if( ( i == 0 && wx.activeTypeDialog == null ) || ( wx.tabSyncData.tabs.length == 0 ) )
+				if( ( i == 0 && wx.activeTypeDialog == null ) || ( wx.tabSyncData.tabs.length < 2 ) )
 					checked = " checked='checked'";
 					
 				else {

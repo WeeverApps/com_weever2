@@ -1,6 +1,6 @@
 <?php
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
@@ -81,7 +81,7 @@ class WeeverModelList extends JModelLegacy
 	protected function getNavTabs() 
 	{
 	
-		$api_endpoint 		= "tabs/list_tab_data";
+		$api_endpoint 		= "tabs/get_tabs";
 		$remote_url 		= comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . $api_endpoint;
 		$stage_url 			= '';
 		$remote_query 		= array( 	

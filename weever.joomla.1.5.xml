@@ -14,7 +14,7 @@
 	
 	<administration>
 	
-		 <menu link="com_weever" img="admin/assets/icons/icon-16-weever_menu_logo.png">Weever appBuilder</menu>
+		 <menu link="com_weever" img="components/com_weever/assets/icons/icon-16-weever_menu_logo.png">Weever appBuilder</menu>
 		 
 		 <files folder="admin">
 			  <filename>weever.php</filename>

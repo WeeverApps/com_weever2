@@ -1,6 +1,6 @@
 <?php
 /*	
-*	Weever Apps Administrator Component for Joomla
+*	Weever appBuilder™ for Joomla
 *	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
@@ -140,6 +140,25 @@ class WeeverViewList extends JViewLegacy
 		
 		if( JRequest::getVar("wxTabDump") )
 			var_dump($nav_tabs);
+			
+		$latestVersion 		= comWeeverHelper::parseVersion( $nav_tabs->joomla_latest_version );
+		$currentVersion 	= comWeeverHelper::parseVersion( comWeeverConst::VERSION );
+		
+		if( $latestVersion[0] > $currentVersion[0] ||
+			($latestVersion[0] == $currentVersion[0] && $latestVersion[1] > $currentVersion[1]) ||
+			($latestVersion[0] == $currentVersion[0] && $latestVersion[1] == $currentVersion[1] && $latestVersion[2] > $currentVersion[2]) ||
+			($latestVersion[0] == $currentVersion[0] && $latestVersion[1] == $currentVersion[1] && $latestVersion[2] == $currentVersion[2] && $latestVersion[3] > $currentVersion[3]) )
+		{
+		
+			$version = str_replace( "2.0.0.", "2.0 Beta ", $nav_tabs->joomla_latest_version );
+			
+			if( strpos($nav_tabs->joomla_latest_version, "2.0.1") !== false )
+				$version = "2.0 Release";
+		
+			JRequest::setVar( "upgrade",			$nav_tabs->joomla_download );
+			JRequest::setVar( "upgradeVersion",		$version );
+		
+		}
 	
 		JSubMenuHelper::addEntry( JText::_('WEEVER_TAB_ITEMS'), 	'index.php?option=com_weever', true);
 		JSubMenuHelper::addEntry( JText::_('WEEVER_THEMING'), 		'index.php?option=com_weever&view=design&task=design', false);
