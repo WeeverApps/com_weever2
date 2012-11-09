@@ -52,7 +52,20 @@ $offlineSpan 		= "";
 
 echo $this->loadTemplate('banner');
 
-?>	
+echo "<div class='wx-full-container'>";
+
+if( isset($this->sidebar) )
+{
+
+	echo "<div class='wx-j3-sidebar'>";
+	
+	echo $this->sidebar;
+	
+	echo "</div>";
+
+}
+
+?>
 
 <div id="wx-list-workspace">
 
@@ -382,6 +395,8 @@ foreach( (array) $this->tabs as $k=>$v )
 		
 	</div>
 	
+</div>
+
 </div>
 
 <?php echo $this->loadTemplate('dialogs'); ?>

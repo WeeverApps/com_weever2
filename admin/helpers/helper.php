@@ -25,6 +25,7 @@ defined('_JEXEC') or die;
 jimport( 'joomla.application.component.helper' );
 jimport( 'joomla.plugin.helper' );
 jimport( 'joomla.html.html.tabs' );
+jimport( 'joomla.filesystem.folder' );
 
 class comWeeverHelper
 {
@@ -88,6 +89,18 @@ class comWeeverHelper
 		    'startOffset' => 0,  // 0 starts on the first tab, 1 starts the second, etc...
 		    'useCookie' => true, // this must not be a string. Don't use quotes.
 		);
+	
+	}
+	
+	
+	public static function addJAdminMenuEntry( $item, $link, $highlight )
+	{
+	
+		if( self::joomlaVersion() < 3.0 ) 
+			JSubMenuHelper::addEntry( $item, $link, $highlight );
+			
+		else 
+			JHtml::_('sidebar.addentry', $item, $link, $highlight );
 	
 	}
 	

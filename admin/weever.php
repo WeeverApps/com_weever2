@@ -67,8 +67,16 @@ else
 
 /* Load our Javascripts */
 
-$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery.js?v='.comWeeverConst::VERSION );
-$document->addCustomTag ('<script type="text/javascript">jQuery.noConflict();</script>');
+if( comWeeverHelper::joomlaVersion() > 2.9 )
+	JHtml::_('jquery.framework');
+	
+else {
+	
+	$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery.js?v='.comWeeverConst::VERSION );
+	$document->addCustomTag ('<script type="text/javascript">jQuery.noConflict();</script>');
+
+}
+
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery-ui.js?v='.comWeeverConst::VERSION );
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery-impromptu.js?v='.comWeeverConst::VERSION );
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jq.common.js?v='.comWeeverConst::VERSION );

@@ -96,6 +96,23 @@ else
 </span>
 </div>
 
+<?php 
+
+echo "<div class='wx-full-container'>";
+
+if( isset($this->sidebar) )
+{
+
+	echo "<div class='wx-j3-sidebar'>";
+	
+	echo $this->sidebar;
+	
+	echo "</div>";
+
+}
+
+?>
+
 <div class="supportlist">
 
 <div>
@@ -111,4 +128,6 @@ else
     
     
 </div>
+</div>
+
 </div>

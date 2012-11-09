@@ -288,6 +288,20 @@ box-shadow: 0 1px 3px #DDDDDD inset;
 
  }
  
+ .wx-full-container {
+ 	
+ 	
+ 	
+ }
+ 
+ .wx-j3-sidebar {
+ 	
+ 	float: left;
+ 	width: 	15em;
+ 	height: 100%;
+ 	
+ }
+ 
 #content-box #submenu li {
 	padding:0;
 	margin:0;
@@ -1963,8 +1977,9 @@ img.wx-jquery-dialog-titlebar-icon {
     width: 24px;
 }
 
-div#wx-list-workspace {
+div#wx-list-workspace, div#wx-workspace  {
 /*	opacity: 0; not sure why this is here, made everything vanish in v2 */
+float: left;
 }
 
 /* JQuery Dialog Buttons

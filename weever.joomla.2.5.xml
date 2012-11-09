@@ -70,7 +70,7 @@
 
 	<updateservers>
 	
-		<server type="extension" priority="2" name="Weever Apps Updates">http://weeverapps.com/download_files/com_weever.xml</server>
+		<server type="collection">http://weeverapps.com/download_files/weever_appbuilder.xml</server>
 		
 	</updateservers>
 	 

@@ -45,6 +45,8 @@ class com_WeeverInstallerScript
 		$document = JFactory::getDocument();
 		
 		$this->installPackagedExtensions($manifest);
+		
+		$result = $this->enablePlugin("mobileesp");
 			
 		if( !is_dir(JPATH_ROOT.DS."images".DS."com_weever") )
 		{

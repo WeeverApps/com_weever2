@@ -92,6 +92,23 @@ echo $this->loadTemplate('banner');
     <div id='wx-modal-error-text'></div>
 </div>
 
+<?php 
+
+echo "<div class='wx-full-container'>";
+
+if( isset($this->sidebar) )
+{
+
+	echo "<div class='wx-j3-sidebar'>";
+	
+	echo $this->sidebar;
+	
+	echo "</div>";
+
+}
+
+?>
+
 <form action='index.php' enctype='multipart/form-data' method='post' name='adminForm' id='adminForm'>	
 
 	<?php echo comWeeverHelper::startJHtmlPane( 'theme', $pane ); ?>
@@ -152,3 +169,5 @@ echo $this->loadTemplate('banner');
 	<?php echo JHTML::_('form.token'); ?>
 	 
 </form>
+
+</div>

@@ -47,11 +47,14 @@ class WeeverViewSupport extends JViewLegacy
 
 		comWeeverHelper::getJsStrings();
 
-		JSubMenuHelper::addEntry(JText::_('WEEVER_TAB_ITEMS'), 'index.php?option=com_weever', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_THEMING'), 'index.php?option=com_weever&view=design&task=design', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_CONFIGURATION'), 'index.php?option=com_weever&view=config&task=config', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_ACCOUNT'), 'index.php?option=com_weever&view=account&task=account', false);
-		JSubMenuHelper::addEntry(JText::_('WEEVER_SUPPORT_TAB'), 'index.php?option=com_weever&view=support&task=support', true);
+		comWeeverHelper::addJAdminMenuEntry(JText::_('WEEVER_TAB_ITEMS'), 'index.php?option=com_weever', false);
+		comWeeverHelper::addJAdminMenuEntry(JText::_('WEEVER_THEMING'), 'index.php?option=com_weever&view=design&task=design', false);
+		comWeeverHelper::addJAdminMenuEntry(JText::_('WEEVER_CONFIGURATION'), 'index.php?option=com_weever&view=config&task=config', false);
+		comWeeverHelper::addJAdminMenuEntry(JText::_('WEEVER_ACCOUNT'), 'index.php?option=com_weever&view=account&task=account', false);
+		comWeeverHelper::addJAdminMenuEntry(JText::_('WEEVER_SUPPORT_TAB'), 'index.php?option=com_weever&view=support&task=support', true);
+
+		if( comWeeverHelper::joomlaVersion() > 2.9 )
+			$this->assign( 'sidebar', JHtml::_('sidebar.render') );
 
 		parent::display($tpl);
 	
