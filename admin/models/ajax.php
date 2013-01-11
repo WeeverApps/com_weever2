@@ -57,7 +57,7 @@ class WeeverModelAjax extends JModelLegacy
 		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
 		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
 		
-		//print_r($postdata);
+		print_r($response);
 
 		$json		= json_decode( $response );
 

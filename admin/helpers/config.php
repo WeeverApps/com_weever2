@@ -30,8 +30,8 @@ final class comWeeverConst
 {
 
 	const VERSION			= "2.0";
-	const RELEASE_TYPE		= "Beta Release 1";
-	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/nt/aulavik/index.aspx' target='_blank'>Aulavik</a>";
+	const RELEASE_TYPE		= "Beta Release 2";
+	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/ab/banff/index.aspx' target='_blank'>Banff</a>";
 	const NAME				= "Weever appBuilder&trade; for Joomla!";
 	const COPYRIGHT_YEAR	= "(c) 2010-2012";
 	const COPYRIGHT			= "Weever Apps Inc.";
@@ -41,7 +41,7 @@ final class comWeeverConst
 	const RELEASE_DATE		= "November 8, 2012";
 	const SUPPORT_WEB		= "http://support.weeverapps.com/";
 	const LIVE_SERVER		= "http://weeverapp.com/";
-	const LIVE_STAGE		= "http://stage.weeverapp.com/";
+	const LIVE_STAGE		= "http://cetus.weeverapp.com/";
 	const API_VERSION		= "api/v2/";
 	const SUPPORTED_TYPES	= "-oldtabs--newtab-";
 	const API_DEBUG			= false;
@@ -71,20 +71,20 @@ class comWeeverHelperJS
 			}
 			
 			Joomla.comWeeverConst = {
-				VERSION: "'.comWeeverConst::VERSION.'",
-				RELEASE_TYPE: "'.comWeeverConst::RELEASE_TYPE.'",
-				RELEASE_NAME: "'.comWeeverConst::RELEASE_NAME.'",
-				NAME: "'.comWeeverConst::NAME.'",
-				COPYRIGHT_YEAR: "'.comWeeverConst::COPYRIGHT_YEAR.'",
-				COPYRIGHT: "'.comWeeverConst::COPYRIGHT.'",
-				COPYRIGHT_URL: "'.comWeeverConst::COPYRIGHT_URL.'",
-				LICENSE: "'.comWeeverConst::LICENSE.'",
-				LICENSE_URL: "'.comWeeverConst::LICENSE_URL.'",
-				RELEASE_DATE: "'.comWeeverConst::RELEASE_DATE.'",
-				SUPPORT_WEB: "'.comWeeverConst::SUPPORT_WEB.'",
-				LIVE_SERVER: "'.comWeeverConst::LIVE_SERVER.'",
-				LIVE_STAGE: "'.comWeeverConst::LIVE_STAGE.'",
-				server: "'.$server.'"
+				VERSION: "'.		comWeeverConst::VERSION.'",
+				RELEASE_TYPE: "'.	comWeeverConst::RELEASE_TYPE.'",
+				RELEASE_NAME: "'.	comWeeverConst::RELEASE_NAME.'",
+				NAME: "'.			comWeeverConst::NAME.'",
+				COPYRIGHT_YEAR: "'.	comWeeverConst::COPYRIGHT_YEAR.'",
+				COPYRIGHT: "'.		comWeeverConst::COPYRIGHT.'",
+				COPYRIGHT_URL: "'.	comWeeverConst::COPYRIGHT_URL.'",
+				LICENSE: "'.		comWeeverConst::LICENSE.'",
+				LICENSE_URL: "'.	comWeeverConst::LICENSE_URL.'",
+				RELEASE_DATE: "'.	comWeeverConst::RELEASE_DATE.'",
+				SUPPORT_WEB: "'.	comWeeverConst::SUPPORT_WEB.'",
+				LIVE_SERVER: "'.	comWeeverConst::LIVE_SERVER.'",
+				LIVE_STAGE: "'.		comWeeverConst::LIVE_STAGE.'",
+				server: "'.			$server.'"
 			};
 			
 			</script>');

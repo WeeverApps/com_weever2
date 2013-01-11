@@ -341,11 +341,9 @@ foreach( (array) $this->tabs as $k=>$v )
 						
 						<td align='center'>
 						
-							<?php if( $sub > 1 || count($v) == 1 ) : ?>
 							
 							 <a href="#" title="ID #<?php echo $vv->id; ?>" class="wx-subtab-movetab"><?php echo '<img src="components/com_weever/assets/icons/move.png" border="0" style="width:24px;" alt="Move to Tab">'; ?></a>
 							 
-							<?php endif; ?>
 							 
 						</td>
 						
