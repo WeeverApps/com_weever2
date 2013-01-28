@@ -51,6 +51,7 @@ console.log(a);
 				content:	data.content,
 				config:		data.config,
 				layout:		jQuery('#wxLayoutType option:selected').val(),
+				tabLayout:	jQuery('#wxTabLayoutType option:selected').val(),
 				icon_id:	data.icon_id,
 				published:	1
 				
@@ -385,7 +386,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 	
 	if( true == populateOptions && jQuery(dialogId + ' > div#wx-added-elems').length == 0 && undefined != featureData.types ) {
 	
-		var checkboxOptions	= '<div id="wx-added-elems"></div>', // hidden div to detect repetition
+		var checkboxOptions	= '<div id="wx-added-elems"></div><h4>Tab Options</h4>', // hidden div to detect repetition
 			serviceTypes	= featureData.types;
 			
 		/* if it's a string, convert it */
@@ -413,6 +414,45 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		else
 		{
 		
+			/****** */
+		
+			var layoutOptions = "",
+				initLayoutVal = 0;
+			
+			if( featureData.layouts instanceof Array ) {
+			
+				for( var i = 0; i < featureData.layouts.length; i ++ ) {
+				
+					selectedText = ( 0 == i ) ? " selected='selected'" : "";
+					
+					initLayoutVal = featureData.layouts[i];
+				
+					layoutOptions += "<option "+ selectedText +" value='" + featureData.layouts[i] + "'>" + wx.layoutTypes[  featureData.layouts[i] ] + "</option>";
+				
+				}	
+				
+			}
+			
+			else {
+			
+				layoutOptions = "<option selected='selected' value='" + featureData.layouts + "'>" + wx.layoutTypes[ featureData.layouts ] + "</option>";
+			
+			}
+			
+			// kill old version		
+			jQuery(dialogId).append( "<h4>Content Layout</h4><p>How should this content by displayed?</p><div class='wx-add-layout-dropdown-container'>" +
+			
+				"<form name='wxLayoutForm'><select id='wxLayoutType' name='wxLayoutType' autocomplete='off'>" + 
+			
+					layoutOptions +
+			
+				"</select></form></div>"	
+				
+			);
+			
+			jQuery('#wxLayoutType').val( initLayoutVal );
+		
+			/****** */
 			var checked, label, disabled, tabList = [], tabDropdown,
 				extraClass		= '';
 				
@@ -464,7 +504,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 				else {
 				
 					checked 		= 0;
-					tabDropdown 	= "";
+					tabDropdown 	= "<select id='wxTabLayoutType'><option value=''>sub-tab (default)</option><option value='map'>map</option><option value='grid'>grid</option></select>";
 					
 				}
 
@@ -493,42 +533,6 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		}
 		
 		jQuery(dialogId).append( checkboxOptions );
-		
-		var layoutOptions = "",
-			initLayoutVal = 0;
-		
-		if( featureData.layouts instanceof Array ) {
-		
-			for( var i = 0; i < featureData.layouts.length; i ++ ) {
-			
-				selectedText = ( 0 == i ) ? " selected='selected'" : "";
-				
-				initLayoutVal = featureData.layouts[i];
-			
-				layoutOptions += "<option value='" + featureData.layouts[i] + "'"+ selectedText +">" + wx.layoutTypes[  featureData.layouts[i] ] + "</option>";
-			
-			}
-			
-		}
-		
-		else {
-		
-			layoutOptions = "<option selected='selected' value='" + featureData.layouts + "'>" + wx.layoutTypes[ featureData.layouts ] + "</option>";
-		
-		}
-		
-		// kill old version		
-		jQuery(dialogId).append( "<div class='wx-add-layout-dropdown-container'>" +
-		
-			"<select id='wxLayoutType'>" + 
-		
-				layoutOptions +
-		
-			"</select></div>"	
-			
-		);
-		
-		jQuery('#wxLayoutType').val( initLayoutVal );
 		
 	}
 	

@@ -79,8 +79,7 @@ class WeeverController extends JControllerLegacy
 	public function ajaxSaveTabName()
 	{
 	
-		$model = $this->getModel('ajax');
-	
+		$model 	= $this->getModel('ajax');
 		$result = $model->saveTabName( JRequest::getVar("name"), JRequest::getVar("id") );
 	
 		if( $result->success )
@@ -93,10 +92,23 @@ class WeeverController extends JControllerLegacy
 	public function ajaxSaveTabItemName()
 	{
 	
-		$model = $this->getModel('ajax');
-	
+		$model 	= $this->getModel('ajax');
 		$result = $model->saveTabItemName( JRequest::getVar("name"), JRequest::getVar("id") );
 	
+		if( $result->success )
+			echo "Tab Changes Saved";
+		
+		jexit();
+	
+	}
+	
+	
+	public function ajaxSaveTabLayout()
+	{
+	
+		$model 	= $this->getModel('ajax');
+		$result = $model->saveTabLayout( JRequest::getVar("tabLayout"), JRequest::getVar("tab_id") );
+		
 		if( $result->success )
 			echo "Tab Changes Saved";
 		
@@ -108,8 +120,7 @@ class WeeverController extends JControllerLegacy
 	public function ajaxTabDelete()
 	{
 
-		$model = $this->getModel('ajax');
-	
+		$model 	= $this->getModel('ajax');
 		$result = $model->deleteTab( JRequest::getVar("id") );
 
 		if( $result->success )
@@ -217,6 +228,7 @@ class WeeverController extends JControllerLegacy
 			JRequest::getVar("title"), 
 			JRequest::getVar("content"), 
 			JRequest::getVar("layout"), 
+			JRequest::getVar("tabLayout"),
 			JRequest::getVar("icon_id"), 
 			JRequest::getVar("published"),
 			JRequest::getVar("parent_id"),

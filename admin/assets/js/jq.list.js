@@ -117,6 +117,8 @@ jQuery( document ).ready( function() {
 	jQuery('div.wx-nav-icon').dblclick( wx.navIconDialog );
 	jQuery('button.wx-nav-icon').click( wx.navIconDialog );
 	
+	jQuery('button.wx-nav-tablayout').click( wx.navTabLayoutDialog );
+	
 	jQuery('button.wx-tab-settings').click( function(e) {
 	
 		wx.settingsDialog[ jQuery(this).attr('rel') ](e);

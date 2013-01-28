@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -57,7 +57,7 @@ class WeeverModelAjax extends JModelLegacy
 		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
 		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
 		
-		print_r($response);
+		echo $response;
 
 		$json		= json_decode( $response );
 
@@ -118,6 +118,22 @@ class WeeverModelAjax extends JModelLegacy
 		);
 	
 		return $this->makeAPICall( "tabs/set_title", $remote_query );
+	
+	}
+	
+	
+	public function saveTabLayout( $tabLayout, $tab_id )
+	{
+	
+		$remote_query		= array(
+		
+			'site_key'		=> $this->key,
+			'tabLayout'		=> $tabLayout,
+			'tab_id'		=> $tab_id
+		
+		);
+		
+		return $this->makeAPICall( "tabs/set_tabLayout", $remote_query );
 	
 	}
 	
@@ -252,7 +268,7 @@ class WeeverModelAjax extends JModelLegacy
 	}
 	
 	
-	public function saveNewTab( $config, $title, $content, $layout, $icon_id, $published, $parent_id, $config_cache ) 
+	public function saveNewTab( $config, $title, $content, $layout, $tabLayout, $icon_id, $published, $parent_id, $config_cache ) 
 	{
 
 		$remote_query 		= array( 	
@@ -262,6 +278,7 @@ class WeeverModelAjax extends JModelLegacy
 			'title'			=> $title,
 			'content'		=> $content,
 			'layout'		=> $layout,
+			'tabLayout'		=> $tabLayout,
 			'icon_id'		=> $icon_id,
 			'published'		=> $published,
 			'parent_id'		=> $parent_id,

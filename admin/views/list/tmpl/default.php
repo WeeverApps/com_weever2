@@ -202,6 +202,7 @@ foreach( (array) $this->tabs as $k=>$v )
 			
 				<button class="wxui-btn white medium radius3 wx-nav-label" style="margin-right:1.5em;" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Name</button>
 				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->icon_id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon</button>
+				<button class="wxui-btn white medium radius3 wx-nav-tablayout" style="margin-right:1.5em;" ref="<?php echo $v[0]->tabLayout; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Layout</button>
 				
 				<?php if( $row->component == "panel" || $row->component == "aboutapp" || $row->component == "map" ) : ?>
 				

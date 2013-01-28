@@ -32,12 +32,12 @@ wx.tabTypes = {
 
 	'oldtabs':		{
 	
-		label:	new wx.labelText('Display under existing tab: ', 'This content will be displayed under the tab: ')
+		label:	new wx.labelText('Use existing tab: ', 'This content will be displayed under the tab: ')
 	
 	},
 	'newtab':		{
 	
-		label:	new wx.labelText('Display as a new tab', 'This content will be displayed as a new tab: ')
+		label:	new wx.labelText('Create a new tab, using the layout: ', 'This content will be displayed as a new tab: ')
 	
 	}
 

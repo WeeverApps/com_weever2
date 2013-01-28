@@ -115,6 +115,7 @@ wx.ajaxUrl			= function(a) {
 	this.icon_id				= "&icon_id=" + a.icon_id;
 	this.published				= "&published=" + a.published;
 	this.layout					= "&layout=" + a.layout;
+	this.tabLayout				= "&tabLayout=" + a.tabLayout;
 	this.cms_feed				= "";
 	this.type 					= a.type;
 	this.parent_id				= "";
@@ -131,7 +132,8 @@ wx.ajaxUrl			= function(a) {
 		/* if we're adding this under an existing tab */
 		if( this.type == "oldtabs" ) {
 		
-			this.parent_id = "&parent_id=" + jQuery('#wxSelectOldTab').val();
+			this.parent_id 	= "&parent_id=" + jQuery('#wxSelectOldTab').val();
+			this.tabLayout	= "&tabLayout=";
 		
 		}
 
@@ -156,7 +158,7 @@ wx.ajaxUrl			= function(a) {
 	
 		var url = "option=com_weever&task=ajaxSaveNewTab" + this.title + 
 						this.content + this.config + "&weever_action=add" +
-					 	this.appKey + this.published + this.layout + this.icon_id + this.parent_id;			
+					 	this.appKey + this.published + this.layout + this.tabLayout + this.icon_id + this.parent_id;			
 		
 		return url;
 
@@ -293,6 +295,92 @@ wx.updateIconPreview = function(evt) {
 		
 	}
 
+
+};
+
+/* Change Tab Layout */
+
+wx.navTabLayoutDialog	= function(e) {
+
+	var xmlhttp 		= new XMLHttpRequest(),
+		tabLayout		= jQuery(this).attr('ref');
+
+	// perhaps add in future -- server-determined layouts
+	//xmlhttp.open("GET", Joomla.comWeeverConst.server + "api/v2/icons/get_icons");	
+	//xmlhttp.send();
+	
+	jQuery("select#wx-tablayout-dropdown-select").change(wx.updateIconPreview)
+	jQuery("select#wx-tablayout-dropdown-select").bind("keyup", wx.updateIconPreview);
+
+	var tabType 		= jQuery(this).attr('title'),
+		siteKey 		= jQuery("input#wx-site-key").val(),
+		tabId			= jQuery(this).attr('title'),
+		txt 			= 	'<div class="jqimessage">'+
+						'<h3 class="wx-imp-h3">' + 
+							'Tab Layout' + 
+						'</h3>'+
+						'<p>Choose how content added to this tab is displayed.</p>'+
+						'<div id="wx-tablayout-dropdown"><select id="wx-tablayout-dropdown-select" name="tablayout">'+
+						'<option value="">Sub-tabs (default)</option>'+
+						'<option value="list">List</option>'+
+						'<option value="grid">Grid</option>'+
+						'<option value="map">Map</option>'+
+						'<option value="carousel">Carousel</option></select>'+
+						'</div><div></div></div>',		
+		myCallbackForm 	= function(v,m,f) {
+
+			if( false == v )
+				return;
+
+			var tabLayout = f.tablayout;
+		//	var tabElem = jQuery( '#wx-nav-icon-' + tabId );
+
+			jQuery.ajax({
+
+			   type: 	"POST",
+			   url: 	"index.php",
+			   data: 	"option=com_weever&task=ajaxSaveTabLayout&tabLayout=" + 
+			   				tabLayout + 
+			   			"&tab_id=" + tabId,
+			   success: function(msg) {
+
+				   jQuery('#wx-modal-loading-text').html(msg);
+
+				   if(msg == "Tab Changes Saved")
+				   {
+
+				   		jQuery('#wx-modal-secondary-text').html( Joomla.JText._('WEEVER_JS_APP_UPDATED') );
+
+					}
+					else
+					{
+
+						jQuery('#wx-modal-secondary-text').html('');
+					 	jQuery('#wx-modal-error-text').html(Joomla.JText._('WEEVER_JS_SERVER_ERROR'));
+
+					}
+
+			 	}
+
+			});
+
+		},	
+		submitCheck 	= function(v,m,f) {
+
+			return true;
+
+		},		
+		tabLayoutLaunch		= jQuery.prompt(txt, {
+
+			callback: 		myCallbackForm, 
+			submit: 		submitCheck,
+			overlayspeed: 	"fast",
+			buttons: 		{ Cancel: false, Submit: true },
+			focus: 			2
+
+		});	
+
+	e.preventDefault();
 
 };
 

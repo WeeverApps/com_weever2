@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
 	    	var jObj = jQuery(this);
 	    	setTimeout( function() {
 	    			jObj.fadeOut(750);
-	    		}, 600 );
+	    		}, 2000 );
 	    });
 	   
 	    

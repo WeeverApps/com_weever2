@@ -36,7 +36,7 @@ wx.features = [
 				name:			'Blog',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				fields:			{
 				
 					'cms_feed':	'#wx-add-joomla-blog-select',
@@ -57,7 +57,7 @@ wx.features = [
 				content:		'html',
 				name:			'Category',
 				title:			true,
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				types:			['oldtabs', 'newtab'],
 				fields:			{
 				
@@ -146,7 +146,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -169,7 +169,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -216,7 +216,7 @@ wx.features = [
 				content:		'html',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				icon_id:		12,
 				config:			{
 				
@@ -253,7 +253,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -277,7 +277,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -325,7 +325,7 @@ wx.features = [
 				title:			true,
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list'],
+				layouts:		['list', 'grid'],
 				config:			{
 				
 					url:		':cms_feed',
