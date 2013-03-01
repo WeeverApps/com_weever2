@@ -4,7 +4,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -32,12 +32,12 @@ wx.tabTypes = {
 
 	'oldtabs':		{
 	
-		label:	new wx.labelText('Use existing tab: ', 'This content will be displayed under the tab: ')
+		label:	new wx.labelText('Add to existing tab: ', 'This content will be displayed under the tab: ')
 	
 	},
 	'newtab':		{
 	
-		label:	new wx.labelText('Create a new tab, using the layout: ', 'This content will be displayed as a new tab: ')
+		label:	new wx.labelText('Add as a new tab, using the layout: ', 'This content will be displayed as a new tab: ')
 	
 	}
 

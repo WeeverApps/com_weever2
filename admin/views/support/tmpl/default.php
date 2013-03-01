@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -118,9 +118,9 @@ if( isset($this->sidebar) )
 <div>
 	<fieldset class='adminForm'>
 	
-		<legend>Coming soon!</legend>
+		<legend>Support</legend>
 		
-		
+		<p><a href="http://support.weeverapps.com/" target="_blank">Please visit our support website</a> for assistance.
 
         
 </fieldset>

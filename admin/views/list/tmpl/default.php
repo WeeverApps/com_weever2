@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -202,7 +202,7 @@ foreach( (array) $this->tabs as $k=>$v )
 			
 				<button class="wxui-btn white medium radius3 wx-nav-label" style="margin-right:1.5em;" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Name</button>
 				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->icon_id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon</button>
-				<button class="wxui-btn white medium radius3 wx-nav-tablayout" style="margin-right:1.5em;" ref="<?php echo $v[0]->tabLayout; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Layout</button>
+				<button class="wxui-btn white medium radius3 wx-nav-tablayout" style="margin-right:1.5em;" ref="<?php echo $v[0]->tabLayout; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Layout (<?php echo ($v[0]->tabLayout) ? $v[0]->tabLayout : "sub-tabs" ; ?>)</button>
 				
 				<?php if( $row->component == "panel" || $row->component == "aboutapp" || $row->component == "map" ) : ?>
 				
@@ -233,15 +233,25 @@ foreach( (array) $this->tabs as $k=>$v )
 						
 						<th width='9%' nowrap='nowrap'>
 						
-							<?php echo JText::_('Move to Tab'); ?>
+							<?php echo JText::_('Geotag'); ?>
 							
 						</th>
 						
 						<th width='9%' nowrap='nowrap'>
 						
-							<?php echo JHTML::_('grid.sort', JText::_('WEEVER_PUBLISHED'), 'published', $this->lists['order_Dir'], $this->lists['order']); ?>
+							<?php echo JText::_('Move to Tab'); ?>
 							
 						</th>
+						
+						<?php if( $v[0]->tabLayout == "map" ) : ?>
+						
+							<th width='9%' nowrap='nowrap'>
+							
+								<?php echo JHTML::_('grid.sort', JText::_('WEEVER_PUBLISHED'), 'published', $this->lists['order_Dir'], $this->lists['order']); ?>
+								
+							</th>
+						
+						<?php endif; ?>
 						
 						<th width='9%' nowrap='nowrap'><?php echo JText::_('WEEVER_DELETE_TH'); ?></th>
 						
@@ -253,7 +263,7 @@ foreach( (array) $this->tabs as $k=>$v )
 				
 					<tr>
 					
-						<td colspan='5'>
+						<td colspan='6'>
 						
 							<div class="wx-list-actions">
 				
@@ -339,6 +349,85 @@ foreach( (array) $this->tabs as $k=>$v )
 						<td>
 							<img class="wx-sort-icon" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link">&nbsp;<?php echo $vv->title; ?>&nbsp;</a>
 						</td>
+						
+						<?php if( $v[0]->tabLayout == "map" ) : ?>
+						
+							<td align='center'>
+							
+								<?php 
+								
+								$geo_point_txt 		= "+";
+								$geo_point_colour	= "orange";
+								
+								if( $vv->geo ) {
+								
+									if( !is_array($vv->geo) )
+										$geo_point_txt = "1";
+									
+									else 
+										$geo_point_txt = count($vv->geo);
+										
+									$geo_point_colour = "green";
+	
+								}
+								
+								if( isset($vv->config) && isset($vv->config->url) )
+								{
+								
+									$is_com_content = strstr($vv->config->url, "option=com_content");
+									$is_com_k2		= strstr($vv->config->url, "option=com_k2");
+								
+									if( $is_com_content || $is_com_k2 )
+									{
+
+										?>
+										<script type="text/javascript">
+
+										jQuery(document).ready(function() { 
+										
+											wx.checkR3SGeo("<?php echo $vv->config->url . "&geotag=true&template=weever_cartographer" ?>", function( item_count ) {									
+
+												jQuery("#wmx-tab-id-<?php echo $vv->id; ?>-count").html( item_count );
+												jQuery("#wmx-tab-id-<?php echo $vv->id; ?> .wmx-map-marker-count").css("background-color", "blue");
+												jQuery("#wmx-tab-id-<?php echo $vv->id; ?>").removeClass("wmx-geocoder-launch");
+												jQuery("#wmx-tab-id-<?php echo $vv->id; ?>").addClass("wmx-geocoder-alert-<?php echo $vv->id; ?>");
+												
+												jQuery(".wmx-geocoder-alert-<?php echo $vv->id; ?>").click(function(e) {
+												
+													<?php if($is_com_content) : ?>
+													
+														alert("This content was geotagged inside the Joomla Content editor. Please go there to change the geotagging.");
+													
+													<?php elseif($is_com_k2) : ?>
+													
+														alert("This content was geotagged inside the K2 Item editor. Please go there to change the geotagging.");
+													
+													<?php else : ?>
+													
+														alert("This content was geotagged at the content's source. Please go to the source to change the geotagging.");
+													
+													<?php endif; ?>
+												
+												});
+												
+											})
+										
+										});
+										</script>
+										
+										<?php
+										
+									}
+								
+								}
+		
+								?>							
+							
+								<div class='wmx-geocoder-launch wmx-geocoder' id='wmx-tab-id-<?php echo $vv->id; ?>'><div class="wmx-map-marker-count" style="background-color: <?php echo $geo_point_colour; ?>;font-size: 1.125em; color: white; border-radius: 1.125em 1.125em 1.125em 1.125em; font-weight: bold; text-align: center; width: 3em;"><div id="wmx-tab-id-<?php echo $vv->id; ?>-count wmx-count-number" style="display: inline";><?php echo $geo_point_txt; ?></div><img src="components/com_weever/assets/icons/nav/map-marker.png" border="0" style="padding: 0.125em 0.125em 0.125em 0.325em; height: 1em;" alt="Map Markers" /></div></div>
+							
+							</td>
+							
+						<?php endif; ?>
 						
 						<td align='center'>
 						

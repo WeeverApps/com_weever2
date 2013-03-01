@@ -4,7 +4,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ wx.features = [
 				name:			'Blog',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				fields:			{
 				
 					'cms_feed':	'#wx-add-joomla-blog-select',
@@ -57,7 +57,7 @@ wx.features = [
 				content:		'html',
 				name:			'Category',
 				title:			true,
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				types:			['oldtabs', 'newtab'],
 				fields:			{
 				
@@ -146,7 +146,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -169,7 +169,7 @@ wx.features = [
 				extension:		'com_k2',
 				title:			true,
 				content:		'html',
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				types:			['oldtabs', 'newtab'],
 				config:			{
 				
@@ -216,7 +216,7 @@ wx.features = [
 				content:		'html',
 				title:			true,
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				icon_id:		12,
 				config:			{
 				
@@ -253,7 +253,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -277,7 +277,7 @@ wx.features = [
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
 				content:		'html',
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				config:			{
 				
 					url:		':cms_feed',
@@ -325,7 +325,7 @@ wx.features = [
 				title:			true,
 				//unavailable:	'Coming soon!',
 				types:			['oldtabs', 'newtab'],
-				layouts:		['list', 'grid'],
+				layouts:		['list'],
 				config:			{
 				
 					url:		':cms_feed',

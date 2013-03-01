@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -33,6 +33,29 @@ class TableWeeverConfig extends JTable
 	{
 	
 		parent::__construct('#__weever_config', 'id', $db);
+			
+	}
+
+
+}
+
+class TableWeeverMaps extends JTable
+{
+
+	public $id 						= 0;
+	public $component_id			= 0;
+	public $component				= null;
+	public $altitude				= 0;
+	public $address					= null;
+	public $label					= null;
+	public $kml						= null;
+	public $marker					= null;
+	public $location				= null;
+	
+	public function __construct(&$db)
+	{
+	
+		parent::__construct('#__weever_maps', 'id', $db);
 			
 	}
 

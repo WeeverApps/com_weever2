@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -109,30 +109,36 @@ class WeeverModelList extends JModelLegacy
 		return $json;
 	
 	}
-		
-	public function getCountSubtabs()
+	
+	public function getMapsData()
 	{
 	
-		$db = &JFactory::getDBO();		
-		
-		$query = "	SELECT	type ".
-				"	FROM	#__weever_tabs ".
-				"	WHERE	published = '1' ".
-				"	AND		type <> ".$db->Quote("tab")." ";
+		$db = &JFactory::getDBO();	
+			
+		$query = "	SELECT	* ".
+				"	FROM	#__weever_maps ";
 				
 		$db->setQuery($query);
 		
-		$subtabs 		= $db->loadObjectList();
-		$count 			= array("blog"=>0, "page"=>0, "video"=>0, "photo"=>0, "social"=>0, "contact"=>0);
+		$rows 		= $db->loadObjectList();
+		$map_items	= array();
 		
-		foreach( (array) $subtabs as $k=>$v )
-			$count[$v->type]++;
+		foreach( (array) $rows as $k=>$v )
+		{
 		
+			if( !isset($map_items[$v->component]) )
+				$map_items[ $v->component ] = array();
+			
+			if( !isset( $map_items[$v->component][$v->component_id] ) )
+				$map_items[$v->component][$v->component_id] = 1;
+			else 
+				$map_items[$v->component][$v->component_id]++;
 		
-		return $count;	
+		}
+		
+		return $map_items;
 	
-	}
-	
+	}	
 	
 	public function getAccountData()
 	{

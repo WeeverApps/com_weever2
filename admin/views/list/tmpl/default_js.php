@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -51,7 +51,7 @@ $document->addCustomTag ('<script type="text/javascript">
 				function jSelectItem(id, title, object) {
 			
                     jQuery(\'#wx-add-k2-item-url\').val(\'index.php?option=com_k2&view=item&id=\' + id);
-                    jQuery(\'#wx-add-k2-item-name\').val(title);
+                    jQuery(\'#wx-add-k2-item-name\').val(title).change();
                    '.$js_close.'
                        
                 }
@@ -67,7 +67,7 @@ $document->addCustomTag ('<script type="text/javascript">
 				function jSelectCategory(id, title, object) {
 			
                     jQuery(\'#wx-add-k2-category-url\').val(\'index.php?option=com_k2&view=itemlist&layout=category&task=category&template=weever_cartographer&id=\' + id);
-                    jQuery(\'#wx-add-k2-category-name\').val(title);
+                    jQuery(\'#wx-add-k2-category-name\').val(title).trigger(\'change\');
                    '.$js_close.'
                        
                 }

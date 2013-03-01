@@ -56,8 +56,6 @@ class WeeverModelAjax extends JModelLegacy
 	
 		$postdata 	= comWeeverHelper::buildWeeverHttpQuery($remote_query);
 		$response	= comWeeverHelper::sendToWeeverServer($postdata, $remote_url);
-		
-		echo $response;
 
 		$json		= json_decode( $response );
 
@@ -268,7 +266,7 @@ class WeeverModelAjax extends JModelLegacy
 	}
 	
 	
-	public function saveNewTab( $config, $title, $content, $layout, $tabLayout, $icon_id, $published, $parent_id, $config_cache ) 
+	public function saveNewTab( $config, $title, $content, $layout, $tabLayout, $icon_id, $published, $parent_id, $config_cache, $geo ) 
 	{
 
 		$remote_query 		= array( 	
@@ -282,7 +280,8 @@ class WeeverModelAjax extends JModelLegacy
 			'icon_id'		=> $icon_id,
 			'published'		=> $published,
 			'parent_id'		=> $parent_id,
-			'config_cache'	=> $config_cache
+			'config_cache'	=> $config_cache,
+			'geo'			=> $geo
 		
 		);
 		

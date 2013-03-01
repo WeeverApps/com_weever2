@@ -4,7 +4,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -32,24 +32,121 @@ if (typeof console == "undefined") {
     
 }
 
+//unused so far
+wx.checkR3SGeo 		= function( url, callback ) {
+
+	var xmlhttp 		= new XMLHttpRequest(),
+		xmlhttpCall		= url;
+
+	xmlhttp.open("GET", xmlhttpCall );	
+	xmlhttp.send();
+
+	xmlhttp.onreadystatechange = function()	{
+	
+		if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+		
+			var response 	= JSON.parse( xmlhttp.responseText ) || null,
+				item_count	= 0;
+				
+			if( !response )
+				return;
+				
+			if( !!response.items ) {
+			
+				for( var i = 0; i < response.items.length; i++ ) {
+				
+					var item 	= response.items[i],
+						geo;		
+
+					if( !item.geo )
+						continue;
+						
+					if( !item.geo instanceof Array )
+						geo = [item.geo]
+					else 
+						geo = item.geo;
+						
+					item_count += geo.length;
+
+				}
+			
+			}
+			
+			else {
+
+				var geo = response.results[0].geo || null;
+			
+				if( !geo )
+					return;
+
+				if( !geo instanceof Array )
+					geo = [geo];	
+					
+				if( !geo.length )
+					return;
+					
+				item_count += geo.length;
+			
+			}
+			
+			if( !item_count )
+				return;
+		
+			callback( item_count );
+			
+		}
+		
+	}
+
+}
+
+wx.addGeoFromWeeverMaps	= function() {
+
+	if( !!!wmx || !!!wmx.markers || !wmx.markers.length )
+		return null;
+		
+	var geo = [];
+
+	for( var i = 0; i < wmx.markers.length; i++ ) {
+	
+		marker 	= wmx.markers[i];
+		geo[i]	= {};
+		
+		geo[i].latitude 	= marker.position.lat();
+		geo[i].longitude 	= marker.position.lng();
+		geo[i].label		= marker.labelContent;
+		geo[i].marker_url	= marker.icon.url;
+		
+		if( jQuery('#wmx-kml-url').val() ) {
+		
+			geo[i].kml = jQuery('#wmx-kml-url').val();
+			
+			jQuery('#wmx-kml-url').val( null );
+		
+		}
+	
+	}
+	
+	wmx.clearMap();
+
+	return geo;
+
+}
 
 /* Prep our Ajax call to the CMS */
 
 wx.ajaxAddTabItem	= function(a) {
 
-console.log(a);	
-	
 	var ajaxUrls	= [],
 		returned	= 0,
 		addAjaxUrl	= function(type, data) {
-		
-			console.log(data);
-		
+
 			var newType = new wx.ajaxUrl({ 
 			
 				type:		type,
 				content:	data.content,
 				config:		data.config,
+				geo:		wx.addGeoFromWeeverMaps(),
 				layout:		jQuery('#wxLayoutType option:selected').val(),
 				tabLayout:	jQuery('#wxTabLayoutType option:selected').val(),
 				icon_id:	data.icon_id,
@@ -386,7 +483,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 	
 	if( true == populateOptions && jQuery(dialogId + ' > div#wx-added-elems').length == 0 && undefined != featureData.types ) {
 	
-		var checkboxOptions	= '<div id="wx-added-elems"></div><h4>Tab Options</h4>', // hidden div to detect repetition
+		var checkboxOptions	= '<div id="wx-added-elems"></div>', // hidden div to detect repetition
 			serviceTypes	= featureData.types;
 			
 		/* if it's a string, convert it */
@@ -398,9 +495,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			serviceTypes[0] = oldString;
 			
 		}
-		
-		console.log( serviceTypes );
-		
+
 		if( serviceTypes.length == 1 ) {
 		
 			if( undefined == featureData.labels )
@@ -440,7 +535,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			}
 			
 			// kill old version		
-			jQuery(dialogId).append( "<h4>Content Layout</h4><p>How should this content by displayed?</p><div class='wx-add-layout-dropdown-container'>" +
+			jQuery(dialogId).append( "<h4>How should this content by displayed?</h4><div class='wx-add-layout-dropdown-container'>" +
 			
 				"<form name='wxLayoutForm'><select id='wxLayoutType' name='wxLayoutType' autocomplete='off'>" + 
 			
@@ -478,12 +573,19 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			
 			for( var i=0; i < wx.tabSyncData.tabs.length; i++ ) {
 			
+				var mapClass = "";
+			
 				if( wx.tabSyncData.tabs[i].parent_id != null || wx.tabSyncData.tabs[i].layout == "share" )
 					continue;
 					
 				var name = wx.tabSyncData.tabs[i].tabTitle || wx.tabSyncData.tabs[i].title;
+				
+				name += " (" + (wx.tabSyncData.tabs[i].tabLayout || "sub-tab") + " layout)";
+				
+				if( wx.tabSyncData.tabs[i].tabLayout == "map" ) 
+					mapClass = "class='wx-map-select' ";
 					
-				tabDropdown += "<option value='" + wx.tabSyncData.tabs[i].id + "'>" + name + "</option>";
+				tabDropdown += "<option " + mapClass + "value='" + wx.tabSyncData.tabs[i].id + "'>" + name + "</option>";
 			
 			}
 			
@@ -504,7 +606,7 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 				else {
 				
 					checked 		= 0;
-					tabDropdown 	= "<select id='wxTabLayoutType'><option value=''>sub-tab (default)</option><option value='map'>map</option><option value='grid'>grid</option></select>";
+					tabDropdown 	= "<select id='wxTabLayoutType'><option value=''>sub-tab (default)</option><option value='list'>list</option><option value='map' class='wx-map-select'>map</option></select>";
 					
 				}
 
@@ -533,6 +635,9 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 		}
 		
 		jQuery(dialogId).append( checkboxOptions );
+		jQuery('#wx-geotag-new-item').remove();
+		jQuery(dialogId).append( "<button id='wx-geotag-new-item' style='display:none;' class='blue button wmx-geocoder-launch wx-geotag-new-item'>+ Add Map Markers</button>" );
+		jQuery('#wx-geotag-new-item').click( wmx.openWindow );
 		
 	}
 	
@@ -576,7 +681,19 @@ wx.localizedConditionalDialog	= function (buttonName, dialogId, backAction, popu
 			});
 			
 			jQuery( 'input:first-child', jQuery(this) ).blur();
-			//jQuery('.wx-dialog-input').val('');
+			
+			if( jQuery('select#wxSelectOldTab, select#wxTabLayoutType').find("option:selected").hasClass("wx-map-select") )
+				jQuery("#wx-geotag-new-item").css('display', 'block');
+			
+			jQuery('select#wxSelectOldTab, select#wxTabLayoutType').change(function() {
+
+				if( jQuery(this).find("option:selected").hasClass("wx-map-select") )
+					jQuery("#wx-geotag-new-item").css('display', 'block');
+					
+				else 
+					jQuery("#wx-geotag-new-item").css('display', 'none');
+			
+			});
 
 		}
 			

@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -45,7 +45,7 @@ class WeeverViewList extends JViewLegacy
 		
 		$state 			= $this->get( 'state' );
 		$nav_tabs 		= $this->get( 'tabsdata' );
-		//$accountData 	= $this->get('AccountData');
+		$map_items		= $this->get( 'mapsdata' );
 		
 		if( !comWeeverHelper::getKey() )
 		{
@@ -73,7 +73,8 @@ class WeeverViewList extends JViewLegacy
 		
 			'<script type="text/javascript">'.
 			
-				'wx.tabSyncData = ' . json_encode( $nav_tabs ) .
+				'wx.tabSyncData = ' . json_encode( $nav_tabs ) . ';' .
+				'wx.juriBase	= "' . JURI::root() . '";'.
 			
 			'</script>'
 			

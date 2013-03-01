@@ -4,7 +4,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -117,6 +117,7 @@ wx.ajaxUrl			= function(a) {
 	this.layout					= "&layout=" + a.layout;
 	this.tabLayout				= "&tabLayout=" + a.tabLayout;
 	this.cms_feed				= "";
+	this.geo					= "&geo=" + ( encodeURIComponent(JSON.stringify(a.geo)) ) || null;
 	this.type 					= a.type;
 	this.parent_id				= "";
 	this.component_behaviour	= "";
@@ -158,7 +159,7 @@ wx.ajaxUrl			= function(a) {
 	
 		var url = "option=com_weever&task=ajaxSaveNewTab" + this.title + 
 						this.content + this.config + "&weever_action=add" +
-					 	this.appKey + this.published + this.layout + this.tabLayout + this.icon_id + this.parent_id;			
+					 	this.appKey + this.published + this.layout + this.tabLayout + this.icon_id + this.parent_id + this.geo;		
 		
 		return url;
 
@@ -269,8 +270,6 @@ wx.iconBase64		= "";
 
 wx.updateIconPreview = function(evt) {
 
-	var xmlhttp 		= new XMLHttpRequest()
-
 	// nav-icons when creating a new tab
 	var val = jQuery("select#wx-icons-dropdown-select").val() || jQuery("select#wx-nav-icons-dropdown-select").val();
 
@@ -323,9 +322,7 @@ wx.navTabLayoutDialog	= function(e) {
 						'<div id="wx-tablayout-dropdown"><select id="wx-tablayout-dropdown-select" name="tablayout">'+
 						'<option value="">Sub-tabs (default)</option>'+
 						'<option value="list">List</option>'+
-						'<option value="grid">Grid</option>'+
 						'<option value="map">Map</option>'+
-						'<option value="carousel">Carousel</option></select>'+
 						'</div><div></div></div>',		
 		myCallbackForm 	= function(v,m,f) {
 

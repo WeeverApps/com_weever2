@@ -1,11 +1,11 @@
 <?php
 /*	
 *	Weever appBuilder™ for Joomla
-*	(c) 2010-2012 Weever Apps Inc. <http://www.weeverapps.com/>
+*	(c) 2010-2013 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -38,7 +38,7 @@ final class comWeeverConst
 	const COPYRIGHT_URL		= "http://www.weeverapps.com/";
 	const LICENSE			= "GPL v3.0";
 	const LICENSE_URL		= "http://www.gnu.org/licenses/gpl-3.0.html";
-	const RELEASE_DATE		= "November 8, 2012";
+	const RELEASE_DATE		= "March 1, 2013";
 	const SUPPORT_WEB		= "http://support.weeverapps.com/";
 	const LIVE_SERVER		= "http://weeverapp.com/";
 	const LIVE_STAGE		= "http://cetus.weeverapp.com/";

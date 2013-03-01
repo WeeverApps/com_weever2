@@ -4,7 +4,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 1
+*	Version: 	2.0 Beta 2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -146,9 +146,24 @@ jQuery( document ).ready( function() {
 			jQuery(actionButton).removeAttr('disabled');
 			jQuery(actionButton).removeClass('white');
 			jQuery(actionButton).addClass('blue');
+			
+			jQuery('#wx-geotag-new-item')
+				.removeAttr('disabled')
+				.html('+ Add Map Markers');
+			
+			wx.checkR3SGeo( wx.juriBase + jQuery(this).val() + "&geotag=true", function( item_count ) {
+			
+				jQuery('#wx-geotag-new-item')
+					.attr('disabled', 'disabled')
+					.html('Content is already geotagged');
+			
+			});
 	       
 		}
 		else {
+		
+			jQuery('#wx-geotag-new-item')
+				.html('---');
 		
 			jQuery(actionButton).attr('disabled', 'disabled');
 			jQuery(actionButton).removeClass('blue');
@@ -156,6 +171,22 @@ jQuery( document ).ready( function() {
 			
 		}
 	    
+	});
+	
+	jQuery('#wx-add-k2-category-name').change( function() {
+	
+		jQuery('#wx-geotag-new-item')
+			.removeAttr('disabled')
+			.html('+ Add Map Markers');
+	
+		wx.checkR3SGeo( wx.juriBase + jQuery('#wx-add-k2-category-url').val() + "&geotag=true", function( item_count ) {
+		
+			jQuery('#wx-geotag-new-item')
+				.attr('disabled', 'disabled')
+				.html('Content is already geotagged');
+		
+		});	
+	
 	});
 	
 	jQuery('a.modal').click( function() {
@@ -353,8 +384,6 @@ jQuery( document ).ready( function() {
 			if(v != undefined && v == true) { 
 			
 				parentId = f['parentId'];
-				
-				console.log ( "option=com_weever&task=ajaxTabMove&parent_id="+ parentId +"&tab_id=" + tabId+ '&site_key=' + siteKey );
 				
 				jQuery.ajax({
 				
