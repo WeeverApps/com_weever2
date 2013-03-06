@@ -159,7 +159,9 @@ class WeeverModelDesign extends JModelLegacy
 		$remote_query 		= array( 	
 		
 			'site_key' 			=> $this->key,
-			'design'			=> json_encode( $options )
+			'design'			=> json_encode( $options ),	
+			'cms'				=> 'joomla',
+			'cms_version'		=> comWeeverHelper::joomlaVersion()
 		
 		);
 		

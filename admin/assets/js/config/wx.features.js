@@ -420,7 +420,7 @@ wx.features = [
 				icon_id:		22,
 				config:			{
 				
-					'screen_name':			':component_behaviour',
+					'q':			':component_behaviour',
 					'include_entities':		1
 				
 				},
@@ -447,7 +447,7 @@ wx.features = [
 				icon_id:		22,
 				config:			{
 				
-					'screen_name':			':component_behaviour',
+					'q':			':component_behaviour',
 					'include_entities':		1
 				
 				},
