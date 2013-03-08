@@ -204,9 +204,9 @@ foreach( (array) $this->tabs as $k=>$v )
 				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->icon_id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon</button>
 				<button class="wxui-btn white medium radius3 wx-nav-tablayout" style="margin-right:1.5em;" ref="<?php echo $v[0]->tabLayout; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Layout (<?php echo ($v[0]->tabLayout) ? $v[0]->tabLayout : "sub-tabs" ; ?>)</button>
 				
-				<?php if( $row->component == "panel" || $row->component == "aboutapp" || $row->component == "map" ) : ?>
+				<?php if( $v[0]->tabLayout == "map" ) : ?>
 				
-					<button class="wxui-btn white medium radius3 wx-tab-settings" rel="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Settings</button>
+					<button class="wxui-btn white medium radius3 wx-tab-settings" rel="<?php echo $v[0]->tabLayout; ?>" ref="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Map Settings</button>
 					
 				<?php endif; ?>
 			
@@ -233,13 +233,7 @@ foreach( (array) $this->tabs as $k=>$v )
 						
 						<th width='9%' nowrap='nowrap'>
 						
-							<?php echo JText::_('Geotag'); ?>
-							
-						</th>
-						
-						<th width='9%' nowrap='nowrap'>
-						
-							<?php echo JText::_('Move to Tab'); ?>
+							<?php echo JText::_('Sorted By'); ?>
 							
 						</th>
 						
@@ -247,12 +241,24 @@ foreach( (array) $this->tabs as $k=>$v )
 						
 							<th width='9%' nowrap='nowrap'>
 							
-								<?php echo JHTML::_('grid.sort', JText::_('WEEVER_PUBLISHED'), 'published', $this->lists['order_Dir'], $this->lists['order']); ?>
+								<?php echo JText::_('Geotag'); ?>
 								
 							</th>
-						
+							
 						<?php endif; ?>
 						
+						<th width='9%' nowrap='nowrap'>
+						
+							<?php echo JText::_('Move to Tab'); ?>
+							
+						</th>
+
+						<th width='9%' nowrap='nowrap'>
+						
+							<?php echo JHTML::_('grid.sort', JText::_('WEEVER_PUBLISHED'), 'published', $this->lists['order_Dir'], $this->lists['order']); ?>
+							
+						</th>
+					
 						<th width='9%' nowrap='nowrap'><?php echo JText::_('WEEVER_DELETE_TH'); ?></th>
 						
 					</tr>
@@ -347,7 +353,28 @@ foreach( (array) $this->tabs as $k=>$v )
 						</td>
 						
 						<td>
-							<img class="wx-sort-icon" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link">&nbsp;<?php echo $vv->title; ?>&nbsp;</a>
+							<img class="wx-sort-method" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link">&nbsp;<?php echo $vv->title; ?>&nbsp;</a>
+						</td>
+						
+						
+						<td>
+							<?php if( $vv->layout == "list" || $vv->layout == "grid"  || $vv->layout == "carousel" ): ?>
+							
+								<?php if( isset($vv->config->gps) && $vv->config->gps == true ) : ?>
+								
+									<a href="#" title="<?php echo $vv->id; ?>" rel="true" class="wx-subtab-sort">GPS/Nearby</a>
+								
+								<?php else: ?>
+								
+									<a href="#" title="<?php echo $vv->id; ?>" rel="false" class="wx-subtab-sort">Default</a>
+								
+								<?php endif; ?>
+							
+							<?php else : ?>
+							
+								Default
+							
+							<?php endif; ?>
 						</td>
 						
 						<?php if( $v[0]->tabLayout == "map" ) : ?>

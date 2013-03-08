@@ -121,7 +121,7 @@ jQuery( document ).ready( function() {
 	
 	jQuery('button.wx-tab-settings').click( function(e) {
 	
-		wx.settingsDialog[ jQuery(this).attr('rel') ](e);
+		wx.settingsDialog[ jQuery(this).attr('rel') ](e, jQuery(this).attr('ref'));
 		
 	});
 	
@@ -354,6 +354,103 @@ jQuery( document ).ready( function() {
 		});
 		
 	});
+	
+	
+	jQuery("a.wx-subtab-sort").click(function() {
+	
+		var tabId 			= jQuery(this).attr('title'),
+			gpsSetting		= ( jQuery(this).attr('rel') == "true" ? true : false ),			
+			siteKey 		= jQuery("input#wx-site-key").val(),
+			clickedElem 	= jQuery(this),	
+			htmlName 		= jQuery(this).html();
+			
+		tabDropdown = "<select id='wxSelectSortTab'><option value='null'>Default</option><option value='gps' "+ (gpsSetting ? "selected='selected' " : "" ) + ">GPS/Nearby</option><input type='hidden' id='gps' name='gps' value='"+gpsSetting+"' />";
+		
+		tabDropdown += "</select>";
+		
+		var txt 	= '<h3 class="wx-imp-h3">Change Sort Method for Lists, Grids, and Carousels</h3> ' + tabDropdown;
+		
+		myCallbackForm = function(v,m,f) {
+		
+			if(v != undefined && v == true) { 
+			
+				gps = f['gps'] || false;
+				
+				jQuery.ajax({
+				
+					type: 		"POST",
+					url: 		Joomla.comWeeverConst.server + "api/v2/tabs/set_gps",
+					data: 		"gps="+ gps +"&tab_id=" + tabId+ '&site_key=' + siteKey,
+					success: 	function(msg) {
+					
+						jQuery('#wx-modal-loading-text').html(msg);
+						
+						if(msg.success) {
+						
+							jQuery('#wx-modal-secondary-text').html(Joomla.JText._('WEEVER_JS_APP_UPDATED'));
+							setTimeout("document.location.reload(true);",20);
+							
+						} else {
+						
+							jQuery('#wx-modal-secondary-text').html('');
+							jQuery('#wx-modal-error-text').html(Joomla.JText._('WEEVER_JS_SERVER_ERROR'));
+							
+						}
+					
+					}
+					
+				});
+			
+			}
+			
+		}	
+		
+		submitCheck = function(v,m,f) {
+		
+			console.log(f);
+			
+			return true;
+		
+		}		
+		
+		var tabName 	= jQuery.prompt(txt, {
+		
+			callback: 		myCallbackForm, 
+			loaded:			function() {
+		
+				jQuery('select#wxSelectSortTab').change( function() {
+				
+					jQuery('#gps').val( jQuery(this).val() );
+			
+				});
+			
+			},
+			submit: 		submitCheck,
+			overlayspeed: 	"fast",
+			buttons: 		{  Cancel: false, Submit: true },
+			focus: 			1
+			
+		});
+		
+		jQuery('#wxSelectSortTab').select();
+		// hit 'enter/return' to save
+		jQuery("#wxSelectSortTab").bind("keypress", function (e) {
+		
+			if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+				
+				jQuery('button#jqi_state0_buttonSubmit').click();
+				return false;
+				
+			} else {
+			
+			return true;
+			
+			}
+			
+		});
+	
+	});
+	
 	
 	jQuery("a.wx-subtab-movetab").click(function() {
 	

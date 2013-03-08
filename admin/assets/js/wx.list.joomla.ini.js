@@ -859,108 +859,146 @@ wx.settingsDialog	= {
 	
 	},
 
-	map: 	function(e) {
+	map: 	function(e, tabId) {
 	
 		e.preventDefault();
-		
-		var startLat 		= jQuery("input#wx-map-start-latitude").val(),
-			startLong 		= jQuery("input#wx-map-start-longitude").val(),
-			startZoom 		= jQuery("input#wx-map-start-zoom").val(),
-			marker 			= jQuery("input#wx-map-marker").val(),
-			siteKey 		= jQuery("input#wx-site-key").val(),
-			tabId 			= jQuery("input#wx-map-tab-id").val();
-		
-		var txt = 	'<table class="admintable">'+
-					'<h3 class="wx-imp-h3">'+Joomla.JText._('WEEVER_JS_MAP_SETTINGS')+'</h3>'+
-					'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_LATITUDE_TOOLTIP')+
-					'">'+Joomla.JText._('WEEVER_JS_MAP_START_LATITUDE')+'</td>'+
-					'<td><input type="text" name="wx-input-map-start-lat" value="'+startLat+'" />'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_LONGITUDE_TOOLTIP')+
-					'">'+Joomla.JText._('WEEVER_JS_MAP_START_LONGITUDE')+'</td>'+
-					'<td><input type="text" name="wx-input-map-start-long" value="'+startLong+'" />'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
-					'">'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM')+'</td>'+
-					'<td><input type="text" name="wx-input-map-start-zoom" value="'+startZoom+'" />'+
-					'</td></tr>'+
-					'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_DEFAULT_MARKER_TOOLTIP')+
-					'">'+Joomla.JText._('WEEVER_JS_MAP_DEFAULT_MARKER')+'</td>'+
-					'<td><img src="'+marker+'" /><br /><input type="text" name="wx-input-map-marker" value="'+marker+'" />'+
-					'</td></tr></table><div>NOTE: If markers must be PNG image sprites that are 128 pixels by 74 pixels. '+
-					'The image on the left is the normal state, the one on the right is the selected state; each is 64x74 pixels '+
-					'placed beside each other in the same transparent PNG image file.</div>';
-					
-		myCallbackForm = function(v,m,f) {
-		
-			if( false == v )
-				return;
-	
-			var startLat 	= encodeURIComponent(f["wx-input-map-start-lat"]),
-				startLong 	= encodeURIComponent(f["wx-input-map-start-long"]),
-				startZoom 	= encodeURIComponent(f["wx-input-map-start-zoom"]),
-				marker 		= encodeURIComponent(f["wx-input-map-marker"]);
+
+		var xmlhttp 		= new XMLHttpRequest(),
+			xmlhttpCall		= Joomla.comWeeverConst.server + "api/v2/tabs/get_map_config?tab_id=" + tabId + "&app_key=" + jQuery("input#wx-site-key").val(),
+			mapConfig,
+			callback		= function( responseText ) {
 			
-			jQuery.ajax({
-			
-				type: 		"POST",
-				url: 		"index.php",
-				data: 		"option=com_weever&task=ajaxUpdateTabSettings&type=map&var=" + 
-								startLat + "," + startLong + "," + startZoom + "," + marker + "&id=" + tabId + '&site_key=' + siteKey,
-				success: 	function(msg) {
+				mapConfig = JSON.parse( responseText ).map_config || null;
 				
-					jQuery('#wx-modal-loading-text').html(msg);
-					
-					if(msg == "Tab Settings Saved")
-					{
-					
-						jQuery('#wx-modal-secondary-text').html(Joomla.JText._('WEEVER_JS_APP_UPDATED'));
-						document.location.href = "index.php?option=com_weever#mapTab";
-						document.location.reload(true);
+				var txt = 	'<table class="admintable">'+
+							'<h3 class="wx-imp-h3">'+Joomla.JText._('WEEVER_JS_MAP_SETTINGS')+'</h3>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_LATITUDE_TOOLTIP')+
+							'">'+Joomla.JText._('WEEVER_JS_MAP_START_LATITUDE')+'</td>'+
+							'<td><input type="text" name="wx-input-map-start-lat" value="'+( mapConfig.start_latitude || "" )+'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_LONGITUDE_TOOLTIP')+
+							'">'+Joomla.JText._('WEEVER_JS_MAP_START_LONGITUDE')+'</td>'+
+							'<td><input type="text" name="wx-input-map-start-long" value="'+( mapConfig.start_longitude || "" )+'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
+							'">Force starting Zoom level (1-22)</td>'+
+							'<td><input type="text" name="wx-input-map-start-zoom" value="'+( mapConfig.start_zoom|| "") +'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_DEFAULT_MARKER_TOOLTIP')+
+							'">Fit all markers within initial map frame (1: on, 0: off)</td>'+
+							'<td><input type="text" name="wx-input-map-start-zoom-enabled" value="'+(mapConfig.start_zoom_enabled || 0)+'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
+							'">Maximum initial zoom (1-22)</td>'+
+							'<td><input type="text" name="wx-input-map-max-zoom" value="'+(mapConfig.maxZoom || "")+'" />'+
+							'</td></tr>'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
+							'">Minimum initial zoom (1-22)</td>'+
+							'<td><input type="text" name="wx-input-map-min-zoom" value="'+(mapConfig.minZoom || "")+'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
+							'">Enable clustering of markers (1: on, 0: off)</td>'+
+							'<td><input type="text" name="wx-input-map-cluster" value="'+(mapConfig.cluster || 0) +'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
+							'">Automatically ping user\'s GPS (1: on, 0: off)</td>'+
+							'<td><input type="text" name="wx-input-map-auto-gps" value="'+(mapConfig.autoGPS || 0)+'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
+							'">Draw radius circle around user\'s GPS position (enter radius of circle in metres)</td>'+
+							'<td><input type="text" name="wx-input-map-gps-radius" value="'+( mapConfig.gpsRadius || 0 )+'" />'+
+							'</td></tr>'+
+							'<tr><td class="key hasTip" title="'+Joomla.JText._('WEEVER_JS_MAP_START_ZOOM_TOOLTIP')+
+							'">Colour of radius circle (hex colours only)</td>'+
+							'<td><input type="text" name="wx-input-map-gps-radius-colour" value="'+(mapConfig.gpsRadius_colour || "")+'" />'+
+							'</td></tr>'+
+							'</table>';
+							
+				myCallbackForm = function(v,m,f) {
+				
+					if( false == v )
+						return;
 						
-					}
-					else
-					{
+					console.log(f);
+			
+					var mapConfig = {
+				
+						start_latitude:		f["wx-input-map-start-lat"],
+						start_longitude:	f["wx-input-map-start-long"],
+						start_zoom:			f["wx-input-map-start-zoom"],
+						start_zoom_enabled:	f["wx-input-map-start-zoom-enabled"],
+						cluster:			f["wx-input-map-cluster"],
+						maxZoom:			f["wx-input-map-max-zoom"],
+						minZoom:			f["wx-input-map-min-zoom"],
+						autoGPS:			f["wx-input-map-auto-gps"],
+						gpsRadius:			f["wx-input-map-gps-radius"],
+						gpsRadius_colour:	f["wx-input-map-gps-radius-colour"]
+							
+					};
 					
-						jQuery('#wx-modal-secondary-text').html('');
-						jQuery('#wx-modal-error-text').html(Joomla.JText._('WEEVER_JS_SERVER_ERROR'));
-						document.location.href = "index.php?option=com_weever#mapTab";
-						document.location.reload(true);
+					jQuery.ajax({
+					
+						type: 		"GET",
+						url: 		Joomla.comWeeverConst.server + "api/v2/tabs/set_map_config",
+						data: 		"tab_id=" + tabId + "&app_key=" + jQuery("input#wx-site-key").val() + "&map_config=" + encodeURIComponent( JSON.stringify( mapConfig ) ),
+						success: 	function(msg) {
 						
-					}
+							jQuery('#wx-modal-loading-text').html(msg);
+
+							//var response = JSON.parse( msg )
+							
+							if( msg.success ) {
+							
+								jQuery('#wx-modal-secondary-text').html(Joomla.JText._('WEEVER_JS_APP_UPDATED'));
+								//document.location.href = "index.php?option=com_weever";
+								//document.location.reload(true);
+								
+							} else {
+							
+								jQuery('#wx-modal-secondary-text').html('');
+								jQuery('#wx-modal-error-text').html(Joomla.JText._('WEEVER_JS_SERVER_ERROR'));
+								//document.location.href = "index.php?option=com_weever";
+								//document.location.reload(true);
+								
+							}
+						
+						}
+					   
+					 });
+			
+				}	
 				
-				}
-			   
-			 });
-	
-		}	
-		
-		submitCheck = function(v,m,f){
-			
-			an = m.children('#alertName');
-		
-			if(f.alertName == "" && v == true) {
-			
-				an.css("border","solid #ff0000 1px");
-				return false;
+				submitCheck = function(v,m,f){
+					
+					return true;
 				
-			}
+				}		
+				
+				var mapSettings = jQuery.prompt(txt, {
 			
-			return true;
+					callback: 		myCallbackForm, 
+					submit: 		submitCheck,
+					overlayspeed: 	"fast",
+					width: 			500,
+					buttons: 		{  Cancel: false, Submit: true },
+					focus: 			1
+			
+				});
+				
+			
+			};
 		
-		}		
+		xmlhttp.open("GET", xmlhttpCall );	
+		xmlhttp.send();
+	
+		xmlhttp.onreadystatechange = function()	{
 		
-		var mapSettings = jQuery.prompt(txt, {
-	
-			callback: 		myCallbackForm, 
-			submit: 		submitCheck,
-			overlayspeed: 	"fast",
-			width: 			500,
-			buttons: 		{  Cancel: false, Submit: true },
-			focus: 			1
-	
-		});
-	
+			if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) 
+				callback( xmlhttp.responseText );
+			
+		}
+
 	}
 	
 };
