@@ -4,7 +4,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 2
+*	Version: 	2.0 Beta 3
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -303,19 +303,20 @@ wx.navTabLayoutDialog	= function(e) {
 
 	var xmlhttp 		= new XMLHttpRequest(),
 		tabLayout		= jQuery(this).attr('ref');
+		
+		console.log( tabLayout );
 
 	// perhaps add in future -- server-determined layouts
 	//xmlhttp.open("GET", Joomla.comWeeverConst.server + "api/v2/icons/get_icons");	
 	//xmlhttp.send();
 	
-	jQuery("select#wx-tablayout-dropdown-select").change(wx.updateIconPreview)
-	jQuery("select#wx-tablayout-dropdown-select").bind("keyup", wx.updateIconPreview);
+	//jQuery("select#wx-tablayout-dropdown-select").change(wx.updateIconPreview)
+	//jQuery("select#wx-tablayout-dropdown-select").bind("keyup", wx.updateIconPreview);
 
 	var tabType 		= jQuery(this).attr('title'),
 		siteKey 		= jQuery("input#wx-site-key").val(),
 		tabId			= jQuery(this).attr('title'),
-		txt 			= 	'<div class="jqimessage">'+
-						'<h3 class="wx-imp-h3">' + 
+		txt 			= '<h3 class="wx-imp-h3">' + 
 							'Tab Layout' + 
 						'</h3>'+
 						'<p>Choose how content added to this tab is displayed.</p>'+
@@ -323,7 +324,7 @@ wx.navTabLayoutDialog	= function(e) {
 						'<option value="">Sub-tabs (default)</option>'+
 						'<option value="list">List</option>'+
 						'<option value="map">Map</option>'+
-						'</div><div></div></div>',		
+						'</select></div>',		
 		myCallbackForm 	= function(v,m,f) {
 
 			if( false == v )
@@ -372,8 +373,8 @@ wx.navTabLayoutDialog	= function(e) {
 			callback: 		myCallbackForm, 
 			submit: 		submitCheck,
 			overlayspeed: 	"fast",
-			buttons: 		{ Cancel: false, Submit: true },
-			focus: 			2
+			buttons: 		{ 'cancel': false, 'Save': true },
+			focus: 			1
 
 		});	
 

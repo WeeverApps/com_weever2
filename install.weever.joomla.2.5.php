@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 2
+*	Version: 	2.0 Beta 3
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
