@@ -5,7 +5,7 @@
 *
 *	Authors: 	Robert Gerald Porter 	<rob@weeverapps.com>
 *				Aaron Song 				<aaron@weeverapps.com>
-*	Version: 	2.0 Beta 3
+*	Version: 	2.0 Beta 4
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -30,15 +30,15 @@ final class comWeeverConst
 {
 
 	const VERSION			= "2.0";
-	const RELEASE_TYPE		= "Beta Release 3";
+	const RELEASE_TYPE		= "Beta Release 4";
 	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/ns/cbreton/index.aspx' target='_blank'>Cape Breton Highlands</a>";
 	const NAME				= "Weever appBuilder&trade; for Joomla!";
-	const COPYRIGHT_YEAR	= "(c) 2010-2012";
+	const COPYRIGHT_YEAR	= "(c) 2010-2013";
 	const COPYRIGHT			= "Weever Apps Inc.";
 	const COPYRIGHT_URL		= "http://www.weeverapps.com/";
 	const LICENSE			= "GPL v3.0";
 	const LICENSE_URL		= "http://www.gnu.org/licenses/gpl-3.0.html";
-	const RELEASE_DATE		= "March 8, 2013";
+	const RELEASE_DATE		= "May 7, 2013";
 	const SUPPORT_WEB		= "http://support.weeverapps.com/";
 	const LIVE_SERVER		= "http://weeverapp.com/";
 	const LIVE_STAGE		= "http://cetus.weeverapp.com/";
