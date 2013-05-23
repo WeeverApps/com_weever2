@@ -1117,5 +1117,26 @@ wx.features = [
 		}
 	
 	},
+	{
+	
+		id:				'r3s',
+		name:			'R3S HTML Object',
+		content:		'html',
+		title:			true,
+		types:			['oldtabs', 'newtab'],
+		layouts:		['list'],
+		config:			{
+		
+			'url':		':cms_feed'
+			
+		},
+		icon_id:		5,
+		fields:			{
+		
+			cms_feed: 	'#wx-add-page-r3s-url-input'
+		
+		}
+	
+	}
 
 ];

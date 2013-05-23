@@ -31,7 +31,7 @@ final class comWeeverConst
 
 	const VERSION			= "2.0";
 	const RELEASE_TYPE		= "Beta Release 4";
-	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/ns/cbreton/index.aspx' target='_blank'>Cape Breton Highlands</a>";
+	const RELEASE_NAME		= "<a href='http://www.pc.gc.ca/eng/pn-np/ab/elkisland/index.aspx' target='_blank'>Elk Island</a>";
 	const NAME				= "Weever appBuilder&trade; for Joomla!";
 	const COPYRIGHT_YEAR	= "(c) 2010-2013";
 	const COPYRIGHT			= "Weever Apps Inc.";

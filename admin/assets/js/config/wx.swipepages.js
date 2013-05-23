@@ -41,7 +41,8 @@ wx.swipePages = [
 			'easyblog.blog',
 			'easyblog.category',
 			'easyblog.item',
-			'easyblog.tag'
+			'easyblog.tag',
+			'r3s'
 		
 		]	
 	
