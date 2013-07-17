@@ -126,7 +126,7 @@ wx.ajaxUrl			= function(a) {
 	
 		if( this.cms_feed && this.cms_feed.search("http") == -1 ) {
 		
-			this.cms_feed = "http://" + document.domain + "/" + this.cms_feed;
+			this.cms_feed = JURI_base + this.cms_feed;
 		
 		}
 			

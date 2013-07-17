@@ -48,6 +48,8 @@ else
 
 $document->addCustomTag ('<script type="text/javascript">
 
+				var JURI_base = "'.JURI::base().'";
+
 				function jSelectItem(id, title, object) {
 			
                     jQuery(\'#wx-add-k2-item-url\').val(\'index.php?option=com_k2&view=item&id=\' + id);
