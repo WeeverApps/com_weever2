@@ -22,496 +22,141 @@
 
 defined('_JEXEC') or die;
 
-$option 		= JRequest::getCmd('option');
-$document 		= JFactory::getDocument();
-
-$extraScript	= '';
-
-if( comWeeverHelper::joomlaVersion() < 3.0 )
-	JHTML::_('behavior.mootools');
-	
-else 
-	JHtmlBehavior::framework();
-
-JHTML::_('behavior.tooltip');
-JHTML::_('behavior.modal', 'a.modal');
-
-jimport('joomla.html.pane');
-
-echo $this->loadTemplate('js');
-
-jimport('joomla.filter.output');
-
-
-$child_html 		= "";
-$rowshade			= 0; // for alternating shaded rows
-$iii 				= 0; // for making checkboxes line up right
-$tabsUnpublished 	= 0;
-$onlineSpan 		= "";
-$offlineSpan 		= "";
-
-echo $this->loadTemplate('banner');
-
-echo "<div class='wx-full-container'>";
-
-if( isset($this->sidebar) )
-{
-
-	echo "<div class='wx-j3-sidebar'>";
-	
-	echo $this->sidebar;
-	
-	echo "</div>";
-
-}
-
 ?>
+<script type="text/javascript">
+    wx.navIconDir = "static/images/icons/nav/";
+    wx.baseExtensionUrl = "<?php echo 'http://aaron.myweeverapp.com/joomla2511/administrator/index.php?option=com_weever'; ?>";
+    wx.siteKey = "<?php echo 'xOUNs3cIQMERqID4gNNrAJITtJQPlkWJ'; ?>";
+    wx.apiUrl = "<?php echo 'http://hydrus.weeverapp.com/api/v2'; ?>";
+</script>
 
-<div id="wx-list-workspace">
+<div id="listTabs">
+    <ul id="listTabsSortable" class="list-items-sortable list-main-tabs">
+        <li id="addFeatureID" class="wx-nav-tabs wx-nosort"><a href="#addTab" class="wx-tab-sortable" style="padding-top: 14px;" title="Drag New Features to this Location"><div class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center" title="Add"><span id="addtabspan" style="display: block; margin: 0 auto; font-weight: bold; color: #666; position: relative; line-height: 1.5; white-space: normal;">Drag New Features Here</span><span style="display:none; margin: 0 auto; text-align: left; font-weight: bold; color: #666; position: relative; line-height: 1.5; white-space: normal;" id="edittabspan">&lsaquo; back to "Build"</span></div></a></li>
+        <li style="width:80px; height:60px; border-style: dashed; margin-left: 5px; border-width: 2px 2px 0; border-color: #666; color: #666; padding: 5px 0 0 5px; box-sizing: border-box; -webkit-box-sizing: border-box; display: none;" id="dropTab">Drop Here</li>
+        <span id="wx-note-tabs-id" class="wx-note-tabs-class wx-nosort">&larr; <?php echo JText::_( 'Drag and drop tabs to re-order!' );?></span>
+    </ul>
 
-	<div id="listTabs">
-	
-		<ul id="listTabsSortable" style="padding-right: 5%">
-		
-			<li id="addTabID" class="wx-nav-tabs wx-nosort">
-				
-				<a href="#addTab" class="wx-tab-sortable">
-				
-					<div class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center" title="Add">
-						<span style="display: block; margin: 0pt auto; position: relative; font-weight: bold; font-size: 2.75em; line-height: normal;">+</span>
-					</div>
-					
-					<div class="wx-nav-label">New Feature</div>
-					
-				</a>
-				
-			</li>
+    <!-- TABS -->
+    <div id="addTab">
+        <!-- START: INTERFACE FOR THE WEEVER APP BUILDER UI V2 -->
+        <div id="wx-add-OneView">
+            <!-- START: Add to App Button Sets -->
+            <div id="wx-add-content-to-app-buttons">
+                <!-- 0.  Empty State Message for Newbies -->
 
-<?php 
+                <div class="wx_box wxblk" id="wxnavtip-empty">
+                    <h2 style="display: block; margin: 0px;"><?php echo JText::_( '<strong>Get started</strong> by selecting app features below!' );?></h2>
+                </div>
 
-/* Parent Tabs and Orphans */
-foreach( (array) $this->tabs as $k=>$v ) 
-{
+                <ul id="wxui-addbuttons-content" class="wxui-btnwrapper list-items-sortable list-add-content-items">
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-FormBuilder">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/form_icon.png">
+                        <span><?php echo JText::_( 'Form Builder' ); ?></span>
+                    </li>
 
-	$tab_active		= 0;
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon" id="add-Twitter">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/twitter.png">
+                        <span><?php echo JText::_( 'Twitter' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-FacebookWall">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/facebook.png">
+                        <span><?php echo JText::_( 'Facebook Wall' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon" id="add-Youtube">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/youtube.png">
+                        <span><?php echo JText::_( 'YouTube' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-Vimeo">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/vimeo.png">
+                        <span><?php echo JText::_( 'Vimeo' ); ?></span>
+                    </li>
+                    
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon" id="add-Flickr">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/flickr.png">
+                        <span><?php echo JText::_( 'Flickr' ); ?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-PicasaAlbums">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/picasa.png">
+                        <span><?php echo JText::_( 'Picasa' ); ?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-FoursquarePhotos">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/foursquare.png">
+                        <span><?php echo JText::_( 'Foursquare' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-FacebookAlbums">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/facebook.png">
+                        <span><?php echo JText::_( 'Facebook Photos' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-GoogleCalendar">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/google_calendar.png"><span>Google Calendar</span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-FacebookEvents">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/facebook.png">
+                        <span><?php echo JText::_( 'Facebook Events' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-WordpressContacts">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/wordpress_contact.png">
+                        <span><?php echo JText::_( 'Tap-to-Call and Email' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-Wufoo">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/form_icon.png">
+                        <span><?php echo JText::_( 'Wufoo Forms' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-RSS">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/r3s.png">
+                        <span><?php echo JText::_( 'RSS Code' );?></span>
+                    </li>
+                    
+                        <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-r3s">
+                            <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/r3s.png">
+                            <span><?php echo JText::_( 'R3S Code' );?></span>
+                        </li>
 
-	/* Check to see if parent or orphan, if published */
-	foreach( (array) $v as $kk=>$vv )
-	{
-	
-		if( $vv->published )
-			$tab_active = 1;
-	
-	}
-	
-	// readd later
-//	if($this->tier == 2.1 && $v[0]->tier > 1)
-//		$trialClass = " trial-feature";
-//	else 
-		$trialClass = "";
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-add-single" id="add-Blogger">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/blogger.png">
+                        <span><?php echo JText::_( 'Blogger' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-unavailable wx-add-single" id="add-google_plus">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/google_plus.png">
+                        <span><?php echo JText::_( 'Google+' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-unavailable wx-add-single" id="add-tumblr">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/tumblr.png">
+                        <span><?php echo JText::_( 'Tumblr' );?></span>
+                    </li>                        <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-unavailable" id="add-soundcloud">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/soundcloud.png">
+                        <span><?php echo JText::_( 'SoundCloud' );?></span>
+                    </li>
+                    <li class="wxui-btn white large radius3 wx-floatleft wx-add-source-icon wx-unavailable" id="add-bandcamp">
+                        <img src="http://weeverapps.com/wp-content/plugins/weever-apps-for-wordpress/static/images/icons/nav/bandcamp.png">
+                        <span><?php echo JText::_( 'BandCamp' );?></span>
+                    </li>
+                </ul>
+                <!-- END: Add to App Buttons -->
+            </div>
+        </div>
+        <!-- wx-add-OneView -->
+    </div>
+    <!-- END: INTERFACE FOR THE WEEVER APP BUILDER UI V2 -->
 
-	/* When there are items, but none are published */
-	if( count($v) && $tab_active == 0 )
-		echo '<li class="wx-nav-tabs wx-sort" id="' . $v[0]->id . '" rel="unpublished" style="float:center;">
-				<a href="#Tab-' . $v[0]->id . '" class="wx-tab-sortable' . $trialClass.'">
-				
-					<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->icon_id . '"  title="' . $v[0]->id . '" class="wx-grayed-out wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
-					
-						<img class="wx-nav-icon-img" src="data:image/png;base64,' . file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id) . '" />
-						
-					</div>
-					
-					<div id="wx-nav-label-' . $v[0]->id . '" class="wx-nav-label wx-grayed-out" ref="' . $v[0]->id . '" title="ID #' . $v[0]->id . '">' . ( $v[0]->tabTitle ? $v[0]->tabTitle : $v[0]->title ) . '</div>
-					
-				</a>
-				
-			</li>';	
-	
-		else
-			echo '<li class="wx-nav-tabs wx-sort" id="' . $v[0]->id . '">
-						<a href="#Tab-' . $v[0]->id . '" class="wx-tab-sortable' . $trialClass.'">
-						
-							<div id="wx-nav-icon-' . $v[0]->id . '" ref="' . $v[0]->icon_id . '" title="' . $v[0]->id . '" class="wx-nav-icon" style="height:32px;width:auto;min-width:32px;text-align:center">
-							
-								<img class="wx-nav-icon-img" src="data:image/png;base64,'.file_get_contents(comWeeverConst::LIVE_SERVER . comWeeverConst::API_VERSION . "/icons/get_icon_base64?icon_id=" . $v[0]->icon_id).'" />
-							
-							</div>
-							
-							<div id="wx-nav-label-' . $v[0]->id . '" ref="' . $v[0]->icon_id . '" class="wx-nav-label" title="ID #'.$v[0]->id.'">'.( $v[0]->tabTitle ? $v[0]->tabTitle : $v[0]->title ).'</div>
-							
-						</a>
-					</li>';	
+    <div id="wx-overlay-drag">
+        <div id="wx-overlay-unpublished">
+            <?php echo JText::_( 'This tab has no published items' ); ?>
+        </div>
+        <img id="wx-overlay-drag-img" src="static/images/icons/drag.png" />
+    </div>
 
-}
+    <div id="wx-modal-loading">
+        <div id="wx-modal-msgcontainer">
+        <img src="static/images/loading.gif" style="float: right; margin-left: 16px;" />
+            <div id="wx-modal-loading-text"></div>
+            <div id="wx-modal-secondary-text"></div>
+            <div id="wx-modal-error-text"></div>
+        </div>
+    </div>
 
-?>
- 
-		</ul>
-		 
-		<?php echo $this->loadTemplate('addtab'); ?>
-		
-		<div id="wx-overlay-drag">
-		
-			<div id="wx-overlay-unpublished"><?php echo JText::_('WEEVER_ICON_HAS_NO_PUB_ITEMS'); ?></div>
-			<img id="wx-overlay-drag-img" src="components/com_weever/assets/icons/drag.png" />
-			<div><?php echo JText::_('WEEVER_DOUBLE_CLICK_EDIT'); ?></div>
-			
-		</div>
-		
-		<div id='wx-modal-loading'>
-		
-		    <div id='wx-modal-loading-text'></div>
-		    <div id='wx-modal-secondary-text'></div>
-		    <div id='wx-modal-error-text'></div>
-		    
-		</div>
-
-		<form action='<?php echo JRoute::_( 'index.php' );?>' method='post' name='adminForm' id='adminForm'>
-	
-<?php
-
-foreach( (array) $this->tabs as $k=>$v ) 
-{
-
-	$link = JFilterOutput::ampReplace('index.php?option=' . $option . '&task=edit&layout=tab&cid[]='.$v[0]->id);
-	
-//	if(count($componentRows))
-//	{
-//		
-//		$published = JHTML::_('grid.published', $row, $iii);
-//		$checked = JHTML::_('grid.id', $iii, $row->id);
-//		
-//		if($row->published == 0)
-//			$tabsUnpublished++;
-//			
-//	}
-//	else
-//	{
-//	
-//		$published = JText::_('WEEVER_NOT_APPLICABLE');
-//		$checked = null;
-//		$tabsUnpublished++;
-//		
-//	}
-
-?>
-	
-		<div id="<?php echo 'Tab-'.$v[0]->id ?>">
-		
-			<div class="wx-tab-top-buttons-container">
-			
-				<button class="wxui-btn white medium radius3 wx-nav-label" style="margin-right:1.5em;" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Name</button>
-				<button class="wxui-btn white medium radius3 wx-nav-icon" style="margin-right:1.5em;" ref="<?php echo $v[0]->icon_id; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Icon</button>
-				<button class="wxui-btn white medium radius3 wx-nav-tablayout" style="margin-right:1.5em;" ref="<?php echo $v[0]->tabLayout; ?>" title="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Tab Layout (<?php echo ($v[0]->tabLayout) ? $v[0]->tabLayout : "sub-tabs" ; ?>)</button>
-				
-				<?php if( $v[0]->tabLayout == "map" ) : ?>
-				
-					<button class="wxui-btn white medium radius3 wx-tab-settings" rel="<?php echo $v[0]->tabLayout; ?>" ref="<?php echo $v[0]->id; ?>">&bull; &nbsp;Change Map Settings</button>
-					
-				<?php endif; ?>
-			
-			</div>
-			
-			<input type="hidden" name="boxchecked-<?php echo $v[0]->id; ?>" id="boxchecked-<?php echo $v[0]->id; ?>" value="0" />
-	
-			<table class='adminlist' id='wx-adminlist-<?php echo $v[0]->id; ?>'>
-	
-				<thead>
-				
-					<tr>
-						<th width='20'>
-						
-							<input type='checkbox' name='toggle-<?php echo $v[0]->id; ?>' id='toggle-<?php echo $v[0]->id; ?>' value='' onclick='checkAllTab(<?php echo count($v[0]); ?>, "cb", document.getElementById("boxchecked-<?php echo $v[0]->id; ?>"), document.getElementById("toggle-<?php echo $v[0]->id; ?>"), <?php echo $iii; ?> + 1);' />
-							
-						</th>
-						
-						<th class='title'>
-						
-							<?php echo JHTML::_('grid.sort', JText::_('WEEVER_NAME'), 'name', $this->lists['order_Dir'], $this->lists['order']); ?> &nbsp; (<a target="_blank" href="http://weeverapps.com/mobile-app-layout" style="color:#1C94C4;">?</a>)
-							
-						</th>
-						
-						<th width='9%' nowrap='nowrap'>
-						
-							<?php echo JText::_('Sorted By'); ?>
-							
-						</th>
-						
-						<?php if( $v[0]->tabLayout == "map" ) : ?>
-						
-							<th width='9%' nowrap='nowrap'>
-							
-								<?php echo JText::_('Geotag'); ?>
-								
-							</th>
-							
-						<?php endif; ?>
-						
-						<th width='9%' nowrap='nowrap'>
-						
-							<?php echo JText::_('Move to Tab'); ?>
-							
-						</th>
-
-						<th width='9%' nowrap='nowrap'>
-						
-							<?php echo JHTML::_('grid.sort', JText::_('WEEVER_PUBLISHED'), 'published', $this->lists['order_Dir'], $this->lists['order']); ?>
-							
-						</th>
-					
-						<th width='9%' nowrap='nowrap'><?php echo JText::_('WEEVER_DELETE_TH'); ?></th>
-						
-					</tr>
-					
-				</thead>
-				
-				<tfoot>
-				
-					<tr>
-					
-						<td colspan='6'>
-						
-							<div class="wx-list-actions">
-				
-								<div class="wx-button-option" style="margin:0; padding:0;width: 110px;">
-									<img  style="margin:0;" src="components/com_weever/assets/icons/arrow_leftup.png" />
-									<span style="float:right; margin-top:.75em;">with selected:</span>
-								</div>
-								
-								<div class="wx-button-option" id='wx-toolbar-publish'>
-									<a href="#" onclick="javascript:if(document.getElementById('boxchecked-<?php echo $v[0]->id; ?>')==0){alert('Please make a selection from the list to publish');}else{  submitbutton('publish')}" class="toolbar">
-										
-										<img class="wx-button-option-icon" src="components/com_weever/assets/icons/tick.png" id="wx-publish-selected" title="Publish" /><?php echo JText::_('WEEVER_PUBLISH'); ?>
-									
-									</a>
-									
-								</div>
-								
-								<div class="wx-button-option" id='wx-toolbar-unpublish'>
-								
-									<a href="#" onclick="javascript:if(document.getElementById('boxchecked-<?php echo $v[0]->id; ?>')==0){alert('Please make a selection from the list to unpublish');}else{  submitbutton('unpublish')}" class="toolbar">
-									<img class="wx-button-option-icon" src="components/com_weever/assets/icons/publish_x.png" id="wx-unpublish-selected" title="Unpublish" /><?php echo JText::_('WEEVER_UNPUBLISH'); ?>
-									</a>
-									
-								</div>
-								
-								<div  class="wx-button-option" id="wx-toolbar-delete">
-								
-									<a href="#" onclick="javascript:if(document.getElementById('boxchecked-<?php echo $v[0]->id; ?>')==0){alert('Please make a selection from the list to delete');}else{if(confirm('Are you sure you want to delete these tabs? (Note that navigation tabs selected will not be deleted.)')){submitbutton('remove');}}" class="toolbar">
-										<img class="wx-button-option-icon" src="components/com_weever/assets/icons/wx-delete-mark.png" id="wx-delete-selected" title="Delete" /><?php echo JText::_('WEEVER_DELETE_TH'); ?>
-									</a>
-									
-								</div>
-								
-							</div>
-							
-						</td>
-						
-					</tr>
-					
-				</tfoot>
-
-	<?php
-	$rowshade = 1 - $rowshade;
-	$sub = 0;
-	?>
-	
-				<tbody class="wx-table-sort" id='wx-table-<?php echo $v[0]->id; ?>'>
-	
-	<?php
-	
-	foreach( (array) $v as $kk=>$vv )
-	{
-	
-		$iii++; $sub++;		
-		
-		if( $vv->layout == "share" ) 
-		{
-		
-			?>
-			
-			<tr class='row<?php echo $vv->id; ?>'>
-				<td></td>
-				<td><img class="wx-sort-icon" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link">&nbsp;<?php echo $vv->title; ?>&nbsp;</a></td>
-				<td></td>
-				<td></td>
-				<td></td>			
-			</tr>
-			
-			<?php
-			
-			continue; 
-		
-		}
-		
-		?>
-		
-					<tr id='<?php echo $vv->id; ?>' class='row<?php echo $vv->id; ?>'>
-					
-						<td>
-							<?php echo JHTML::_('grid.id', $iii, $vv->id); ?>
-						</td>
-						
-						<td>
-							<img class="wx-sort-method" title="Drag to sort the order of items" src="components/com_weever/assets/icons/sort.png" /> <a href='#' title="ID #<?php echo $vv->id; ?>" class="wx-subtab-link">&nbsp;<?php echo $vv->title; ?>&nbsp;</a>
-						</td>
-						
-						
-						<td>
-							<?php if( $vv->layout == "list" || $vv->layout == "grid"  || $vv->layout == "carousel" ): ?>
-							
-								<?php if( isset($vv->config->gps) && $vv->config->gps == true ) : ?>
-								
-									<a href="#" title="<?php echo $vv->id; ?>" rel="true" class="wx-subtab-sort">GPS/Nearby</a>
-								
-								<?php else: ?>
-								
-									<a href="#" title="<?php echo $vv->id; ?>" rel="false" class="wx-subtab-sort">Default</a>
-								
-								<?php endif; ?>
-							
-							<?php else : ?>
-							
-								Default
-							
-							<?php endif; ?>
-						</td>
-						
-						<?php if( $v[0]->tabLayout == "map" ) : ?>
-						
-							<td align='center'>
-							
-								<?php 
-								
-								$geo_point_txt 		= "+";
-								$geo_point_colour	= "orange";
-								
-								if( $vv->geo ) {
-								
-									if( !is_array($vv->geo) )
-										$geo_point_txt = "1";
-									
-									else 
-										$geo_point_txt = count($vv->geo);
-										
-									$geo_point_colour = "green";
-	
-								}
-								
-								if( isset($vv->config) && isset($vv->config->url) )
-								{
-								
-									$is_com_content = strstr($vv->config->url, "option=com_content");
-									$is_com_k2		= strstr($vv->config->url, "option=com_k2");
-								
-									if( $is_com_content || $is_com_k2 )
-									{
-
-										?>
-										<script type="text/javascript">
-
-										jQuery(document).ready(function() { 
-										
-											wx.checkR3SGeo("<?php echo $vv->config->url . "&geotag=true&template=weever_cartographer" ?>", function( item_count ) {									
-
-												jQuery("#wmx-tab-id-<?php echo $vv->id; ?>-count").html( item_count );
-												jQuery("#wmx-tab-id-<?php echo $vv->id; ?> .wmx-map-marker-count").css("background-color", "blue");
-												jQuery("#wmx-tab-id-<?php echo $vv->id; ?>").removeClass("wmx-geocoder-launch");
-												jQuery("#wmx-tab-id-<?php echo $vv->id; ?>").addClass("wmx-geocoder-alert-<?php echo $vv->id; ?>");
-												
-												jQuery(".wmx-geocoder-alert-<?php echo $vv->id; ?>").click(function(e) {
-												
-													<?php if($is_com_content) : ?>
-													
-														alert("This content was geotagged inside the Joomla Content editor. Please go there to change the geotagging.");
-													
-													<?php elseif($is_com_k2) : ?>
-													
-														alert("This content was geotagged inside the K2 Item editor. Please go there to change the geotagging.");
-													
-													<?php else : ?>
-													
-														alert("This content was geotagged at the content's source. Please go to the source to change the geotagging.");
-													
-													<?php endif; ?>
-												
-												});
-												
-											})
-										
-										});
-										</script>
-										
-										<?php
-										
-									}
-								
-								}
-		
-								?>							
-							
-								<div class='wmx-geocoder-launch wmx-geocoder' id='wmx-tab-id-<?php echo $vv->id; ?>'><div class="wmx-map-marker-count" style="background-color: <?php echo $geo_point_colour; ?>;font-size: 1.125em; color: white; border-radius: 1.125em 1.125em 1.125em 1.125em; font-weight: bold; text-align: center; width: 3em;"><div id="wmx-tab-id-<?php echo $vv->id; ?>-count wmx-count-number" style="display: inline";><?php echo $geo_point_txt; ?></div><img src="components/com_weever/assets/icons/nav/map-marker.png" border="0" style="padding: 0.125em 0.125em 0.125em 0.325em; height: 1em;" alt="Map Markers" /></div></div>
-							
-							</td>
-							
-						<?php endif; ?>
-						
-						<td align='center'>
-						
-							
-							 <a href="#" title="ID #<?php echo $vv->id; ?>" class="wx-subtab-movetab"><?php echo '<img src="components/com_weever/assets/icons/move.png" border="0" style="width:24px;" alt="Move to Tab">'; ?></a>
-							 
-							 
-						</td>
-						
-						<td align='center'>
-						
-							 <a href="#" title="ID #<?php echo $vv->id; ?>" class="wx-subtab-publish"<?php echo ($vv->published ? 'rel="1"><img src="components/com_weever/assets/icons/tick.png" border="0" alt="Published">' : 'rel="0"><img src="components/com_weever/assets/icons/publish_x.png" border="0" alt="Unpublished">'); ?></a>
-							 
-						</td>
-						
-						<td align='center'>
-						
-							<a href="#" title="ID #<?php echo $vv->id; ?>" class="wx-subtab-delete" rel="<?php echo $vv->layout; ?>" alt=" <?php echo JText::_('WEEVER_DELETE'); ?> &quot;<?php echo htmlentities($vv->title); ?>&quot;"><img src="components/com_weever/assets/icons/wx-delete-mark.png" /></a>
-							
-						</td>
-						
-					</tr>
-		
-		<?php
-		$rowshade = 1 - $rowshade;
-		
-	}
-	
-	?>
-	
-				</tbody>
-		
-			</table>
-			
-		</div>
-	
-	<?php
-
-}
-
-?>
-
-		<input type="hidden" name="option" value="<?php echo $option; ?>" />
-		<input type="hidden" name="site_key" id="wx-site-key" value="<?php echo $this->site_key; ?>" />
-		<input type="hidden" name="task" value="" />
-		<input type="hidden" name="boxchecked" value="0" />
-		<input type="hidden" name="legacyAPI" value="2" />
-		<input type="hidden" name="view" value="list" />
-		<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
-		<input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists['order_Dir']; ?>" />
-		<?php echo JHTML::_('form.token'); ?>
-		</form>
-		
-	</div>
-	
+    <!-- END TABS -->
 </div>
 
-</div>
-
-<?php echo $this->loadTemplate('dialogs'); ?>
+<div class="clear"></div>
