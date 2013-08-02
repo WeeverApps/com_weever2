@@ -76,11 +76,22 @@ if( comWeeverHelper::joomlaVersion() > 2.9 )
 else {
 	
 	$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery.js?v='.comWeeverConst::VERSION );
+	
+	//for backbone UI
+	$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery-v1.8.3.js?v='.comWeeverConst::VERSION );
+	
 	$document->addCustomTag ('<script type="text/javascript">jQuery.noConflict();</script>');
 
 }
 
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery-ui.js?v='.comWeeverConst::VERSION );
+
+//for backbone UI
+$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/backbone.min-v0.9.2.js?v='.comWeeverConst::VERSION );
+
+//for backbone UI
+$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/underscore.min-v1.4.1.js?v='.comWeeverConst::VERSION );
+
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery-impromptu.js?v='.comWeeverConst::VERSION );
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jq.common.js?v='.comWeeverConst::VERSION );
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/weever.js?v='.comWeeverConst::VERSION );
