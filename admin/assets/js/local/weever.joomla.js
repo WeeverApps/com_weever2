@@ -1,0 +1,1 @@
+WPText=Joomla.JText.strings;

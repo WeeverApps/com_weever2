@@ -32,8 +32,8 @@ if( !defined('DS') )
 	define( 'DS', DIRECTORY_SEPARATOR );
 
 # Add localization capabilities to Javascript in Joomla 1.5
-if(substr($joomla,0,3) == '1.5') 
-	require_once( JPATH_COMPONENT . DS . 'helpers' . DS . 'jsjtext15.php' );
+//if(substr($joomla,0,3) == '1.5') 
+	//require_once( JPATH_COMPONENT . DS . 'helpers' . DS . 'jsjtext15.php' );
 
 /* Requires */
 
@@ -57,16 +57,7 @@ $dispatcher = JDispatcher::getInstance();
 
 $document 			= JFactory::getDocument();
 
-if($staging)
-{
-
-	$weeverIcon = "weever_toolbar_title_staging";
-	$style = "#wx-app-status-button { visibility:hidden !important; }";
-	$document->addStyleDeclaration($style);
-	
-}
-else
-	$weeverIcon = "weever_toolbar_title";
+$weeverIcon = "weever_toolbar_title";
 
 /* Load our Javascripts */
 
@@ -75,7 +66,7 @@ if( comWeeverHelper::joomlaVersion() > 2.9 )
 	
 else {
 	
-	$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery.js?v='.comWeeverConst::VERSION );
+	//$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery.js?v='.comWeeverConst::VERSION );
 	
 	//for backbone UI
 	$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery-v1.8.3.js?v='.comWeeverConst::VERSION );
@@ -90,12 +81,16 @@ $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/underscore.min-v1.4.1.js?v='.comWeeverConst::VERSION );
 
 //for backbone UI
-$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/backbone.min-v0.9.2.js?v='.comWeeverConst::VERSION );
+$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/backbone.min-v0.9.2.js' );
 
+$document->addScript	( JURI::base(true).'/components/com_weever/assets/js/local/weever.joomla.js?v='.comWeeverConst::VERSION );
+
+/*
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jquery-impromptu.js?v='.comWeeverConst::VERSION );
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/jq.common.js?v='.comWeeverConst::VERSION );
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/weever.js?v='.comWeeverConst::VERSION );
 $document->addScript	( JURI::base(true).'/components/com_weever/assets/js/wx.js?v='.comWeeverConst::VERSION );
+*/
 
 /* Load our CSS */
 
@@ -125,26 +120,6 @@ if(!JPluginHelper::isEnabled('system', 'mobileesp'))
 	
 # Zeroes out the title in favour of the logo
 JToolBarHelper::title( '&nbsp;', $weeverIcon);
-
-/* Give us a previewer if in Webkit */
-
-if( comWeeverHelper::isWebKit() ) 
-{
-
-	$row->load(4); 		$keySiteDomain 	= $row->setting;
-	
-	if($staging)
-		$weeverServer 	= comWeeverConst::LIVE_STAGE;
-
-	else
-		$weeverServer 	= comWeeverConst::LIVE_SERVER;
-
-	$url 	= $weeverServer.'app/'.$keySiteDomain.'?cache_manifest=false';
-	$bar 	= JToolBar::getInstance('toolbar');
-	
-	$bar->appendButton('Popup', 'preview', JText::_("WEEVER_PREVIEW_YOUR_APP"), $url, 320, 480);
-	
-} 
 
 /* Load up our controller */
 
@@ -182,21 +157,9 @@ if($key)
 {
 
 	$siteDomain = comWeeverHelper::getSiteDomain();
-	
-	if($staging)
-	{
-	
-		$weeverServer = comWeeverConst::LIVE_STAGE;
-		$modetype = 'stage';
-		
-	}
-	else
-	{
-	
-		$weeverServer = comWeeverConst::LIVE_SERVER;
-		$modetype = 'live';
-		
-	}
+
+	$weeverServer = comWeeverConst::LIVE_SERVER;
+	$modetype = 'live';
 	
 	$googleQRUrl 		= "http://chart.apis.google.com/chart?cht=qr&chs=140x140&choe=UTF-8&chld=H|0&chl=";
 	$googleQRUrlHD 		= "http://chart.apis.google.com/chart?cht=qr&chs=480x480&choe=UTF-8&chld=H|0&chl=";
